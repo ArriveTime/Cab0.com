@@ -54,7 +54,7 @@ input.fi{width:100%;background:#F8F6F0;border:1.5px solid var(--faint);border-ra
 
 /* PAGE 3 — RESULTS */
 .p3-body{padding:18px 18px 140px;flex:1}
-.pcard{background:var(--card);border-radius:15px;border:1px solid var(--faint);padding:14px 15px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;position:relative}
+.pcard{background:var(--card);border-radius:15px;border:1px solid var(--faint);padding:14px 15px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;position:relative; transition: border 0.2s;}
 .pcard.sel{border:2px solid #0C0C0A}
 .plogo{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;color:white}
 .pinfo{flex:1}
@@ -89,7 +89,7 @@ input.fi{width:100%;background:#F8F6F0;border:1.5px solid var(--faint);border-ra
         <div class="cat" onclick="pickCat(this, 'food')"><div class="cat-label">Food</div></div>
         <div class="cat" onclick="pickCat(this, 'grocery')"><div class="cat-label">Grocery</div></div>
       </div>
-      <div style="background:var(--y); padding:20px; border-radius:15px; text-align:center; font-weight:700;" onclick="goTo(1)">Get Started →</div>
+      <div style="background:var(--y); padding:20px; border-radius:15px; text-align:center; font-weight:700; cursor:pointer;" onclick="goTo(1)">Get Started →</div>
     </div>
   </div>
 </div>
@@ -117,18 +117,23 @@ input.fi{width:100%;background:#F8F6F0;border:1.5px solid var(--faint);border-ra
         </div>
       </div>
     </div>
-    <div style="background:#0C0C0A; color:var(--y); padding:18px; border-radius:15px; text-align:center; font-weight:700; cursor:pointer;" onclick="goTo(2)">Compare 20+ Providers →</div>
+    <div style="background:#0C0C0A; color:var(--y); padding:18px; border-radius:15px; text-align:center; font-weight:700; cursor:pointer;" onclick="goTo(2)">Compare Rates →</div>
   </div>
 </div>
 
 <div class="page" id="pg2">
   <div class="p3-body">
+     <div style="display:flex; gap:10px; margin-bottom:20px; overflow-x:auto; padding-bottom:5px;">
+        <div class="cat on" id="btn-ride" style="flex:none; padding:10px 20px; border-radius:20px; border:1px solid #ddd; cursor:pointer;" onclick="switchCat('ride')">Rides</div>
+        <div class="cat" id="btn-food" style="flex:none; padding:10px 20px; border-radius:20px; border:1px solid #ddd; cursor:pointer;" onclick="switchCat('food')">Food</div>
+        <div class="cat" id="btn-grocery" style="flex:none; padding:10px 20px; border-radius:20px; border:1px solid #ddd; cursor:pointer;" onclick="switchCat('grocery')">Grocery</div>
+     </div>
     <div id="p3-grid"></div>
   </div>
   <div class="p3-footer">
     <div class="sel-info">
       <div id="sel-name" style="font-weight:700; font-size:14px;">Select an option</div>
-      <div style="font-size:11px; color:#888;">$0 Cab0 Service Fee</div>
+      <div style="font-size:11px; color:#888;">Cheapest option selected</div>
     </div>
     <a href="#" id="final-link" target="_blank" class="open-btn">Open App</a>
   </div>
@@ -144,27 +149,30 @@ var LINKS = {
   'curb': 'https://gocurb.com/', 'doordash': 'https://www.doordash.com/',
   'ubereats': 'https://www.ubereats.com/', 'grubhub': 'https://www.grubhub.com/',
   'instacart': 'https://www.instacart.com/', 'walmart': 'https://www.walmart.com/plus',
-  'amazon': 'https://www.amazon.com/fresh', 'shipt': 'https://www.shipt.com/'
+  'amazon': 'https://www.amazon.com/fresh', 'shipt': 'https://www.shipt.com/',
+  'uber_comfort': 'https://m.uber.com/ul/'
 };
 
+// numericVal is used for sorting (ascending order)
 var PROVIDERS = {
   ride: [
-    { id:'uber_x', name:'Uber X', s:'Ub', c:'#000', p:'$9-11' },
-    { id:'lyft', name:'Lyft', s:'Ly', c:'#E91E8C', p:'$10-13' },
-    { id:'uber_xl', name:'Uber XL', s:'UXL', c:'#333', p:'$16-20' },
-    { id:'lyft_xl', name:'Lyft XL', s:'LXL', c:'#C2185B', p:'$17-22' },
-    { id:'curb', name:'Curb Taxi', s:'Crb', c:'#2563EB', p:'$13-18' }
+    { id:'uber_x', name:'Uber X', s:'Ub', c:'#000', p:'$9.00', numericVal: 9.00 },
+    { id:'lyft', name:'Lyft', s:'Ly', c:'#E91E8C', p:'$10.50', numericVal: 10.50 },
+    { id:'curb', name:'Curb Taxi', s:'Crb', c:'#2563EB', p:'$13.00', numericVal: 13.00 },
+    { id:'uber_comfort', name:'Uber Comfort', s:'UC', c:'#222', p:'$14.50', numericVal: 14.50 },
+    { id:'uber_xl', name:'Uber XL', s:'UXL', c:'#333', p:'$16.00', numericVal: 16.00 },
+    { id:'lyft_xl', name:'Lyft XL', s:'LXL', c:'#C2185B', p:'$17.00', numericVal: 17.00 }
   ],
   food: [
-    { id:'doordash', name:'DoorDash', s:'DD', c:'#FF3008', p:'$2.99 fee' },
-    { id:'ubereats', name:'Uber Eats', s:'UE', c:'#06C167', p:'$3.49 fee' },
-    { id:'grubhub', name:'Grubhub', s:'GH', c:'#F97316', p:'$3.99 fee' }
+    { id:'doordash', name:'DoorDash', s:'DD', c:'#FF3008', p:'$2.99 fee', numericVal: 2.99 },
+    { id:'ubereats', name:'Uber Eats', s:'UE', c:'#06C167', p:'$3.49 fee', numericVal: 3.49 },
+    { id:'grubhub', name:'Grubhub', s:'GH', c:'#F97316', p:'$3.99 fee', numericVal: 3.99 }
   ],
   grocery: [
-    { id:'instacart', name:'Instacart', s:'IC', c:'#00AD31', p:'$3.99 fee' },
-    { id:'walmart', name:'Walmart+', s:'Wm', c:'#0071DC', p:'FREE' },
-    { id:'amazon', name:'Amazon Fresh', s:'Az', c:'#FF9900', p:'FREE' },
-    { id:'shipt', name:'Shipt', s:'Sh', c:'#CC0000', p:'$7.99 fee' }
+    { id:'walmart', name:'Walmart+', s:'Wm', c:'#0071DC', p:'FREE', numericVal: 0.00 },
+    { id:'amazon', name:'Amazon Fresh', s:'Az', c:'#FF9900', p:'FREE', numericVal: 0.01 },
+    { id:'instacart', name:'Instacart', s:'IC', c:'#00AD31', p:'$3.99 fee', numericVal: 3.99 },
+    { id:'shipt', name:'Shipt', s:'Sh', c:'#CC0000', p:'$7.99 fee', numericVal: 7.99 }
   ]
 };
 
@@ -181,10 +189,25 @@ function pickCat(el, cat) {
   currentCat = cat;
 }
 
+function switchCat(cat) {
+  currentCat = cat;
+  selectedId = null;
+  // Update UI buttons
+  ['ride', 'food', 'grocery'].forEach(c => {
+    document.getElementById('btn-'+c).classList.toggle('on', c === cat);
+  });
+  renderProviders();
+}
+
 function renderProviders() {
   var list = PROVIDERS[currentCat] || [];
+  
+  // Ascending Sort Logic (Cheapest First)
+  list.sort((a, b) => a.numericVal - b.numericVal);
+
   if (list.length > 0 && !selectedId) selectProvider(list[0].id);
-  var html = `<h2 style="font-family:var(--serif); margin-bottom:15px;">Top ${currentCat} Deals</h2>`;
+  
+  var html = `<h2 style="font-family:var(--serif); margin-bottom:15px; text-transform:capitalize;">${currentCat} Rates</h2>`;
   list.forEach(p => {
     html += `<div class="pcard ${p.id===selectedId?'sel':''}" onclick="selectProvider('${p.id}')">
       <div class="plogo" style="background:${p.c}">${p.s}</div>
