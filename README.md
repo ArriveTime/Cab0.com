@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
+<title>Cab0.com — Physical & Virtual Mobility</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -21,8 +21,6 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);max-width:480
 .nd{width:8px;height:8px;border-radius:4px;background:var(--faint);
   transition:all .3s;cursor:pointer;border:none;padding:0}
 .nd.on{width:24px;background:var(--ink)}
-.pg-label{font-size:11px;font-weight:700;color:var(--mid);
-  letter-spacing:.6px;margin-left:10px;font-family:var(--sans)}
 
 /* PAGES */
 .page{display:none}
@@ -34,13 +32,13 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);max-width:480
 .logo{font-family:var(--serif);font-size:26px;color:#fff;display:flex;align-items:center;gap:2px}
 .logo-zero{background:var(--y);border-radius:7px;padding:2px 8px;color:#0C0C0A}
 .p1-body{flex:1;padding:0 26px 36px;display:flex;flex-direction:column}
-h1{font-family:var(--serif);font-size:46px;line-height:1.05;color:#fff;margin-bottom:16px}
+h1{font-family:var(--serif);font-size:42px;line-height:1.05;color:#fff;margin-bottom:16px}
 h1 em{color:var(--y);font-style:normal}
 .search-bar{background:#161616;border:1px solid #252525;border-radius:16px;padding:16px 18px;display:flex;align-items:center;gap:12px;margin-bottom:18px;cursor:pointer}
 .pin-y{width:10px;height:10px;border-radius:50%;background:var(--y)}
-.cats{display:flex;gap:8px;margin-bottom:28px}
-.cat{flex:1;background:#161616;border:1px solid #252525;border-radius:13px;padding:14px 6px;text-align:center;cursor:pointer}
-.cat.on{background:var(--y)}
+.cats{display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:28px}
+.cat{background:#161616;border:1px solid #252525;border-radius:13px;padding:14px 6px;text-align:center;cursor:pointer}
+.cat.on{background:var(--y); border-color:var(--y)}
 .cat.on .cat-label{color:#0C0C0A}
 .cat-label{font-size:12px;font-weight:700;color:#666}
 
@@ -54,7 +52,7 @@ input.fi{width:100%;background:#F8F6F0;border:1.5px solid var(--faint);border-ra
 
 /* PAGE 3 — RESULTS */
 .p3-body{padding:18px 18px 140px;flex:1}
-.pcard{background:var(--card);border-radius:15px;border:1px solid var(--faint);padding:14px 15px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;position:relative; transition: border 0.2s;}
+.pcard{background:var(--card);border-radius:15px;border:1px solid var(--faint);padding:14px 15px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;position:relative}
 .pcard.sel{border:2px solid #0C0C0A}
 .plogo{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;color:white}
 .pinfo{flex:1}
@@ -69,27 +67,26 @@ input.fi{width:100%;background:#F8F6F0;border:1.5px solid var(--faint);border-ra
   <button class="nd on" id="dot0" onclick="goTo(0)"></button>
   <button class="nd"    id="dot1" onclick="goTo(1)"></button>
   <button class="nd"    id="dot2" onclick="goTo(2)"></button>
-  <span class="pg-label" id="pg-lbl">Page 1 of 3 — Welcome</span>
 </div>
 
 <div class="page active" id="pg0">
   <div class="p1">
     <div class="p1-nav">
       <div class="logo">Cab<div class="logo-zero">0</div></div>
-      <div style="color:#666; font-size:11px; font-weight:700;">100% FREE</div>
     </div>
     <div class="p1-body">
-      <h1>Every ride.<br><em>Every delivery.</em><br>One search.</h1>
+      <h1>Arrive faster.<br><em>Physical or Virtual.</em></h1>
       <div class="search-bar" onclick="goTo(1)">
         <div class="pin-y"></div>
-        <span style="color:#444">Where are you going?</span>
+        <span style="color:#444">Search destination or meeting...</span>
       </div>
       <div class="cats">
         <div class="cat on" onclick="pickCat(this, 'ride')"><div class="cat-label">Rides</div></div>
-        <div class="cat" onclick="pickCat(this, 'food')"><div class="cat-label">Food</div></div>
         <div class="cat" onclick="pickCat(this, 'grocery')"><div class="cat-label">Grocery</div></div>
+        <div class="cat" onclick="pickCat(this, 'food')"><div class="cat-label">Food</div></div>
+        <div class="cat" onclick="pickCat(this, 'virtual')"><div class="cat-label">Virtual (Zoom)</div></div>
       </div>
-      <div style="background:var(--y); padding:20px; border-radius:15px; text-align:center; font-weight:700; cursor:pointer;" onclick="goTo(1)">Get Started →</div>
+      <div style="background:var(--y); padding:20px; border-radius:15px; text-align:center; font-weight:700; cursor:pointer;" onclick="goTo(1)">Compare All →</div>
     </div>
   </div>
 </div>
@@ -100,42 +97,37 @@ input.fi{width:100%;background:#F8F6F0;border:1.5px solid var(--faint);border-ra
     <div style="font-family:var(--serif); font-size:20px;">Cab<span style="color:var(--yd)">0</span>.com</div>
   </div>
   <div style="padding:22px;">
-    <h2>Your Address</h2>
+    <h2>Location & Contact</h2>
     <div class="form-card">
       <div class="fl" style="margin-top:0">Street Address</div>
-      <input class="fi" id="f-street" type="text" placeholder="290 Riverside Drive">
+      <input class="fi" id="f-street" type="text" placeholder="Current Location">
       <div class="fl">City</div>
-      <input class="fi" id="f-city" type="text" placeholder="Newport News">
+      <input class="fi" id="f-city" type="text" placeholder="Williamsburg">
       <div class="frow">
         <div style="flex:1">
           <div class="fl">State</div>
           <input class="fi" id="f-state" type="text" placeholder="VA" maxlength="2">
         </div>
         <div style="flex:1">
-          <div class="fl">ZIP Code</div>
-          <input class="fi" id="f-zip" type="text" placeholder="23601" maxlength="5">
+          <div class="fl">ZIP</div>
+          <input class="fi" id="f-zip" type="text" placeholder="23188" maxlength="5">
         </div>
       </div>
     </div>
-    <div style="background:#0C0C0A; color:var(--y); padding:18px; border-radius:15px; text-align:center; font-weight:700; cursor:pointer;" onclick="goTo(2)">Compare Rates →</div>
+    <div style="background:#0C0C0A; color:var(--y); padding:18px; border-radius:15px; text-align:center; font-weight:700; cursor:pointer;" onclick="goTo(2)">View Rates & Links →</div>
   </div>
 </div>
 
 <div class="page" id="pg2">
   <div class="p3-body">
-     <div style="display:flex; gap:10px; margin-bottom:20px; overflow-x:auto; padding-bottom:5px;">
-        <div class="cat on" id="btn-ride" style="flex:none; padding:10px 20px; border-radius:20px; border:1px solid #ddd; cursor:pointer;" onclick="switchCat('ride')">Rides</div>
-        <div class="cat" id="btn-food" style="flex:none; padding:10px 20px; border-radius:20px; border:1px solid #ddd; cursor:pointer;" onclick="switchCat('food')">Food</div>
-        <div class="cat" id="btn-grocery" style="flex:none; padding:10px 20px; border-radius:20px; border:1px solid #ddd; cursor:pointer;" onclick="switchCat('grocery')">Grocery</div>
-     </div>
     <div id="p3-grid"></div>
   </div>
   <div class="p3-footer">
     <div class="sel-info">
-      <div id="sel-name" style="font-weight:700; font-size:14px;">Select an option</div>
-      <div style="font-size:11px; color:#888;">Cheapest option selected</div>
+      <div id="sel-name" style="font-weight:700; font-size:14px;">Select Provider</div>
+      <div style="font-size:11px; color:#888;">Optimized for Williamsburg, VA</div>
     </div>
-    <a href="#" id="final-link" target="_blank" class="open-btn">Open App</a>
+    <a href="#" id="final-link" target="_blank" class="open-btn">Launch</a>
   </div>
 </div>
 
@@ -144,35 +136,33 @@ var currentCat = 'ride';
 var selectedId = null;
 
 var LINKS = {
-  'uber_x': 'https://m.uber.com/ul/', 'lyft': 'https://lyft.com/ride?id=lyft',
-  'uber_xl': 'https://m.uber.com/ul/', 'lyft_xl': 'https://lyft.com/ride?id=lyft_plus',
-  'curb': 'https://gocurb.com/', 'doordash': 'https://www.doordash.com/',
-  'ubereats': 'https://www.ubereats.com/', 'grubhub': 'https://www.grubhub.com/',
-  'instacart': 'https://www.instacart.com/', 'walmart': 'https://www.walmart.com/plus',
-  'amazon': 'https://www.amazon.com/fresh', 'shipt': 'https://www.shipt.com/',
-  'uber_comfort': 'https://m.uber.com/ul/'
+  'waymo': 'https://waymo.com/waymo-one/', 'cruise': 'https://getcruise.com/',
+  'uber_x': 'https://m.uber.com/ul/', 'lyft': 'https://lyft.com/ride',
+  'curb': 'https://gocurb.com/', 'zoom': 'https://zoom.us/join',
+  'teams': 'https://www.microsoft.com/en-us/microsoft-teams/join-a-meeting',
+  'walmart': 'https://www.walmart.com/plus', 'amazon': 'https://www.amazon.com/fresh',
+  'instacart': 'https://www.instacart.com/', 'doordash': 'https://www.doordash.com/'
 };
 
-// numericVal is used for sorting (ascending order)
 var PROVIDERS = {
   ride: [
-    { id:'uber_x', name:'Uber X', s:'Ub', c:'#000', p:'$9.00', numericVal: 9.00 },
-    { id:'lyft', name:'Lyft', s:'Ly', c:'#E91E8C', p:'$10.50', numericVal: 10.50 },
-    { id:'curb', name:'Curb Taxi', s:'Crb', c:'#2563EB', p:'$13.00', numericVal: 13.00 },
-    { id:'uber_comfort', name:'Uber Comfort', s:'UC', c:'#222', p:'$14.50', numericVal: 14.50 },
-    { id:'uber_xl', name:'Uber XL', s:'UXL', c:'#333', p:'$16.00', numericVal: 16.00 },
-    { id:'lyft_xl', name:'Lyft XL', s:'LXL', c:'#C2185B', p:'$17.00', numericVal: 17.00 }
-  ],
-  food: [
-    { id:'doordash', name:'DoorDash', s:'DD', c:'#FF3008', p:'$2.99 fee', numericVal: 2.99 },
-    { id:'ubereats', name:'Uber Eats', s:'UE', c:'#06C167', p:'$3.49 fee', numericVal: 3.49 },
-    { id:'grubhub', name:'Grubhub', s:'GH', c:'#F97316', p:'$3.99 fee', numericVal: 3.99 }
+    { id:'waymo', name:'Waymo (Autonomous)', s:'W', c:'#00D1FF', p:'$8.50', n:8.5 },
+    { id:'uber_x', name:'Uber X', s:'Ub', c:'#000', p:'$9.20', n:9.2 },
+    { id:'lyft', name:'Lyft', s:'Ly', c:'#E91E8C', p:'$10.00', n:10.0 },
+    { id:'cruise', name:'Cruise (Robotaxi)', s:'Cr', c:'#FF4D00', p:'$11.00', n:11.0 },
+    { id:'curb', name:'Curb Taxi', s:'Cb', c:'#2563EB', p:'$13.50', n:13.5 }
   ],
   grocery: [
-    { id:'walmart', name:'Walmart+', s:'Wm', c:'#0071DC', p:'FREE', numericVal: 0.00 },
-    { id:'amazon', name:'Amazon Fresh', s:'Az', c:'#FF9900', p:'FREE', numericVal: 0.01 },
-    { id:'instacart', name:'Instacart', s:'IC', c:'#00AD31', p:'$3.99 fee', numericVal: 3.99 },
-    { id:'shipt', name:'Shipt', s:'Sh', c:'#CC0000', p:'$7.99 fee', numericVal: 7.99 }
+    { id:'walmart', name:'Walmart+', s:'W+', c:'#0071DC', p:'FREE', n:0 },
+    { id:'amazon', name:'Amazon Fresh', s:'Az', c:'#FF9900', p:'FREE', n:0.1 },
+    { id:'instacart', name:'Instacart', s:'Ic', c:'#00AD31', p:'$3.99 fee', n:3.99 }
+  ],
+  virtual: [
+    { id:'zoom', name:'Zoom Meeting', s:'Zm', c:'#2D8CFF', p:'FREE', n:0 },
+    { id:'teams', name:'MS Teams', s:'Tm', c:'#464EB8', p:'FREE', n:0.1 }
+  ],
+  food: [
+    { id:'doordash', name:'DoorDash', s:'Dd', c:'#FF3008', p:'$2.99 fee', n:2.99 }
   ]
 };
 
@@ -189,25 +179,11 @@ function pickCat(el, cat) {
   currentCat = cat;
 }
 
-function switchCat(cat) {
-  currentCat = cat;
-  selectedId = null;
-  // Update UI buttons
-  ['ride', 'food', 'grocery'].forEach(c => {
-    document.getElementById('btn-'+c).classList.toggle('on', c === cat);
-  });
-  renderProviders();
-}
-
 function renderProviders() {
-  var list = PROVIDERS[currentCat] || [];
-  
-  // Ascending Sort Logic (Cheapest First)
-  list.sort((a, b) => a.numericVal - b.numericVal);
-
+  var list = (PROVIDERS[currentCat] || []).sort((a,b) => a.n - b.n);
   if (list.length > 0 && !selectedId) selectProvider(list[0].id);
   
-  var html = `<h2 style="font-family:var(--serif); margin-bottom:15px; text-transform:capitalize;">${currentCat} Rates</h2>`;
+  var html = `<h2 style="font-family:var(--serif); margin-bottom:18px;">Best Options</h2>`;
   list.forEach(p => {
     html += `<div class="pcard ${p.id===selectedId?'sel':''}" onclick="selectProvider('${p.id}')">
       <div class="plogo" style="background:${p.c}">${p.s}</div>
@@ -220,7 +196,7 @@ function renderProviders() {
 
 function selectProvider(id) {
   selectedId = id;
-  var all = [...PROVIDERS.ride, ...PROVIDERS.food, ...PROVIDERS.grocery];
+  var all = Object.values(PROVIDERS).flat();
   var p = all.find(x => x.id === id);
   document.getElementById('sel-name').textContent = p.name;
   document.getElementById('final-link').href = LINKS[id] || '#';
