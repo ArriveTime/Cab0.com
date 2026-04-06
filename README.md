@@ -6,16 +6,14 @@
 <title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* CSS Reset and Variables */
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --ink:#0C0C0A; --y:#FACC15; --yd:#D4A10A; --bg:#F6F3EC;
-  --card:#FFFFFF; --mid:#6B6760; --faint:#E4E0D6;
   --serif:'DM Serif Display',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
 }
 body{font-family:var(--sans);background:#0C0C0A;color:#fff;max-width:480px;margin:0 auto;line-height:1.4}
 
-/* NAV */
+/* Navigation */
 .nav-bar{display:flex;justify-content:center;align-items:center;gap:8px;padding:14px 0;background:#0C0C0A;border-bottom:1px solid #222;position:sticky;top:0;z-index:100}
 .nd{width:8px;height:8px;border-radius:4px;background:#333;transition:all .3s;cursor:pointer;border:none;padding:0}
 .nd.on{width:24px;background:var(--y)}
@@ -24,37 +22,26 @@ body{font-family:var(--sans);background:#0C0C0A;color:#fff;max-width:480px;margi
 .page{display:none}
 .page.active{display:block}
 
-/* PAGE 1: HERO */
-.p1{background:#0C0C0A;min-height:100vh;display:flex;flex-direction:column}
-.p1-nav{display:flex;justify-content:space-between;align-items:center;padding:22px 26px}
-.logo{font-family:var(--serif);font-size:26px;color:#fff;display:flex;align-items:center;gap:2px}
-.logo-zero{background:var(--y);border-radius:7px;padding:2px 8px;color:#0C0C0A}
-.p1-body{flex:1;padding:0 26px 36px;display:flex;flex-direction:column}
+/* Page 1: Branding & Categories */
+.p1-body{padding:40px 26px;display:flex;flex-direction:column;min-height:90vh}
 h1{font-family:var(--serif);font-size:46px;line-height:1.05;color:#fff;margin-bottom:16px}
 h1 em{color:var(--y);font-style:normal}
-.search-bar{background:#161616;border:1px solid #252525;border-radius:16px;padding:16px 18px;display:flex;align-items:center;gap:12px;margin-bottom:18px;cursor:pointer}
+.search-bar{background:#161616;border:1px solid #252525;border-radius:16px;padding:18px;display:flex;align-items:center;gap:12px;margin-bottom:24px;cursor:pointer}
 .pin-y{width:10px;height:10px;border-radius:50%;background:var(--y)}
-.cats{display:grid;grid-template-columns: 1fr 1fr;gap:8px;margin-bottom:28px}
-.cat{background:#161616;border:1px solid #252525;border-radius:13px;padding:14px 6px;text-align:center;cursor:pointer}
-.cat.on{background:var(--y)}
-.cat.on .cat-label{color:#0C0C0A}
-.cat-label{font-size:12px;font-weight:700;color:#666}
+.cats{display:grid;grid-template-columns: 1fr 1fr;gap:12px;margin-bottom:30px}
+.cat{background:#161616;border:1px solid #252525;border-radius:14px;padding:22px 10px;text-align:center;cursor:pointer;transition:0.2s}
+.cat.on{background:var(--y);border-color:var(--y)}
+.cat.on .cat-label{color:#000}
+.cat-label{font-size:14px;font-weight:700;color:#888}
 
-/* PAGE 2: FORM */
-.topbar{background:#111;border-bottom:1px solid #222;padding:16px 22px;display:flex;align-items:center;gap:14px}
-.back-btn{width:36px;height:36px;border-radius:10px;border:1px solid #333;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff}
-.form-card{background:#161616;border-radius:18px;border:1px solid #222;padding:20px;margin-bottom:14px}
-.fl{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;margin-bottom:7px;margin-top:14px}
-input.fi{width:100%;background:#000;border:1.5px solid #333;border-radius:11px;padding:13px 15px;font-size:16px;outline:none;color:#fff}
-
-/* PAGE 3: RESULTS */
-.sort-strip{display:flex;background:#000;padding:10px 18px;gap:8px;border-bottom:1px solid #222;position:sticky;top:50px;z-index:90}
-.sort-btn{flex:1;padding:8px;border-radius:8px;border:1px solid #333;font-size:10px;font-weight:700;background:#000;color:#888;cursor:pointer}
+/* Page 3: Comparison View */
+.sort-strip{display:flex;background:#000;padding:10px 18px;gap:8px;border-bottom:1px solid #222;position:sticky;top:52px;z-index:90}
+.sort-btn{flex:1;padding:10px;border-radius:8px;border:1px solid #333;font-size:11px;font-weight:700;background:#000;color:#888;cursor:pointer}
 .sort-btn.active{background:var(--y);color:#000;border-color:var(--y)}
-.pcard{background:#161616;border-radius:15px;border:1px solid #222;padding:14px 15px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.pcard{background:#161616;border-radius:15px;border:1px solid #222;padding:16px;margin-bottom:10px;display:flex;align-items:center;gap:15px;cursor:pointer}
 .pcard.sel{border:2px solid var(--y);background:#1a1a1a}
-.p3-footer{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#000;border-top:1px solid #222;padding:15px 20px 25px;display:flex;align-items:center;justify-content:space-between;z-index:1000}
-.open-btn{background:var(--y);color:#000;padding:14px 24px;border-radius:12px;text-decoration:none;font-weight:700;font-size:15px}
+.p3-footer{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#000;border-top:1px solid #222;padding:20px;display:flex;align-items:center;justify-content:space-between;z-index:1000}
+.open-btn{background:var(--y);color:#000;padding:14px 28px;border-radius:12px;text-decoration:none;font-weight:700;font-size:16px}
 </style>
 </head>
 <body>
@@ -63,43 +50,36 @@ input.fi{width:100%;background:#000;border:1.5px solid #333;border-radius:11px;p
   <button class="nd on" id="dot0" onclick="goTo(0)"></button>
   <button class="nd"    id="dot1" onclick="goTo(1)"></button>
   <button class="nd"    id="dot2" onclick="goTo(2)"></button>
-  <span class="pg-label">Cab0 Hub</span>
+  <span class="pg-label" id="cur-label">Cab0 Hub</span>
 </div>
 
 <div class="page active" id="pg0">
-  <div class="p1">
-    <div class="p1-nav">
-      <div class="logo">Cab<div class="logo-zero">0</div></div>
-      <div style="color:#666; font-size:11px; font-weight:700;">100% FREE</div>
+  <div class="p1-body">
+    <div style="font-family:var(--serif); font-size:24px; margin-bottom:40px;">Cab<span style="color:var(--y)">0</span>.com</div>
+    <h1>Every ride.<br>Every delivery.<br><em>One search.</em></h1>
+    <div class="search-bar" onclick="goTo(1)">
+      <div class="pin-y"></div>
+      <span style="color:#666">Enter destination...</span>
     </div>
-    <div class="p1-body">
-      <h1>Every ride.<br>Every delivery.<br><em>One search.</em></h1>
-      <div class="search-bar" onclick="goTo(1)">
-        <div class="pin-y"></div>
-        <span style="color:#666">Where are you going?</span>
-      </div>
-      <div class="cats">
-        <div class="cat on" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>
-        <div class="cat" onclick="pickCat(this, 'delivery')"><div class="cat-label">Food/Grocery</div></div>
-        <div class="cat" onclick="window.location.href='vegas.html'"><div class="cat-label">Vegas Loop</div></div>
-        <div class="cat" onclick="pickCat(this, 'robo')"><div class="cat-label">Robo Taxi</div></div>
-      </div>
-      <div style="background:var(--y); color:#000; padding:20px; border-radius:15px; text-align:center; font-weight:700; cursor:pointer;" onclick="goTo(1)">Find the best ride →</div>
+    <div class="cats">
+      <div class="cat on" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>
+      <div class="cat" onclick="pickCat(this, 'food')"><div class="cat-label">Food</div></div>
+      <div class="cat" onclick="pickCat(this, 'grocery')"><div class="cat-label">Grocery</div></div>
+      <div class="cat" onclick="pickCat(this, 'retail')"><div class="cat-label">Package/Retail</div></div>
     </div>
+    <div style="background:var(--y); color:#000; padding:20px; border-radius:15px; text-align:center; font-weight:700; cursor:pointer;" onclick="goTo(1)">Find the best rate →</div>
   </div>
 </div>
 
 <div class="page" id="pg1">
-  <div class="topbar"><div class="back-btn" onclick="goTo(0)">←</div><div class="logo">Cab<span class="logo-zero">0</span></div></div>
-  <div style="padding:22px;">
-    <h2>Set Destination</h2>
-    <div class="form-card">
-      <div class="fl">Street Address</div>
-      <input class="fi" id="f-street" type="text" placeholder="123 Main St">
-      <div class="fl">City, State, Zip</div>
-      <input class="fi" id="f-city" type="text" placeholder="Williamsburg, VA 23185">
+  <div style="padding:40px 26px;">
+    <h2 style="margin-bottom:20px;">Pickup Details</h2>
+    <div style="background:#161616; border:1px solid #222; border-radius:18px; padding:20px;">
+      <div style="font-size:11px; color:#666; text-transform:uppercase; margin-bottom:8px;">Location</div>
+      <input type="text" placeholder="123 Main St, Williamsburg, VA" style="width:100%; background:#000; border:1.5px solid #333; color:#fff; padding:15px; border-radius:11px; outline:none; font-size:16px;">
     </div>
-    <div style="background:var(--y); color:#000; padding:18px; border-radius:15px; text-align:center; font-weight:700; cursor:pointer;" onclick="goTo(2)">Compare Providers →</div>
+    <div style="background:var(--y); color:#000; padding:20px; border-radius:15px; text-align:center; font-weight:700; margin-top:20px; cursor:pointer;" onclick="goTo(2)">Compare Providers →</div>
+    <div style="text-align:center; margin-top:20px; color:#666; font-size:12px;" onclick="goTo(0)">← Back to Home</div>
   </div>
 </div>
 
@@ -110,7 +90,7 @@ input.fi{width:100%;background:#000;border:1.5px solid #333;border-radius:11px;p
   </div>
   <div style="padding:18px 18px 140px;" id="p3-grid"></div>
   <div class="p3-footer">
-    <div><div id="sel-name" style="font-weight:700; font-size:15px;">Select Option</div><div style="font-size:11px; color:#666;">No hidden fees</div></div>
+    <div><div id="sel-name" style="font-weight:700; font-size:15px;">Select Option</div><div style="font-size:11px; color:#666;">Direct App Connection</div></div>
     <a href="#" id="final-link" target="_blank" class="open-btn">Open App</a>
   </div>
 </div>
@@ -118,31 +98,40 @@ input.fi{width:100%;background:#000;border:1.5px solid #333;border-radius:11px;p
 <script>
 var currentCat = 'ride', currentSort = 'price', selectedId = null;
 
-// UNIVERSAL DEEP LINKS
+// APP SCHEMES & DESTINATIONS
 var LINKS = {
-  'uber': 'uber://', 'lyft': 'lyft://', 'doordash': 'doordash://', 
-  'ubereats': 'ubereats://', 'instacart': 'instacart://',
-  'waymo': 'https://waymo.com/', 'zoox': 'https://zoox.com/'
+  'uber':'https://m.uber.com', 'lyft':'lyft://', 'curb':'https://gocurb.com',
+  'doordash':'doordash://', 'ubereats':'ubereats://', 'grubhub':'grubhub://', 'postmates':'postmates://',
+  'instacart':'instacart://', 'shipt':'shipt://', 'amazon':'https://amazon.com/fresh', 'walmart':'walmart://'
 };
 
 var PROVIDERS = {
   ride: [
     { id:'uber', name:'Uber X', s:'Ub', c:'#000', price:9.50, time:4 },
-    { id:'lyft', name:'Lyft', s:'Ly', c:'#FF00BF', price:10.20, time:6 }
+    { id:'lyft', name:'Lyft', s:'Ly', c:'#FF00BF', price:10.20, time:6 },
+    { id:'curb', name:'Curb Taxi', s:'Cb', c:'#007AFF', price:12.00, time:3 }
   ],
-  delivery: [
+  food: [
     { id:'doordash', name:'DoorDash', s:'DD', c:'#FF3008', price:1.99, time:25 },
-    { id:'ubereats', name:'Uber Eats', s:'UE', c:'#06C167', price:2.49, time:20 }
+    { id:'ubereats', name:'Uber Eats', s:'UE', c:'#06C167', price:2.49, time:20 },
+    { id:'grubhub', name:'Grubhub', s:'GH', c:'#F97316', price:3.00, time:35 }
   ],
-  robo: [
-    { id:'waymo', name:'Waymo One', s:'Wy', c:'#00D1B2', price:8.00, time:12 },
-    { id:'zoox', name:'Zoox', s:'Zx', c:'#000', price:7.50, time:15 }
+  grocery: [
+    { id:'instacart', name:'Instacart', s:'IC', c:'#00AD31', price:3.99, time:60 },
+    { id:'shipt', name:'Shipt', s:'Sh', c:'#E0162B', price:5.00, time:45 },
+    { id:'amazon', name:'Amazon Fresh', s:'Az', c:'#FF9900', price:0.00, time:90 }
+  ],
+  retail: [
+    { id:'walmart', name:'Walmart+', s:'Wm', c:'#0071DC', price:0.00, time:120 },
+    { id:'doordash', name:'DoorDash DashMart', s:'DD', c:'#FF3008', price:2.99, time:30 }
   ]
 };
 
 function goTo(n) {
   document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active', i === n));
+  document.querySelectorAll('.nd').forEach((d, i) => d.classList.toggle('on', i === n));
   if (n === 2) renderProviders();
+  window.scrollTo(0,0);
 }
 
 function pickCat(el, cat) {
