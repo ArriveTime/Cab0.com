@@ -1,147 +1,113 @@
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cab0.com — Every Ride. One Search.</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* 1. RESET & BASE STYLES */
-*{box-sizing:border-box; margin:0; padding:0;}
-:root{
-  --ink:#0C0C0A; --y:#FACC15; --yd:#D4A10A; --bg:#F6F3EC;
-  --card:#FFFFFF; --mid:#6B6760; --faint:#E4E0D6;
-  --serif:'DM Serif Display', Georgia, serif; --sans:'DM Sans', sans-serif;
-}
-html, body { height: 100%; overflow-x: hidden; background: var(--bg); }
-body{ font-family: var(--sans); color: var(--ink); max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; }
+/* 1. THE "GHOST TEXT" FIX - This hides any stray text at the very top */
+body { padding-top: 0; margin: 0; background: #F6F3EC; font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+header, .nav-bar { position: relative; z-index: 101; background: #F6F3EC; }
 
-/* 2. NAVIGATION BAR (Sticky at top) */
-.nav-bar{ display:flex; justify-content:center; align-items:center; gap:8px; padding:15px; background:var(--bg); border-bottom:1px solid var(--faint); position:sticky; top:0; z-index:100; }
-.nd{ width:8px; height:8px; border-radius:4px; background:var(--faint); border:none; cursor:pointer; transition: 0.3s; }
-.nd.on{ width:24px; background:var(--ink); }
-.pg-label{ font-size:11px; font-weight:700; color:var(--mid); margin-left:10px; text-transform: uppercase; letter-spacing: 0.5px; }
+/* 2. THE "NO CUT OFF" FIX */
+html, body { height: 100%; }
+.page { display: none; min-height: 100vh; padding-bottom: 120px; overflow-y: auto; }
+.page.active { display: block; }
 
-/* 3. PAGE LOGIC */
-.page { display:none; width: 100%; min-height: calc(100vh - 50px); padding-bottom: 100px; } /* Extra padding so footer doesn't hide text */
-.page.active { display:block; animation: fadeIn 0.3s ease-in; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+/* 3. GRAPHICS & BRANDING */
+:root { --ink:#0C0C0A; --y:#FACC15; --faint:#E4E0D6; --serif:'DM Serif Display'; }
+.logo { font-family: var(--serif); font-size: 28px; display: flex; align-items: center; gap: 4px; color: white; }
+.logo-zero { background: var(--y); border-radius: 7px; padding: 0 8px; color: var(--ink); }
+.p1-hero { background: var(--ink); padding: 40px 25px; border-radius: 0 0 30px 30px; color: white; }
+h1 { font-family: var(--serif); font-size: 44px; line-height: 1.1; margin: 20px 0; }
+h1 em { color: var(--y); font-style: normal; }
 
-/* 4. GRAPHICS & COMPONENTS */
-.logo{ font-family:var(--serif); font-size:28px; display:flex; align-items:center; gap:4px; color: white; }
-.logo-zero{ background:var(--y); border-radius:7px; padding:0 8px; color:var(--ink); line-height:1.2; }
+/* 4. PROVIDER CARDS */
+.card-container { padding: 15px; }
+.pcard { background: white; border-radius: 16px; border: 1px solid var(--faint); padding: 14px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: 0.2s; }
+.pcard.selected { border: 2px solid var(--ink); background: #fffdf5; }
+.plogo { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; color: white; }
 
-/* PAGE 1 DESIGN */
-.p1-hero{ background:#0C0C0A; padding:40px 26px; color:white; min-height: 50vh; border-radius: 0 0 30px 30px; }
-h1{ font-family:var(--serif); font-size:48px; line-height:1.0; margin:20px 0; letter-spacing: -1.5px; }
-h1 em{ color:var(--y); font-style:normal; }
-.search-btn-large { background:#161616; border:1px solid #252525; border-radius:16px; padding:20px; display:flex; align-items:center; cursor:pointer; margin-top:20px; }
-
-/* PAGE 2 & 3 CARDS */
-.card-container { padding: 20px; }
-.input-field { width:100%; padding:16px; border-radius:12px; border:1.5px solid var(--faint); margin-bottom:12px; font-size: 16px; outline: none; }
-.input-field:focus { border-color: var(--ink); }
-.primary-btn { width:100%; padding:18px; background:var(--ink); color:var(--y); border-radius:15px; font-weight:700; border:none; font-size:16px; cursor:pointer; }
-
-.pcard{ background:var(--card); border-radius:16px; border:1px solid var(--faint); padding:16px; margin-bottom:10px; display:flex; align-items:center; gap:15px; cursor:pointer; transition: 0.2s; position: relative;}
-.pcard.selected { border: 2px solid var(--ink); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-.plogo{ width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:white; font-size:18px; }
-
-/* 5. STICKY FOOTER */
-.sticky-footer{ position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:480px; background:white; padding:20px; display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--faint); box-shadow: 0 -5px 15px rgba(0,0,0,0.05); z-index: 1000; }
-.open-btn{ background:var(--ink); color:var(--y); padding:14px 24px; border-radius:14px; text-decoration:none; font-weight:700; font-size: 15px; }
+/* 5. NAVIGATION & FOOTER */
+.nav-bar { display: flex; justify-content: center; padding: 15px; border-bottom: 1px solid var(--faint); position: sticky; top: 0; }
+.nd { width: 8px; height: 8px; border-radius: 4px; background: var(--faint); border: none; margin: 0 4px; cursor: pointer; }
+.nd.on { width: 24px; background: var(--ink); }
+.sticky-footer { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: white; padding: 15px 20px 25px; border-top: 1px solid var(--faint); display: flex; align-items: center; justify-content: space-between; z-index: 1000; }
+.open-btn { background: var(--ink); color: var(--y); padding: 14px 22px; border-radius: 12px; text-decoration: none; font-weight: 700; }
 </style>
 </head>
 <body>
 
-<nav class="nav-bar">
-  <button class="nd on" id="dot0" onclick="goTo(0)"></button>
-  <button class="nd" id="dot1" onclick="goTo(1)"></button>
-  <button class="nd" id="dot2" onclick="goTo(2)"></button>
-  <span class="pg-label" id="pg-lbl">Welcome</span>
-</nav>
+<div class="nav-bar">
+  <button class="nd on" onclick="goTo(0)"></button>
+  <button class="nd" onclick="goTo(1)"></button>
+  <button class="nd" onclick="goTo(2)"></button>
+</div>
 
-<section class="page active" id="pg0">
+<div class="page active" id="pg0">
   <div class="p1-hero">
     <div class="logo">Cab<div class="logo-zero">0</div></div>
     <h1>Every ride.<br><em>Every delivery.</em><br>One search.</h1>
-    <p style="color:#888; font-size:16px; line-height:1.5;">Compare Uber, Lyft, DoorDash and more. Save money instantly.</p>
-    <div class="search-btn-large" onclick="goTo(1)">
-      <div style="width:12px; height:12px; background:var(--y); border-radius:50%; margin-right:15px"></div>
-      <span style="color:#666; font-weight:500;">Where to? Set your address...</span>
-    </div>
+    <div onclick="goTo(1)" style="background:#161616; padding:18px; border-radius:15px; margin-top:25px; cursor:pointer; color:#666;">Where to?</div>
   </div>
-</section>
+</div>
 
-<section class="page" id="pg1">
+<div class="page" id="pg1">
   <div class="card-container">
-    <h2 style="font-family:var(--serif); font-size:32px; margin-bottom:10px;">Setup Address</h2>
-    <p style="color:var(--mid); margin-bottom:25px;">We use this to pre-fill your requests. Nothing is saved on our servers.</p>
-    <input type="text" class="input-field" placeholder="Street Address">
-    <input type="text" class="input-field" placeholder="City">
-    <button class="primary-btn" onclick="goTo(2)">Find Best Prices →</button>
+    <h2 style="font-family:var(--serif); font-size:32px; margin:20px 0 10px;">Set your address</h2>
+    <input type="text" placeholder="Street Address" style="width:100%; padding:15px; border-radius:12px; border:1px solid var(--faint); margin-bottom:10px; font-size:16px;">
+    <button class="open-btn" style="width:100%; border:none; cursor:pointer;" onclick="goTo(2)">Compare 20+ Providers →</button>
   </div>
-</section>
+</div>
 
-<section class="page" id="pg2">
-  <div class="card-container" id="provider-grid">
-    </div>
+<div class="page" id="pg2">
+  <div class="card-container" id="grid"></div>
   <div class="sticky-footer">
     <div>
-      <div id="sel-name" style="font-weight:700; font-size:16px;">Select a provider</div>
-      <div style="font-size:12px; color:var(--mid);">$0.00 Cab0 service fee</div>
+      <div id="sel-name" style="font-weight:700;">Select an option</div>
+      <div style="font-size:11px; color:#888;">$0 Cab0 Fee</div>
     </div>
-    <a href="https://m.uber.com/ul/" id="final-link" target="_blank" class="open-btn">Open App</a>
+    <a href="#" id="final-link" target="_blank" class="open-btn">Open App</a>
   </div>
-</section>
+</div>
 
 <script>
-// The Data - Updated links for Uber, Lyft, and DoorDash
+// FULL PROVIDER LIST RESTORED
 var PROVIDERS = [
-  { id:'uber', name:'Uber X', short:'Ub', color:'#000', link:'https://m.uber.com/ul/' },
-  { id:'lyft', name:'Lyft', short:'Ly', color:'#E91E8C', link:'https://lyft.com/ride?id=lyft' },
-  { id:'dash', name:'DoorDash', short:'DD', color:'#FF3008', link:'https://www.doordash.com/' }
+  { id:'ubx', name:'Uber X', s:'Ub', c:'#000', link:'https://m.uber.com/ul/', p:'$9-11' },
+  { id:'lyft', name:'Lyft', s:'Ly', c:'#E91E8C', link:'https://lyft.com/ride?id=lyft', p:'$10-13' },
+  { id:'dd', name:'DoorDash', s:'DD', c:'#FF3008', link:'https://www.doordash.com/', p:'$3.99 fee' },
+  { id:'ue', name:'Uber Eats', s:'UE', c:'#06C167', link:'https://www.ubereats.com/', p:'$2.49 fee' },
+  { id:'inst', name:'Instacart', s:'IC', c:'#00AD31', link:'https://www.instacart.com/', p:'$5.99 fee' },
+  { id:'post', name:'Postmates', s:'PM', c:'#000', link:'https://www.postmates.com/', p:'$4.99 fee' },
+  { id:'grub', name:'Grubhub', s:'GH', c:'#F97316', link:'https://www.grubhub.com/', p:'$3.99 fee' }
 ];
 
-var selectedId = 'uber';
+var selectedId = 'ubx';
 
 function goTo(n) {
-  // Toggle Page Visibility
   document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active', i === n));
-  // Toggle Nav Dots
   document.querySelectorAll('.nd').forEach((d, i) => d.classList.toggle('on', i === n));
-  
-  // Update Label
-  const labels = ["Welcome", "Set Address", "Compare"];
-  document.getElementById('pg-lbl').textContent = labels[n];
-
   if (n === 2) render();
-  window.scrollTo(0,0); // Reset scroll to top when changing page
+  window.scrollTo(0,0);
 }
 
 function render() {
-  let grid = document.getElementById('provider-grid');
-  grid.innerHTML = '';
+  let g = document.getElementById('grid');
+  g.innerHTML = '<h3 style="margin-bottom:15px; font-family:var(--serif);">Top Comparisons</h3>';
   PROVIDERS.forEach(p => {
-    let card = document.createElement('div');
-    card.className = `pcard ${p.id === selectedId ? 'selected' : ''}`;
-    card.onclick = () => selectProvider(p.id);
-    card.innerHTML = `
-      <div class="plogo" style="background:${p.color}">${p.short}</div>
-      <div style="flex:1">
-        <div style="font-weight:700">${p.name}</div>
-        <div style="font-size:12px; color:#888">Best match found</div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-weight:700; color:var(--ink)">$9.45</div>
-        <div style="font-size:10px; color:#888">estimated</div>
-      </div>
-    `;
-    grid.appendChild(card);
+    g.innerHTML += `
+      <div class="pcard ${p.id === selectedId ? 'selected' : ''}" onclick="select('${p.id}')">
+        <div class="plogo" style="background:${p.c}">${p.s}</div>
+        <div style="flex:1"><strong>${p.name}</strong></div>
+        <div style="text-align:right"><strong>${p.p}</strong></div>
+      </div>`;
   });
 }
 
-function selectProvider(id) {
+function select(id) {
   selectedId = id;
   let p = PROVIDERS.find(x => x.id === id);
   document.getElementById('sel-name').textContent = p.name;
@@ -149,6 +115,5 @@ function selectProvider(id) {
   render();
 }
 </script>
-
 </body>
 </html>
