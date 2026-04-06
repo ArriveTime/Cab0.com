@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cab0.com — Physical & Virtual Mobility</title>
+<title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --ink:#0C0C0A; --y:#FACC15; --yd:#D4A10A; --bg:#F6F3EC;
-  --card:#FFFFFF; --mid:#6B6760; --faint:#E4E0D6;
+  --ink:#0C0C0A; --y:#FACC15; --yd:#D4A10A; --bg:#0C0C0A;
+  --card:#161616; --mid:#6B6760; --faint:#252525;
   --serif:'DM Serif Display',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
 }
-body{font-family:var(--sans);background:var(--bg);color:var(--ink);max-width:480px;margin:0 auto}
+body{font-family:var(--sans);background:var(--bg);color:#fff;max-width:480px;margin:0 auto}
 
 /* NAV DOTS */
 .nav-bar{display:flex;justify-content:center;align-items:center;gap:8px;
@@ -20,45 +20,51 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);max-width:480
   position:sticky;top:0;z-index:100}
 .nd{width:8px;height:8px;border-radius:4px;background:var(--faint);
   transition:all .3s;cursor:pointer;border:none;padding:0}
-.nd.on{width:24px;background:var(--ink)}
+.nd.on{width:24px;background:var(--y)}
 
 /* PAGES */
 .page{display:none}
 .page.active{display:block}
 
-/* PAGE 1 — HERO */
-.p1{background:#0C0C0A;min-height:100vh;display:flex;flex-direction:column}
-.p1-nav{display:flex;justify-content:space-between;align-items:center;padding:22px 26px}
-.logo{font-family:var(--serif);font-size:26px;color:#fff;display:flex;align-items:center;gap:2px}
-.logo-zero{background:var(--y);border-radius:7px;padding:2px 8px;color:#0C0C0A}
-.p1-body{flex:1;padding:0 26px 36px;display:flex;flex-direction:column}
-h1{font-family:var(--serif);font-size:42px;line-height:1.05;color:#fff;margin-bottom:16px}
+/* PAGE 1 — DARK HERO */
+.p1{min-height:100vh;display:flex;flex-direction:column;padding:26px}
+.p1-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}
+.logo{font-family:var(--sans);font-weight:900;font-size:24px;color:#fff;display:flex;align-items:center;gap:4px}
+.logo-zero{background:var(--y);border-radius:6px;padding:2px 6px;color:#000}
+.badge{background:rgba(255,255,255,0.1); border:1px solid var(--faint); padding:6px 12px; border-radius:20px; font-size:10px; font-weight:700; color:#888}
+
+h1{font-family:var(--serif);font-size:48px;line-height:1.1;margin-bottom:20px}
 h1 em{color:var(--y);font-style:normal}
-.search-bar{background:#161616;border:1px solid #252525;border-radius:16px;padding:16px 18px;display:flex;align-items:center;gap:12px;margin-bottom:18px;cursor:pointer}
-.pin-y{width:10px;height:10px;border-radius:50%;background:var(--y)}
-.cats{display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:28px}
-.cat{background:#161616;border:1px solid #252525;border-radius:13px;padding:14px 6px;text-align:center;cursor:pointer}
-.cat.on{background:var(--y); border-color:var(--y)}
-.cat.on .cat-label{color:#0C0C0A}
+.hero-sub{color:#888; font-size:15px; line-height:1.5; margin-bottom:30px}
+
+.search-bar{background:#161616;border:1.5px solid var(--faint);border-radius:14px;padding:18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.cats{display:flex;gap:8px;margin-bottom:24px}
+.cat{flex:1;background:#161616;border:1px solid var(--faint);border-radius:12px;padding:20px 10px;text-align:center;cursor:pointer;transition:0.2s}
+.cat.on{background:var(--y);border-color:var(--y)}
+.cat.on .cat-label{color:#000}
 .cat-label{font-size:12px;font-weight:700;color:#666}
 
-/* PAGE 2 — FORM */
-.topbar{background:var(--card);border-bottom:1px solid var(--faint);padding:16px 22px;display:flex;align-items:center;gap:14px}
-.back-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--faint);display:flex;align-items:center;justify-content:center;cursor:pointer}
-.form-card{background:var(--card);border-radius:18px;border:1px solid var(--faint);padding:20px;margin-bottom:14px}
-.fl{font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;margin-bottom:7px;margin-top:14px}
-input.fi{width:100%;background:#F8F6F0;border:1.5px solid var(--faint);border-radius:11px;padding:13px 15px;font-size:15px;outline:none}
-.frow{display:flex;gap:8px}
+.stats-grid{display:grid; grid-template-columns: 1fr 1fr 1fr; border:1px solid var(--faint); border-radius:14px; margin-bottom:20px}
+.stat{padding:15px; text-align:center; border-right:1px solid var(--faint)}
+.stat:last-child{border-right:none}
+.stat-val{display:block; font-weight:900; font-size:18px}
+.stat-label{font-size:9px; text-transform:uppercase; color:#666; font-weight:700}
+
+.cta-btn{background:var(--y); color:#000; padding:20px; border-radius:14px; text-align:center; font-weight:800; font-size:16px; cursor:pointer}
+
+/* PAGE 2 — FORM (LIGHTER THEME FOR INPUT) */
+.form-pg{background:#F6F3EC; color:#000; min-height:100vh}
+.topbar{background:#fff;border-bottom:1px solid #E4E0D6;padding:16px 22px;display:flex;align-items:center;gap:14px}
+.form-card{background:#fff;border-radius:18px;border:1px solid #E4E0D6;padding:20px;margin:20px}
+input.fi{width:100%;background:#F8F6F0;border:1.5px solid #E4E0D6;border-radius:11px;padding:13px 15px;font-size:15px;outline:none;margin-bottom:10px}
 
 /* PAGE 3 — RESULTS */
-.p3-body{padding:18px 18px 140px;flex:1}
-.pcard{background:var(--card);border-radius:15px;border:1px solid var(--faint);padding:14px 15px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;position:relative}
-.pcard.sel{border:2px solid #0C0C0A}
+.p3-body{padding:18px; background:#F6F3EC; color:#000; min-height:100vh}
+.pcard{background:#fff;border-radius:15px;border:1px solid #E4E0D6;padding:14px 15px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.pcard.sel{border:2px solid #000}
 .plogo{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;color:white}
-.pinfo{flex:1}
 .pprice{text-align:right;font-family:var(--serif);font-size:18px}
-.p3-footer{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:white;border-top:1px solid var(--faint);padding:15px 20px 25px;display:flex;align-items:center;justify-content:space-between;z-index:1000}
-.open-btn{background:#0C0C0A;color:var(--y);padding:14px 22px;border-radius:12px;text-decoration:none;font-weight:700}
+.p3-footer{position:fixed;bottom:0;width:100%;max-width:480px;background:#fff;border-top:1px solid #E4E0D6;padding:15px 20px 25px;display:flex;align-items:center;justify-content:space-between}
 </style>
 </head>
 <body>
@@ -72,49 +78,67 @@ input.fi{width:100%;background:#F8F6F0;border:1.5px solid var(--faint);border-ra
 <div class="page active" id="pg0">
   <div class="p1">
     <div class="p1-nav">
-      <div class="logo">Cab<div class="logo-zero">0</div></div>
+      <div class="logo">Cab<div class="logo-zero">0</div>.com</div>
+      <div class="badge">100% FREE</div>
     </div>
-    <div class="p1-body">
-      <h1>Arrive faster.<br><em>Physical or Virtual.</em></h1>
-      <div class="search-bar" onclick="goTo(1)">
-        <div class="pin-y"></div>
-        <span style="color:#444">Search destination or meeting...</span>
-      </div>
-      <div class="cats">
-        <div class="cat on" onclick="pickCat(this, 'ride')"><div class="cat-label">Rides</div></div>
-        <div class="cat" onclick="pickCat(this, 'grocery')"><div class="cat-label">Grocery</div></div>
-        <div class="cat" onclick="pickCat(this, 'food')"><div class="cat-label">Food</div></div>
-        <div class="cat" onclick="pickCat(this, 'virtual')"><div class="cat-label">Virtual (Zoom)</div></div>
-      </div>
-      <div style="background:var(--y); padding:20px; border-radius:15px; text-align:center; font-weight:700; cursor:pointer;" onclick="goTo(1)">Compare All →</div>
+    <div class="badge" style="width:fit-content; margin-bottom:15px">● No fees · No sign-up · No API keys</div>
+    <h1>Every ride.<br><em style="color:var(--y)">Every delivery.</em><br>One search.</h1>
+    <p class="hero-sub">Compare Uber, Lyft, DoorDash, Instacart and 16 more platforms side by side — instantly. Cab0 is completely free, always.</p>
+    
+    <div class="search-bar" onclick="goTo(1)">
+      <span style="color:#444">Where are you going?</span>
+      <div style="background:var(--y); padding:6px; border-radius:6px; color:#000">→</div>
     </div>
+
+    <div class="cats">
+      <div class="cat on" onclick="pickCat(this, 'ride')"><div class="cat-label">Rides</div></div>
+      <div class="cat" onclick="pickCat(this, 'food')"><div class="cat-label">Food</div></div>
+      <div class="cat" onclick="pickCat(this, 'grocery')"><div class="cat-label">Grocery</div></div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat"><span class="stat-val">20</span><span class="stat-label">Providers</span></div>
+      <div class="stat"><span class="stat-val">$0</span><span class="stat-label">Cab0 Fee</span></div>
+      <div class="stat"><span class="stat-val">3</span><span class="stat-label">Taps to Book</span></div>
+    </div>
+
+    <div class="cta-btn" onclick="goTo(1)">Get started — it's free →</div>
   </div>
 </div>
 
 <div class="page" id="pg1">
-  <div class="topbar">
-    <div class="back-btn" onclick="goTo(0)">←</div>
-    <div style="font-family:var(--serif); font-size:20px;">Cab<span style="color:var(--yd)">0</span>.com</div>
-  </div>
-  <div style="padding:22px;">
-    <h2>Location & Contact</h2>
+  <div class="form-pg">
+    <div class="topbar">
+      <div class="logo" style="color:#000">Cab<div class="logo-zero">0</div></div>
+      <div style="margin-left:auto; font-size:11px; font-weight:700">STEP 1 OF 2</div>
+    </div>
     <div class="form-card">
-      <div class="fl" style="margin-top:0">Street Address</div>
-      <input class="fi" id="f-street" type="text" placeholder="Current Location">
-      <div class="fl">City</div>
-      <input class="fi" id="f-city" type="text" placeholder="Williamsburg">
-      <div class="frow">
+      <h2 style="margin-bottom:8px">Set your home address</h2>
+      <p style="font-size:13px; color:#666; margin-bottom:20px">Save it once — Cab0 pre-fills your pickup every time.</p>
+      
+      <div style="background:#F8F6F0; border:1px solid #E4E0D6; border-radius:12px; padding:15px; margin-bottom:20px; display:flex; align-items:center; gap:10px; cursor:pointer">
+        <div style="background:#000; padding:6px; border-radius:6px">📍</div>
+        <div style="font-size:13px; font-weight:700">Use my current location</div>
+      </div>
+
+      <div style="font-size:11px; font-weight:700; color:#888; text-transform:uppercase; margin-bottom:8px">Street Address</div>
+      <input class="fi" id="f-street" type="text" placeholder="290 Riverside Drive">
+      
+      <div style="font-size:11px; font-weight:700; color:#888; text-transform:uppercase; margin-bottom:8px">City</div>
+      <input class="fi" id="f-city" type="text" placeholder="Newport News">
+      
+      <div style="display:flex; gap:10px">
         <div style="flex:1">
-          <div class="fl">State</div>
-          <input class="fi" id="f-state" type="text" placeholder="VA" maxlength="2">
+          <div style="font-size:11px; font-weight:700; color:#888; text-transform:uppercase; margin-bottom:8px">State</div>
+          <input class="fi" id="f-state" type="text" placeholder="VA">
         </div>
         <div style="flex:1">
-          <div class="fl">ZIP</div>
-          <input class="fi" id="f-zip" type="text" placeholder="23188" maxlength="5">
+          <div style="font-size:11px; font-weight:700; color:#888; text-transform:uppercase; margin-bottom:8px">ZIP Code</div>
+          <input class="fi" id="f-zip" type="text" placeholder="23601">
         </div>
       </div>
+      <div class="cta-btn" onclick="goTo(2)" style="margin-top:10px">Compare All Rates →</div>
     </div>
-    <div style="background:#0C0C0A; color:var(--y); padding:18px; border-radius:15px; text-align:center; font-weight:700; cursor:pointer;" onclick="goTo(2)">View Rates & Links →</div>
   </div>
 </div>
 
@@ -124,25 +148,16 @@ input.fi{width:100%;background:#F8F6F0;border:1.5px solid var(--faint);border-ra
   </div>
   <div class="p3-footer">
     <div class="sel-info">
-      <div id="sel-name" style="font-weight:700; font-size:14px;">Select Provider</div>
-      <div style="font-size:11px; color:#888;">Optimized for Williamsburg, VA</div>
+      <div id="sel-name" style="font-weight:700; font-size:14px; color:#000">Select Provider</div>
+      <div style="font-size:11px; color:#888;">Optimized for your area</div>
     </div>
-    <a href="#" id="final-link" target="_blank" class="open-btn">Launch</a>
+    <a href="#" id="final-link" target="_blank" style="background:#000; color:var(--y); padding:14px 22px; border-radius:12px; text-decoration:none; font-weight:700">Launch App</a>
   </div>
 </div>
 
 <script>
 var currentCat = 'ride';
 var selectedId = null;
-
-var LINKS = {
-  'waymo': 'https://waymo.com/waymo-one/', 'cruise': 'https://getcruise.com/',
-  'uber_x': 'https://m.uber.com/ul/', 'lyft': 'https://lyft.com/ride',
-  'curb': 'https://gocurb.com/', 'zoom': 'https://zoom.us/join',
-  'teams': 'https://www.microsoft.com/en-us/microsoft-teams/join-a-meeting',
-  'walmart': 'https://www.walmart.com/plus', 'amazon': 'https://www.amazon.com/fresh',
-  'instacart': 'https://www.instacart.com/', 'doordash': 'https://www.doordash.com/'
-};
 
 var PROVIDERS = {
   ride: [
@@ -152,17 +167,14 @@ var PROVIDERS = {
     { id:'cruise', name:'Cruise (Robotaxi)', s:'Cr', c:'#FF4D00', p:'$11.00', n:11.0 },
     { id:'curb', name:'Curb Taxi', s:'Cb', c:'#2563EB', p:'$13.50', n:13.5 }
   ],
+  food: [
+    { id:'doordash', name:'DoorDash', s:'Dd', c:'#FF3008', p:'$2.99 fee', n:2.99 },
+    { id:'ubereats', name:'Uber Eats', s:'Ue', c:'#06C167', p:'$3.49 fee', n:3.49 }
+  ],
   grocery: [
     { id:'walmart', name:'Walmart+', s:'W+', c:'#0071DC', p:'FREE', n:0 },
     { id:'amazon', name:'Amazon Fresh', s:'Az', c:'#FF9900', p:'FREE', n:0.1 },
     { id:'instacart', name:'Instacart', s:'Ic', c:'#00AD31', p:'$3.99 fee', n:3.99 }
-  ],
-  virtual: [
-    { id:'zoom', name:'Zoom Meeting', s:'Zm', c:'#2D8CFF', p:'FREE', n:0 },
-    { id:'teams', name:'MS Teams', s:'Tm', c:'#464EB8', p:'FREE', n:0.1 }
-  ],
-  food: [
-    { id:'doordash', name:'DoorDash', s:'Dd', c:'#FF3008', p:'$2.99 fee', n:2.99 }
   ]
 };
 
@@ -183,12 +195,12 @@ function renderProviders() {
   var list = (PROVIDERS[currentCat] || []).sort((a,b) => a.n - b.n);
   if (list.length > 0 && !selectedId) selectProvider(list[0].id);
   
-  var html = `<h2 style="font-family:var(--serif); margin-bottom:18px;">Best Options</h2>`;
+  var html = `<h2 style="font-family:var(--serif); margin-bottom:18px; color:#000">Compare ${currentCat}</h2>`;
   list.forEach(p => {
     html += `<div class="pcard ${p.id===selectedId?'sel':''}" onclick="selectProvider('${p.id}')">
       <div class="plogo" style="background:${p.c}">${p.s}</div>
-      <div class="pinfo"><strong>${p.name}</strong></div>
-      <div class="pprice">${p.p}</div>
+      <div class="pinfo" style="color:#000; flex:1"><strong>${p.name}</strong></div>
+      <div class="pprice" style="color:#000">${p.p}</div>
     </div>`;
   });
   document.getElementById('p3-grid').innerHTML = html;
@@ -199,7 +211,6 @@ function selectProvider(id) {
   var all = Object.values(PROVIDERS).flat();
   var p = all.find(x => x.id === id);
   document.getElementById('sel-name').textContent = p.name;
-  document.getElementById('final-link').href = LINKS[id] || '#';
   renderProviders();
 }
 </script>
