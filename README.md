@@ -25,7 +25,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);max-width:480
 
 /* PAGE 1: HERO */
 .p1{background:#0C0C0A;min-height:100vh;display:flex;flex-direction:column}
-.p1-nav{display:flex;justify-content:between;align-items:center;padding:22px 26px}
+.p1-nav{display:flex;justify-content:space-between;align-items:center;padding:22px 26px}
 .logo{font-family:var(--serif);font-size:26px;color:#fff;display:flex;align-items:center;gap:2px}
 .logo-zero{background:var(--y);border-radius:7px;padding:2px 8px;color:#0C0C0A}
 .p1-body{flex:1;padding:0 26px 36px;display:flex;flex-direction:column}
@@ -55,7 +55,7 @@ input.fi{width:100%;background:#F8F6F0;border:1.5px solid var(--faint);border-ra
 .p3-body{padding:18px 18px 140px}
 .pcard{background:var(--card);border-radius:15px;border:1px solid var(--faint);padding:14px 15px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer}
 .pcard.sel{border:2px solid #0C0C0A;background:#FFFDF5}
-.plogo{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;color:white;font-size:14px;text-transform:uppercase}
+.plogo{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;color:white;font-size:12px;text-transform:uppercase}
 .pinfo{flex:1}
 .pprice{text-align:right;font-family:var(--serif);font-size:18px}
 .pmeta{font-size:11px;color:#888;margin-top:2px}
@@ -77,21 +77,21 @@ input.fi{width:100%;background:#F8F6F0;border:1.5px solid var(--faint);border-ra
   <div class="p1">
     <div class="p1-nav">
       <div class="logo">Cab<div class="logo-zero">0</div></div>
-      <div style="color:#666; font-size:11px; font-weight:700;">V2.0 LIVE</div>
+      <div style="color:#666; font-size:11px; font-weight:700;">V3.0 DEEP-LINK</div>
     </div>
     <div class="p1-body">
-      <h1>The fastest way to<br><em>get there.</em></h1>
+      <h1>Better way to<br><em>get there.</em></h1>
       <div class="search-bar" onclick="goTo(1)">
         <div class="pin-y"></div>
-        <span style="color:#888">Enter destination...</span>
+        <span style="color:#888">Search destination...</span>
       </div>
       <div class="cats">
         <div class="cat on" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>
-        <div class="cat" onclick="pickCat(this, 'robo')"><div class="cat-label">Robo Taxi</div></div>
+        <div class="cat" onclick="pickCat(this, 'future')"><div class="cat-label">Future/Vegas</div></div>
         <div class="cat" onclick="pickCat(this, 'food')"><div class="cat-label">Food</div></div>
         <div class="cat" onclick="pickCat(this, 'grocery')"><div class="cat-label">Grocery</div></div>
       </div>
-      <div style="background:var(--y); padding:20px; border-radius:15px; text-align:center; font-weight:700; cursor:pointer;" onclick="goTo(1)">Compare Rates →</div>
+      <div style="background:var(--y); padding:20px; border-radius:15px; text-align:center; font-weight:700; cursor:pointer;" onclick="goTo(1)">Launch Comparisons →</div>
     </div>
   </div>
 </div>
@@ -102,12 +102,12 @@ input.fi{width:100%;background:#F8F6F0;border:1.5px solid var(--faint);border-ra
     <div style="font-family:var(--serif); font-size:20px;">Cab<span style="color:var(--yd)">0</span>.com</div>
   </div>
   <div style="padding:22px;">
-    <h2 style="margin-bottom:10px;">Pickup Address</h2>
+    <h2 style="margin-bottom:10px;">Set Location</h2>
     <div class="form-card">
       <div class="fl" style="margin-top:0">Street Address</div>
-      <input class="fi" id="f-street" type="text" placeholder="123 Main St">
+      <input class="fi" id="f-street" type="text" placeholder="Street Address">
       <div class="fl">City</div>
-      <input class="fi" id="f-city" type="text" placeholder="Williamsburg">
+      <input class="fi" id="f-city" type="text" placeholder="City">
       <div class="frow">
         <div style="flex: 1;">
           <div class="fl">State</div>
@@ -135,7 +135,7 @@ input.fi{width:100%;background:#F8F6F0;border:1.5px solid var(--faint);border-ra
   <div class="p3-footer">
     <div class="sel-info">
       <div id="sel-name" style="font-weight:700; font-size:15px;">Select provider</div>
-      <div style="font-size:11px; color:#888;">Direct Deep-Link Connection</div>
+      <div style="font-size:11px; color:#888;">Pre-filled Destination Link</div>
     </div>
     <a href="#" id="final-link" target="_blank" class="open-btn">Open App</a>
   </div>
@@ -146,26 +146,36 @@ var currentCat = 'ride';
 var currentSort = 'price';
 var selectedId = null;
 
-// ACTUAL DEEP LINKS FOR MOBILE APPS
+// APP LINKS / WEBSITE DESTINATIONS
 var LINKS = {
-  'uber_x': 'uber://', 'lyft': 'lyft://', 'uber_xl': 'uber://', 'lyft_xl': 'lyft://',
-  'curb': 'curb://', 'waymo': 'https://waymo.com/waymo-one/', 'zoox': 'https://zoox.com/',
-  'vegas_loop': 'https://www.lvloop.com/tickets', 'tesla_robo': 'tesla://',
-  'doordash': 'doordash://', 'ubereats': 'ubereats://', 'grubhub': 'grubhub://',
-  'instacart': 'instacart://', 'walmart': 'walmart://', 'amazon': 'amazon-fresh://', 'shipt': 'shipt://'
+  'uber_x': 'uber://?action=setPickup', 
+  'lyft': 'lyft://ridetype?id=lyft',
+  'uber_xl': 'uber://?action=setPickup&product_id=uberxl',
+  'curb': 'curb://',
+  'waymo': 'https://waymo.com/waymo-one/',
+  'zoox': 'https://zoox.com/',
+  'tesla_robo': 'https://www.tesla.com/robotaxi',
+  'vegas_loop': 'https://www.boringcompany.com/vegas-loop',
+  'doordash': 'doordash://',
+  'ubereats': 'ubereats://',
+  'grubhub': 'grubhub://',
+  'instacart': 'instacart://',
+  'walmart': 'walmart://',
+  'amazon': 'amazon-fresh://'
 };
 
 var PROVIDERS = {
   ride: [
     { id:'uber_x', name:'Uber X', s:'Ub', c:'#000', price:9.50, time:4, dist:1.2 },
     { id:'lyft', name:'Lyft', s:'Ly', c:'#E91E8C', price:10.20, time:6, dist:2.1 },
+    { id:'uber_xl', name:'Uber XL', s:'UXL', c:'#333', price:15.80, time:5, dist:1.5 },
     { id:'curb', name:'Curb Taxi', s:'Crb', c:'#2563EB', price:12.00, time:3, dist:0.8 }
   ],
-  robo: [
-    { id:'waymo', name:'Waymo One', s:'Wy', c:'#00D1B2', price:8.00, time:12, dist:3.0 },
-    { id:'zoox', name:'Zoox', s:'Zx', c:'#000', price:7.50, time:15, dist:4.5 },
-    { id:'tesla_robo', name:'Tesla Cybercab', s:'Ts', c:'#E00', price:5.00, time:10, dist:2.0 },
-    { id:'vegas_loop', name:'Vegas Loop', s:'Lp', c:'#444', price:5.00, time:2, dist:0.1 }
+  future: [
+    { id:'waymo', name:'Waymo One', s:'Waymo', c:'#00D1B2', price:8.00, time:12, dist:3.0 },
+    { id:'zoox', name:'Zoox', s:'Zoox', c:'#000', price:7.50, time:15, dist:4.5 },
+    { id:'tesla_robo', name:'Tesla Robotaxi', s:'Tesla', c:'#E00', price:5.00, time:10, dist:2.0 },
+    { id:'vegas_loop', name:'Vegas Loop', s:'Loop', c:'#444', price:5.00, time:2, dist:0.1 }
   ],
   food: [
     { id:'doordash', name:'DoorDash', s:'DD', c:'#FF3008', price:1.99, time:25, dist:2.0 },
