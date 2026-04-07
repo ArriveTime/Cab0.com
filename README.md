@@ -6,45 +6,84 @@
 <title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* Global Reset and Background */
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --ink:#0C0C0A; --y:#FACC15; --yd:#D4A10A; --bg:#F6F3EC;
+  --ink:#000000; /* Set to pure black */
+  --y:#FACC15; --bg:#000000;
   --serif:'DM Serif Display',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
 }
-body{font-family:var(--sans);background:#0C0C0A;color:#fff;max-width:480px;margin:0 auto;line-height:1.4;overflow-x:hidden;}
+body{
+    font-family:var(--sans);
+    background:#000000; /* Force pure black background */
+    color:#fff;
+    max-width:480px;
+    margin:0 auto;
+    line-height:1.4;
+    overflow-x:hidden;
+}
 
-/* NAVIGATION - Dots styled to blend with background as requested */
-.nav-bar{display:flex;justify-content:center;align-items:center;gap:8px;padding:14px 0;background:#0C0C0A;border-bottom:1px solid #1a1a1a;position:sticky;top:0;z-index:100}
-.nd{width:8px;height:8px;border-radius:4px;background:#0C0C0A;border:1px solid #1a1a1a;transition:all .3s;cursor:pointer;padding:0}
-.nd.on{width:24px;background:var(--y);border-color:var(--y)}
-.pg-label{font-size:11px;font-weight:700;color:#444;letter-spacing:.6px;margin-left:10px;text-transform:uppercase}
+/* NAVIGATION - Using dark black for dots and text you want to hide */
+.nav-bar{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    padding:14px 0;
+    background:#000000;
+    border-bottom:1px solid #111;
+    position:sticky;
+    top:0;
+    z-index:100;
+    color:#000000; /* Hide any stray text in the nav bar */
+}
+.nd{
+    width:8px;
+    height:8px;
+    border-radius:4px;
+    background:#000000; /* Dark black dots */
+    border:1px solid #000000;
+    transition:all .3s;
+    cursor:pointer;
+    padding:0;
+}
+.nd.on{
+    width:24px;
+    background:var(--y);
+    border-color:var(--y);
+}
+.pg-label{
+    font-size:11px;
+    font-weight:700;
+    color:#000000; /* Dark black label */
+    letter-spacing:.6px;
+    margin-left:10px;
+    text-transform:uppercase;
+}
 
 .page{display:none}
 .page.active{display:block}
 
-/* BRANDING */
+/* BRANDING & CARDS */
 .p1-body{padding:30px 26px;display:flex;flex-direction:column}
 .logo-main{font-family:var(--serif); font-size:24px; margin-bottom:20px; color:#fff;}
 .logo-main span{color:var(--y)}
 h1{font-family:var(--serif);font-size:42px;line-height:1.05;color:#fff;margin-bottom:16px}
 h1 em{color:var(--y);font-style:normal}
 
-/* CATEGORY GRID */
 .cats-grid{display:grid;grid-template-columns: 1fr 1fr;gap:12px;margin-bottom:20px}
-.cat{background:#161616;border:1px solid #252525;border-radius:12px;padding:22px 5px;text-align:center;cursor:pointer;transition:0.2s;display:flex;flex-direction:column;align-items:center;gap:8px}
+.cat{background:#111;border:1px solid #222;border-radius:12px;padding:22px 5px;text-align:center;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px}
 .cat.on{background:var(--y);border-color:var(--y)}
 .cat.on .cat-label{color:#000}
-.cat-label{font-size:14px;font-weight:700;color:#777}
+.cat-label{font-size:14px;font-weight:700;color:#666}
 
-/* RESULTS LIST */
-.sort-strip{display:flex;background:#000;padding:10px 18px;gap:8px;border-bottom:1px solid #1a1a1a;position:sticky;top:52px;z-index:90}
+.sort-strip{display:flex;background:#000;padding:10px 18px;gap:8px;border-bottom:1px solid #111;position:sticky;top:52px;z-index:90}
 .sort-btn{flex:1;padding:12px;border-radius:8px;border:1px solid #222;font-size:11px;font-weight:700;background:#000;color:#888;cursor:pointer}
 .sort-btn.active{background:var(--y);color:#000;border-color:var(--y)}
-.pcard{background:#161616;border-radius:15px;border:1px solid #222;padding:16px;margin-bottom:10px;display:flex;align-items:center;gap:15px;cursor:pointer}
-.pcard.sel{border:2px solid var(--y);background:#1a1a1a}
+.pcard{background:#111;border-radius:15px;border:1px solid #222;padding:16px;margin-bottom:10px;display:flex;align-items:center;gap:15px;cursor:pointer}
+.pcard.sel{border:2px solid var(--y);background:#080808}
 
-/* STICKY FOOTER */
-.p3-footer{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#000;border-top:1px solid #1a1a1a;padding:20px;display:flex;align-items:center;justify-content:space-between;z-index:1000}
+.p3-footer{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#000;border-top:1px solid #111;padding:20px;display:flex;align-items:center;justify-content:space-between;z-index:1000}
 .open-btn{background:var(--y);color:#000;padding:14px 28px;border-radius:12px;text-decoration:none;font-weight:700;font-size:16px;text-align:center}
 </style>
 </head>
@@ -61,9 +100,9 @@ h1 em{color:var(--y);font-style:normal}
   <div class="p1-body">
     <div class="logo-main">Cab<span>0</span>.com</div>
     <h1>Every ride.<br>Every delivery.<br><em>One search.</em></h1>
-    <div style="background:#161616; border:1px solid #252525; border-radius:16px; padding:18px; display:flex; align-items:center; gap:12px; margin-bottom:25px; cursor:pointer" onclick="goTo(1)">
+    <div style="background:#111; border:1px solid #222; border-radius:16px; padding:18px; display:flex; align-items:center; gap:12px; margin-bottom:25px; cursor:pointer" onclick="goTo(1)">
       <div style="width:10px; height:10px; border-radius:50%; background:var(--y)"></div>
-      <span style="color:#666">Where are you going?</span>
+      <span style="color:#555">Where are you going?</span>
     </div>
     <div class="cats-grid">
       <div class="cat on" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>
@@ -78,8 +117,8 @@ h1 em{color:var(--y);font-style:normal}
 <div class="page" id="pg1">
   <div style="padding:40px 26px;">
     <h2>Confirm Address</h2>
-    <div style="background:#161616; border:1px solid #222; border-radius:18px; padding:20px; margin-top:20px;">
-      <input type="text" placeholder="123 Main St, Williamsburg, VA" style="width:100%; background:#000; border:1.5px solid #333; color:#fff; padding:15px; border-radius:11px; outline:none; font-size:16px;">
+    <div style="background:#111; border:1px solid #222; border-radius:18px; padding:20px; margin-top:20px;">
+      <input type="text" placeholder="123 Main St, Williamsburg, VA" style="width:100%; background:#000; border:1px solid #333; color:#fff; padding:15px; border-radius:11px; outline:none; font-size:16px;">
     </div>
     <div style="background:var(--y); color:#000; padding:20px; border-radius:15px; text-align:center; font-weight:700; margin-top:20px; cursor:pointer;" onclick="goTo(2)">Compare Now →</div>
   </div>
@@ -92,7 +131,7 @@ h1 em{color:var(--y);font-style:normal}
   </div>
   <div style="padding:18px 18px 140px;" id="p3-grid"></div>
   <div class="p3-footer">
-    <div><div id="sel-name" style="font-weight:700; font-size:15px;">DoorDash</div><div style="font-size:11px; color:#666;">Secure Official Link</div></div>
+    <div><div id="sel-name" style="font-weight:700; font-size:15px;">Uber</div><div style="font-size:11px; color:#666;">Secure Official Link</div></div>
     <a href="#" id="final-link" target="_blank" class="open-btn">Book Now</a>
   </div>
 </div>
