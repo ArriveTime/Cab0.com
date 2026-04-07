@@ -1,171 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color: #000000; color: #000000;">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:italic,wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* CRITICAL: This hides any stray technical tags by matching them to the background */
-html {
+/* 1. HIDE STRAY TAGS: Forces top-level text to match background */
+html, body {
+    background-color: #000000 !important;
     color: #000000; 
-    background-color: #000000;
+    margin: 0 auto;
+    max-width: 480px;
+    overflow-x: hidden;
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
-
-:root{
-  --ink:#000000; 
-  --y:#FACC15; 
-  --blue:#3b82f6;
-  --serif:'DM Serif Display',Georgia,serif; 
-  --sans:'DM Sans',system-ui,sans-serif;
-  --fancy:'Playfair Display', serif;
+:root {
+  --cab0-blue: #3b82f6;
+  --cab0-yellow: #FACC15;
+  --serif: 'DM Serif Display', serif;
+  --sans: 'DM Sans', sans-serif;
+  --fancy: 'Playfair Display', serif;
 }
 
-body{
-    font-family:var(--sans);
-    background:#000000;
-    color:#fff;
-    max-width:480px;
-    margin:0 auto;
-    line-height:1.4;
-    overflow-x:hidden;
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.content-wrapper {
+    color: #ffffff;
+    font-family: var(--sans);
+    min-height: 100vh;
 }
 
-/* NAVIGATION - Blended to background */
-.nav-bar{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:8px;
-    padding:14px 0;
-    background:#000000;
-    position:sticky;
-    top:0;
-    z-index:100;
+/* NAVIGATION */
+.nav-bar {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 0;
+    background: #000000;
 }
-.nd{
-    width:8px;
-    height:8px;
-    border-radius:4px;
-    background:#000000; 
-    border:1px solid #111;
-    transition:all .3s;
-}
-.nd.on{
-    width:24px;
-    background:var(--y);
-    border-color:var(--y);
-}
+.nd { width: 8px; height: 8px; border-radius: 50%; background: #111; border:1px solid #111;}
+.nd.on { width: 24px; border-radius: 4px; background: var(--cab0-yellow); border-color: var(--cab0-yellow); }
 
-.page{display:none}
-.page.active{display:block}
+.page { display: none; }
+.page.active { display: block; }
 
 /* BRANDING */
-.p1-body{padding:30px 26px;display:flex;flex-direction:column}
-.logo-main{font-family:var(--serif); font-size:28px; color:#3b82f6; margin-bottom:4px;}
-.logo-main span{color:var(--y)}
+.p1-body { padding: 0 26px 30px; }
+.logo-main { font-family: var(--serif); font-size: 32px; color: var(--cab0-blue); margin-bottom: 4px; }
+.logo-main span { color: var(--cab0-yellow); }
 
 /* WOZ QUOTE */
-.woz-quote {
-    font-family: var(--fancy);
-    font-style: italic;
-    font-size: 14px;
-    color: #3b82f6;
-    margin-bottom: 24px;
-    line-height: 1.2;
-}
-.woz-name {
-    display: block;
-    font-size: 11px;
-    font-style: normal;
-    font-weight: 700;
-    margin-top: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
+.woz-box { margin-bottom: 30px; border-left: 2px solid var(--cab0-yellow); padding-left: 15px; margin-top: 10px; }
+.woz-quote { font-family: var(--fancy); font-style: italic; font-size: 16px; color: var(--cab0-yellow); line-height: 1.4; }
+.woz-attribution { display: block; font-family: var(--sans); font-size: 10px; font-weight: 700; text-transform: uppercase; margin-top: 8px; letter-spacing: 1px; color: var(--cab0-yellow); opacity: 0.9; }
 
-h1{font-family:var(--serif);font-size:42px;line-height:1.05;color:#fff;margin-bottom:16px}
-h1 em{color:var(--y);font-style:normal}
+h1 { font-family: var(--serif); font-size: 44px; line-height: 1.1; margin-bottom: 20px; color: #fff; }
+h1 em { color: var(--cab0-yellow); font-style: normal; }
 
-/* CATEGORY GRID */
-.cats-grid{display:grid;grid-template-columns: 1fr 1fr;gap:12px;margin-bottom:20px}
-.cat{background:#111;border:1px solid #222;border-radius:12px;padding:22px 5px;text-align:center;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px}
-.cat.on{background:var(--y);border-color:var(--y)}
-.cat.on .cat-label{color:#000}
-.cat-label{font-size:14px;font-weight:700;color:#666}
+/* TILES */
+.cats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
+.cat { background: #111; border: 1px solid #222; border-radius: 12px; padding: 25px 10px; text-align: center; cursor: pointer; }
+.cat.on { background: var(--cab0-yellow); border-color: var(--cab0-yellow); }
+.cat.on .cat-label { color: #000; }
+.cat-label { font-size: 14px; font-weight: 700; color: #888; }
 
-/* RESULTS */
-.sort-strip{display:flex;background:#000;padding:10px 18px;gap:8px;border-bottom:1px solid #111;position:sticky;top:52px;z-index:90}
-.sort-btn{flex:1;padding:12px;border-radius:8px;border:1px solid #222;font-size:11px;font-weight:700;background:#000;color:#888;cursor:pointer}
-.sort-btn.active{background:var(--y);color:#000;border-color:var(--y)}
-.pcard{background:#111;border-radius:15px;border:1px solid #222;padding:16px;margin-bottom:10px;display:flex;align-items:center;gap:15px;cursor:pointer}
-.pcard.sel{border:2px solid var(--y);background:#080808}
+/* RESULTS LIST */
+.sort-strip { display: flex; background: #000; padding: 10px 18px; gap: 8px; border-bottom: 1px solid #111; position: sticky; top: 0; z-index: 90; }
+.sort-btn { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid #222; font-size: 11px; font-weight: 700; background: #000; color: #888; cursor: pointer; }
+.sort-btn.active { background: var(--cab0-yellow); color: #000; border-color: var(--cab0-yellow); }
+.pcard { background: #111; border-radius: 15px; border: 1px solid #222; padding: 16px; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; cursor: pointer; }
+.pcard.sel { border: 2px solid var(--cab0-yellow); background: #080808; }
 
-.p3-footer{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#000;border-top:1px solid #111;padding:20px;display:flex;align-items:center;justify-content:space-between;z-index:1000}
-.open-btn{background:var(--y);color:#000;padding:14px 28px;border-radius:12px;text-decoration:none;font-weight:700;font-size:16px;text-align:center}
+.p3-footer { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: #000; border-top: 1px solid #111; padding: 20px; display: flex; align-items: center; justify-content: space-between; z-index: 1000; }
+.open-btn { background: var(--cab0-yellow); color: #000; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 16px; text-align: center; }
 </style>
 </head>
 <body>
 
-<div class="nav-bar">
-  <div class="nd on" id="d0"></div>
-  <div class="nd" id="d1"></div>
-  <div class="nd" id="d2"></div>
-</div>
-
-<div class="page active" id="pg0">
-  <div class="p1-body">
-    <div class="logo-main">Cab<span>0</span>.com</div>
-    
-    <div class="woz-quote">
-      "Best of luck to you on this worthy venture, its your turn"
-      <span class="woz-name">— Steve Wozniak, Apple Co-Founder</span>
+<div class="content-wrapper">
+    <div class="nav-bar">
+        <div class="nd on" id="d0"></div>
+        <div class="nd" id="d1"></div>
+        <div class="nd" id="d2"></div>
     </div>
 
-    <h1>Every ride.<br>Every delivery.<br><em>One search.</em></h1>
-    
-    <div style="background:#111; border:1px solid #222; border-radius:16px; padding:18px; display:flex; align-items:center; gap:12px; margin-bottom:25px; cursor:pointer" onclick="goTo(1)">
-      <div style="width:10px; height:10px; border-radius:50%; background:var(--y)"></div>
-      <span style="color:#555">Where are we going?</span>
+    <div class="page active" id="pg0">
+        <div class="p1-body">
+            <div class="logo-main">Cab<span>0</span>.com</div>
+            <div class="woz-box">
+                <p class="woz-quote">"Best of luck to you on this worthy venture, its your turn"</p>
+                <span class="woz-attribution">Steve Wozniak, Apple Co-Founder</span>
+            </div>
+            <h1>Every ride.<br>Every delivery.<br><em>One search.</em></h1>
+            <div class="cats-grid">
+                <div class="cat on" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>
+                <div class="cat" onclick="pickCat(this, 'vip')"><div class="cat-label">VIP Luxury</div></div>
+                <div class="cat" onclick="pickCat(this, 'delivery')"><div class="cat-label">Food</div></div>
+                <div class="cat" onclick="pickCat(this, 'grocery')"><div class="cat-label">Grocery</div></div>
+            </div>
+            <div class="main-btn" onclick="goTo(1)">Find Best Rate →</div>
+        </div>
     </div>
 
-    <div class="cats-grid">
-      <div class="cat on" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>
-      <div class="cat" onclick="pickCat(this, 'vip')"><div class="cat-label">VIP Luxury</div></div>
-      <div class="cat" onclick="pickCat(this, 'delivery')"><div class="cat-label">Food</div></div>
-      <div class="cat" onclick="pickCat(this, 'grocery')"><div class="cat-label">Grocery</div></div>
+    <div class="page" id="pg1">
+        <div style="padding:40px 26px;">
+            <h2 style="color:#fff; margin-bottom:20px;">Confirm Destination</h2>
+            <input type="text" placeholder="Enter Address..." style="width:100%; background:#111; border:1px solid #333; color:#fff; padding:18px; border-radius:12px; font-size:16px; margin-bottom:20px;">
+            <div class="main-btn" onclick="goTo(2)">Compare Rates →</div>
+        </div>
     </div>
-    <div style="background:var(--y); color:#000; padding:20px; border-radius:15px; text-align:center; font-weight:700; cursor:pointer;" onclick="goTo(1)">Find Best Rate →</div>
-  </div>
-</div>
 
-<div class="page" id="pg1">
-  <div style="padding:40px 26px;">
-    <h2>Confirm Address</h2>
-    <div style="background:#111; border:1px solid #222; border-radius:18px; padding:20px; margin-top:20px;">
-      <input type="text" placeholder="123 Main St, Williamsburg, VA" style="width:100%; background:#000; border:1px solid #333; color:#fff; padding:15px; border-radius:11px; outline:none; font-size:16px;">
+    <div class="page" id="pg2">
+        <div class="sort-strip">
+            <button class="sort-btn active" id="sort-price" onclick="setSort('price')">CHEAPEST</button>
+            <button class="sort-btn" id="sort-time" onclick="setSort('time')">FASTEST</button>
+        </div>
+        <div style="padding:18px 18px 140px;" id="p3-grid"></div>
+        <div class="p3-footer">
+            <div><div id="sel-name" style="font-weight:700; color:#fff;">Select Service</div><div style="font-size:11px; color:#666;">Secure Official Link</div></div>
+            <a href="#" id="final-link" target="_blank" class="open-btn">Book Now</a>
+        </div>
     </div>
-    <div style="background:var(--y); color:#000; padding:20px; border-radius:15px; text-align:center; font-weight:700; margin-top:20px; cursor:pointer;" onclick="goTo(2)">Compare Now →</div>
-  </div>
-</div>
-
-<div class="page" id="pg2">
-  <div class="sort-strip">
-    <button class="sort-btn active" id="sort-price" onclick="setSort('price')">CHEAPEST</button>
-    <button class="sort-btn" id="sort-time" onclick="setSort('time')">FASTEST</button>
-  </div>
-  <div style="padding:18px 18px 140px;" id="p3-grid"></div>
-  <div class="p3-footer">
-    <div><div id="sel-name" style="font-weight:700; font-size:15px;">Uber</div><div style="font-size:11px; color:#666;">Secure Official Link</div></div>
-    <a href="#" id="final-link" target="_blank" class="open-btn">Book Now</a>
-  </div>
 </div>
 
 <script>
 var currentCat = 'ride', currentSort = 'price', selectedId = null;
 
+// SECURE HTTPS LINKS
 var LINKS = {
   'uber':'https://m.uber.com', 'lyft':'https://www.lyft.com', 'waymo':'https://waymo.com',
   'uber_black':'https://m.uber.com', 'lyft_lux':'https://www.lyft.com',
@@ -223,7 +185,7 @@ function renderProviders() {
     html += `<div class="pcard ${p.id===selectedId?'sel':''}" onclick="selectProvider('${p.id}')">
       <div style="width:40px;height:40px;background:${p.c};border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;">${p.s}</div>
       <div style="flex:1"><strong>${p.name}</strong><div style="font-size:11px;color:#666">${p.time} min wait</div></div>
-      <div style="font-family:var(--serif);font-size:18px;color:var(--y)">$${p.price.toFixed(2)}</div>
+      <div style="font-family:var(--serif);font-size:18px;color:var(--cab0-yellow)">$${p.price.toFixed(2)}</div>
     </div>`;
   });
   document.getElementById('p3-grid').innerHTML = html;
