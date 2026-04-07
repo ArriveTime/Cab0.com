@@ -6,7 +6,7 @@
 <title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:italic,wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* 1. HIDE STRAY TAGS: Forces top-level text to match background */
+/* 1. INVISIBLE TAG FIX: Forces top-level text to match background */
 html, body {
     background-color: #000000 !important;
     color: #000000; 
@@ -46,30 +46,52 @@ html, body {
 .page.active { display: block; }
 
 /* BRANDING */
-.p1-body { padding: 0 26px 30px; }
-.logo-main { font-family: var(--serif); font-size: 32px; color: var(--cab0-blue); margin-bottom: 4px; }
+.p1-body { padding: 0 26px 30px; text-align: center; } /* Centered branding */
+.logo-main { font-family: var(--serif); font-size: 36px; color: var(--cab0-blue); margin-bottom: 20px; }
 .logo-main span { color: var(--cab0-yellow); }
 
-/* WOZ QUOTE */
-.woz-box { margin-bottom: 30px; border-left: 2px solid var(--cab0-yellow); padding-left: 15px; margin-top: 10px; }
-.woz-quote { font-family: var(--fancy); font-style: italic; font-size: 16px; color: var(--cab0-yellow); line-height: 1.4; }
-.woz-attribution { display: block; font-family: var(--sans); font-size: 10px; font-weight: 700; text-transform: uppercase; margin-top: 8px; letter-spacing: 1px; color: var(--cab0-yellow); opacity: 0.9; }
+/* WOZ QUOTE - CENTERED & LARGER */
+.woz-box { 
+    margin-bottom: 40px; 
+    padding: 0 10px;
+}
+.woz-quote { 
+    font-family: var(--fancy); 
+    font-style: italic; 
+    font-size: 20px; /* Slightly larger */
+    color: var(--cab0-yellow); 
+    line-height: 1.4; 
+    margin-bottom: 10px;
+}
+.woz-attribution { 
+    display: block; 
+    font-family: var(--sans); 
+    font-size: 11px; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    letter-spacing: 1.2px; 
+    color: var(--cab0-yellow); 
+    opacity: 0.8; 
+}
 
-h1 { font-family: var(--serif); font-size: 44px; line-height: 1.1; margin-bottom: 20px; color: #fff; }
+h1 { font-family: var(--serif); font-size: 44px; line-height: 1.1; margin-bottom: 25px; color: #fff; text-align: left; }
 h1 em { color: var(--cab0-yellow); font-style: normal; }
 
 /* TILES */
-.cats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
-.cat { background: #111; border: 1px solid #222; border-radius: 12px; padding: 25px 10px; text-align: center; cursor: pointer; }
+.cats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; text-align: center; }
+.cat { background: #111; border: 1px solid #222; border-radius: 12px; padding: 25px 10px; cursor: pointer; }
 .cat.on { background: var(--cab0-yellow); border-color: var(--cab0-yellow); }
 .cat.on .cat-label { color: #000; }
 .cat-label { font-size: 14px; font-weight: 700; color: #888; }
+
+/* CTA BUTTON */
+.main-btn { background: var(--cab0-yellow); color: #000; padding: 20px; border-radius: 14px; text-align: center; font-weight: 700; font-size: 18px; cursor: pointer; }
 
 /* RESULTS LIST */
 .sort-strip { display: flex; background: #000; padding: 10px 18px; gap: 8px; border-bottom: 1px solid #111; position: sticky; top: 0; z-index: 90; }
 .sort-btn { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid #222; font-size: 11px; font-weight: 700; background: #000; color: #888; cursor: pointer; }
 .sort-btn.active { background: var(--cab0-yellow); color: #000; border-color: var(--cab0-yellow); }
-.pcard { background: #111; border-radius: 15px; border: 1px solid #222; padding: 16px; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; cursor: pointer; }
+.pcard { background: #111; border-radius: 15px; border: 1px solid #222; padding: 16px; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; cursor: pointer; text-align: left; }
 .pcard.sel { border: 2px solid var(--cab0-yellow); background: #080808; }
 
 .p3-footer { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: #000; border-top: 1px solid #111; padding: 20px; display: flex; align-items: center; justify-content: space-between; z-index: 1000; }
@@ -88,11 +110,14 @@ h1 em { color: var(--cab0-yellow); font-style: normal; }
     <div class="page active" id="pg0">
         <div class="p1-body">
             <div class="logo-main">Cab<span>0</span>.com</div>
+            
             <div class="woz-box">
                 <p class="woz-quote">"Best of luck to you on this worthy venture, its your turn"</p>
                 <span class="woz-attribution">Steve Wozniak, Apple Co-Founder</span>
             </div>
+
             <h1>Every ride.<br>Every delivery.<br><em>One search.</em></h1>
+
             <div class="cats-grid">
                 <div class="cat on" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>
                 <div class="cat" onclick="pickCat(this, 'vip')"><div class="cat-label">VIP Luxury</div></div>
@@ -118,7 +143,7 @@ h1 em { color: var(--cab0-yellow); font-style: normal; }
         </div>
         <div style="padding:18px 18px 140px;" id="p3-grid"></div>
         <div class="p3-footer">
-            <div><div id="sel-name" style="font-weight:700; color:#fff;">Select Service</div><div style="font-size:11px; color:#666;">Secure Official Link</div></div>
+            <div style="text-align: left;"><div id="sel-name" style="font-weight:700; color:#fff;">Select Service</div><div style="font-size:11px; color:#666;">Secure Official Link</div></div>
             <a href="#" id="final-link" target="_blank" class="open-btn">Book Now</a>
         </div>
     </div>
