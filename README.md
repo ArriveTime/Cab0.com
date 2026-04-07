@@ -4,18 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:italic,wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* Global Reset and Background */
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --ink:#000000; /* Set to pure black */
-  --y:#FACC15; --bg:#000000;
-  --serif:'DM Serif Display',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
+/* CRITICAL: This hides any stray technical tags by matching them to the background */
+html {
+    color: #000000; 
+    background-color: #000000;
 }
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:#000000; 
+  --y:#FACC15; 
+  --blue:#3b82f6;
+  --serif:'DM Serif Display',Georgia,serif; 
+  --sans:'DM Sans',system-ui,sans-serif;
+  --fancy:'Playfair Display', serif;
+}
+
 body{
     font-family:var(--sans);
-    background:#000000; /* Force pure black background */
+    background:#000000;
     color:#fff;
     max-width:480px;
     margin:0 auto;
@@ -23,7 +33,7 @@ body{
     overflow-x:hidden;
 }
 
-/* NAVIGATION - Using dark black for dots and text you want to hide */
+/* NAVIGATION - Blended to background */
 .nav-bar{
     display:flex;
     justify-content:center;
@@ -31,52 +41,62 @@ body{
     gap:8px;
     padding:14px 0;
     background:#000000;
-    border-bottom:1px solid #111;
     position:sticky;
     top:0;
     z-index:100;
-    color:#000000; /* Hide any stray text in the nav bar */
 }
 .nd{
     width:8px;
     height:8px;
     border-radius:4px;
-    background:#000000; /* Dark black dots */
-    border:1px solid #000000;
+    background:#000000; 
+    border:1px solid #111;
     transition:all .3s;
-    cursor:pointer;
-    padding:0;
 }
 .nd.on{
     width:24px;
     background:var(--y);
     border-color:var(--y);
 }
-.pg-label{
-    font-size:11px;
-    font-weight:700;
-    color:#000000; /* Dark black label */
-    letter-spacing:.6px;
-    margin-left:10px;
-    text-transform:uppercase;
-}
 
 .page{display:none}
 .page.active{display:block}
 
-/* BRANDING & CARDS */
+/* BRANDING */
 .p1-body{padding:30px 26px;display:flex;flex-direction:column}
-.logo-main{font-family:var(--serif); font-size:24px; margin-bottom:20px; color:#fff;}
+.logo-main{font-family:var(--serif); font-size:28px; color:#3b82f6; margin-bottom:4px;}
 .logo-main span{color:var(--y)}
+
+/* WOZ QUOTE */
+.woz-quote {
+    font-family: var(--fancy);
+    font-style: italic;
+    font-size: 14px;
+    color: #3b82f6;
+    margin-bottom: 24px;
+    line-height: 1.2;
+}
+.woz-name {
+    display: block;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
 h1{font-family:var(--serif);font-size:42px;line-height:1.05;color:#fff;margin-bottom:16px}
 h1 em{color:var(--y);font-style:normal}
 
+/* CATEGORY GRID */
 .cats-grid{display:grid;grid-template-columns: 1fr 1fr;gap:12px;margin-bottom:20px}
 .cat{background:#111;border:1px solid #222;border-radius:12px;padding:22px 5px;text-align:center;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px}
 .cat.on{background:var(--y);border-color:var(--y)}
 .cat.on .cat-label{color:#000}
 .cat-label{font-size:14px;font-weight:700;color:#666}
 
+/* RESULTS */
 .sort-strip{display:flex;background:#000;padding:10px 18px;gap:8px;border-bottom:1px solid #111;position:sticky;top:52px;z-index:90}
 .sort-btn{flex:1;padding:12px;border-radius:8px;border:1px solid #222;font-size:11px;font-weight:700;background:#000;color:#888;cursor:pointer}
 .sort-btn.active{background:var(--y);color:#000;border-color:var(--y)}
@@ -93,17 +113,24 @@ h1 em{color:var(--y);font-style:normal}
   <div class="nd on" id="d0"></div>
   <div class="nd" id="d1"></div>
   <div class="nd" id="d2"></div>
-  <span class="pg-label">CABO SEARCH</span>
 </div>
 
 <div class="page active" id="pg0">
   <div class="p1-body">
     <div class="logo-main">Cab<span>0</span>.com</div>
+    
+    <div class="woz-quote">
+      "Best of luck to you on this worthy venture, its your turn"
+      <span class="woz-name">— Steve Wozniak, Apple Co-Founder</span>
+    </div>
+
     <h1>Every ride.<br>Every delivery.<br><em>One search.</em></h1>
+    
     <div style="background:#111; border:1px solid #222; border-radius:16px; padding:18px; display:flex; align-items:center; gap:12px; margin-bottom:25px; cursor:pointer" onclick="goTo(1)">
       <div style="width:10px; height:10px; border-radius:50%; background:var(--y)"></div>
-      <span style="color:#555">Where are you going?</span>
+      <span style="color:#555">Where are we going?</span>
     </div>
+
     <div class="cats-grid">
       <div class="cat on" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>
       <div class="cat" onclick="pickCat(this, 'vip')"><div class="cat-label">VIP Luxury</div></div>
