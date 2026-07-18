@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- FORCE AUTO-FIT: Tells mobile devices to scale layout 1:1 with device viewport boundaries -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- RE-ENGINEERED VIEWPORT PORT: Forces every single iPhone and Android to scale 1:1, pixel-perfect -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
     <style>
         :root { 
@@ -20,56 +20,59 @@
             padding: 0; 
         }
 
-        html, body { 
+        /* STRICT MOBILE SYSTEM OVERRIDES */
+        html {
+            width: 100%;
+            height: 100%;
+            -webkit-text-size-adjust: 100%;
+            background-color: #000000 !important;
+        }
+
+        body { 
             background-color: #000000 !important; 
             color: #ffffff; 
             font-family: var(--sans);
             min-height: 100vh;
             overflow-x: hidden;
-            width: 100%;
-            -webkit-text-size-adjust: 100%;
+            width: 100% !important;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* RESPONSIVE wrapper: Fluid fit on phones, balanced centered panel on laptops */
+        /* DYNAMIC AUTO-EXPAND ENGINE: Fills 100% edge-to-edge on phones, restricts cleanly on laptops */
         .content-wrapper { 
-            width: 100%;
+            width: 100% !important;
             max-width: 500px; 
             margin: 0 auto;
-            padding: 20px 16px;
+            padding: 20px 24px; /* Generous side spacing for mobile screens */
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* BACK BUTTON STRIP */
         .nav-header {
             display: flex;
             justify-content: flex-start;
             padding-bottom: 15px;
             margin-bottom: 15px;
             border-bottom: 1px solid #111;
+            width: 100%;
         }
         .back-btn {
             background: #111;
             color: #aaa;
             border: 1px solid #222;
-            padding: 8px 16px;
+            padding: 10px 20px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 700;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            transition: all 0.2s ease;
-        }
-        .back-btn:hover {
-            border-color: var(--cab0-yellow);
-            color: #fff;
         }
 
         .logo-main { 
             font-family: var(--serif); 
-            font-size: 44px; 
+            font-size: 46px; /* Slightly scaled up for high-density phone screens */
             color: var(--cab0-blue); 
             margin-bottom: 25px; 
             font-weight: 700;
@@ -79,16 +82,17 @@
 
         .woz-box { 
             margin-bottom: 30px; 
-            padding: 15px; 
+            padding: 18px; 
             background: #0d0d0d;
-            border-radius: 12px;
+            border-radius: 14px;
             border: 1px solid #1a1a1a;
             text-align: center;
+            width: 100%;
         } 
         .woz-quote { 
             font-family: var(--fancy); 
             font-style: italic; 
-            font-size: 18px; 
+            font-size: 19px; 
             color: var(--cab0-yellow); 
             line-height: 1.4; 
             margin-bottom: 10px; 
@@ -106,11 +110,12 @@
 
         h1 { 
             font-family: var(--serif); 
-            font-size: 36px; 
+            font-size: 38px; 
             line-height: 1.15; 
-            margin-bottom: 30px; 
+            margin-bottom: 35px; 
             color: #fff; 
             text-align: center; 
+            width: 100%;
         } 
         h1 em { 
             color: var(--cab0-yellow); 
@@ -120,16 +125,16 @@
         .cats-grid { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
-            gap: 12px; 
-            margin-bottom: 30px; 
+            gap: 14px; 
+            margin-bottom: 35px; 
             text-align: center; 
             width: 100%;
         } 
         .cat { 
             background: #111; 
             border: 1px solid #222; 
-            border-radius: 14px; 
-            padding: 22px 8px; 
+            border-radius: 16px; 
+            padding: 26px 10px; /* Bigger tap targets for easy thumb pressing */
             cursor: pointer; 
             transition: all 0.2s ease;
             display: flex;
@@ -155,22 +160,23 @@
             color: var(--cab0-yellow);
         }
         .cat-label { 
-            font-size: 13px; 
-            font-weight: 700; 
+            font-size: 14px; 
+            font-weight: 800; 
             color: #aaa; 
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .search-group {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
+            width: 100%;
         }
         .search-group label {
             display: block;
-            font-size: 11px;
+            font-size: 12px;
             text-transform: uppercase;
             color: #888;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             font-weight: 700;
             text-align: left;
         }
@@ -179,11 +185,11 @@
             background: #111;
             border: 1px solid #333;
             color: #fff;
-            padding: 16px;
-            border-radius: 12px;
+            padding: 18px;
+            border-radius: 14px;
             font-size: 16px;
             outline: none;
-            transition: border 0.2s;
+            -webkit-appearance: none;
         }
         .search-field:focus {
             border-color: var(--cab0-blue);
@@ -192,8 +198,8 @@
         .main-btn { 
             background: var(--cab0-yellow); 
             color: #000; 
-            padding: 18px; 
-            border-radius: 14px; 
+            padding: 20px; 
+            border-radius: 16px; 
             text-align: center; 
             font-weight: 800; 
             font-size: 18px; 
@@ -202,10 +208,10 @@
             letter-spacing: 0.5px;
             width: 100%;
             border: none;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
-        .page { display: none; } 
+        .page { display: none; width: 100%; } 
         .page.active { display: block; }
 
         .sort-strip { 
@@ -216,6 +222,7 @@
             position: sticky; 
             top: 0; 
             z-index: 90; 
+            width: 100%;
         } 
         .sort-btn { 
             flex: 1; 
@@ -273,7 +280,7 @@
             max-width: 500px; 
             background: rgba(0,0,0,0.96); 
             border-top: 1px solid #222; 
-            padding: 20px; 
+            padding: 24px 20px; 
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
@@ -315,7 +322,6 @@
         <!-- PAGE 1: ADDRESS VERIFICATION SYSTEM -->
         <div class="page" id="pg1">
             <div class="nav-header">
-                <!-- Navigation back to landing grid -->
                 <button class="back-btn" onclick="goTo(0)">← Main Menu</button>
             </div>
             
@@ -339,7 +345,6 @@
         <!-- PAGE 2: MARKETPLACE PROVIDER CONSOLE -->
         <div class="page" id="pg2">
             <div class="nav-header">
-                <!-- Navigation back to landing grid -->
                 <button class="back-btn" onclick="goTo(0)">← Main Menu</button>
             </div>
 
