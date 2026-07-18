@@ -361,10 +361,11 @@
             'lyft': 'https://www.lyft.com', 
             'vegas_loop': 'https://www.boringcompany.com/loop', 
             'zoox': 'https://zoox.com',
-            'waymo': 'https://waymo.com', 
             'doordash': 'https://www.doordash.com', 
             'ubereats': 'https://www.ubereats.com', 
-            'instacart': 'https://www.instacart.com'
+            'instacart': 'https://www.instacart.com',
+            'amazon_fresh': 'https://www.amazon.com/fresh',
+            'walmart_plus': 'https://www.walmart.com/plus'
         }; 
 
         var PROVIDERS = { 
@@ -373,17 +374,20 @@
                 { id:'lyft', name:'Lyft Ride', s:'Ly', c:'#FF00BF', price:11.20, time:6 }
             ], 
             loop: [ 
-                { id:'vegas_loop', name:'Vegas Loop (Tunnel)', s:'TL', c:'#cc0000', price:4.50, time:2 }
+                { id:'vegas_loop', name:'Vegas Loop (Tunnel Ride)', s:'TL', c:'#cc0000', price:0.00, time:2 }
             ],
             robotaxi: [
-                { id:'zoox', name:'Zoox Autonomous Cabs', s:'Zx', c:'#2c3e50', price:0.00, time:7 },
-                { id:'waymo', name:'Waymo Driverless', s:'Wy', c:'#00D1B2', price:9.50, time:9 }
+                { id:'zoox', name:'Zoox Autonomous (Free Local)', s:'Zx', c:'#2c3e50', price:0.00, time:5 }
             ],
             delivery: [ 
                 { id:'doordash', name:'DoorDash', s:'DD', c:'#FF3008', price:2.99, time:22 }, 
-                { id:'ubereats', name:'Uber Eats', s:'UE', c:'#06C167', price:3.49, time:18 }, 
-                { id:'instacart', name:'Instacart Grocery', s:'IC', c:'#00AD31', price:4.99, time:45 }
-            ] 
+                { id:'ubereats', name:'Uber Eats', s:'UE', c:'#06C167', price:3.49, time:18 }
+            ],
+            grocery: [
+                { id:'amazon_fresh', name:'Amazon Fresh / Prime', s:'Az', c:'#FF9900', price:0.00, time:30 },
+                { id:'walmart_plus', name:'Walmart+ Grocery Delivery', s:'Wm', c:'#0071DC', price:0.00, time:45 },
+                { id:'instacart', name:'Instacart Delivery', s:'IC', c:'#00AD31', price:4.99, time:40 }
+            ]
         }; 
 
         function toggleVegasMode() {
@@ -414,10 +418,11 @@
             
             if(isVegasMode) {
                 html += `<div class="cat ${currentCat === 'loop' ? 'on' : ''}" onclick="pickCat(this, 'loop')"><div class="cat-label">Vegas Loop</div></div>`;
-                html += `<div class="cat ${currentCat === 'robotaxi' ? 'on' : ''}" onclick="pickCat(this, 'robotaxi')"><div class="cat-label">Robotaxis</div></div>`;
+                html += `<div class="cat ${currentCat === 'robotaxi' ? 'on' : ''}" onclick="pickCat(this, 'robotaxi')"><div class="cat-label">Robotaxes</div></div>`;
             }
             
-            html += `<div class="cat ${currentCat === 'delivery' ? 'on' : ''}" onclick="pickCat(this, 'delivery')"><div class="cat-label">App Delivery</div></div>`;
+            html += `<div class="cat ${currentCat === 'delivery' ? 'on' : ''}" onclick="pickCat(this, 'delivery')"><div class="cat-label">Food Delivery</div></div>`;
+            html += `<div class="cat ${currentCat === 'grocery' ? 'on' : ''}" onclick="pickCat(this, 'grocery')"><div class="cat-label">Grocery Delivery</div></div>`;
             
             container.innerHTML = html;
         }
