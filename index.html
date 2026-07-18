@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Cleaned mobile responsive tag to force fluid auto-sizing across all devices -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- FORCE AUTO-FIT: Tells mobile devices to scale layout 1:1 with device viewport boundaries -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
     <style>
         :root { 
@@ -30,15 +30,41 @@
             -webkit-text-size-adjust: 100%;
         }
 
-        /* FLUID SCREEN LAYER: Auto-scales and expands perfectly from mobile to laptop */
+        /* RESPONSIVE wrapper: Fluid fit on phones, balanced centered panel on laptops */
         .content-wrapper { 
             width: 100%;
             max-width: 500px; 
             margin: 0 auto;
-            padding: 24px 16px;
+            padding: 20px 16px;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+        }
+
+        /* BACK BUTTON STRIP */
+        .nav-header {
+            display: flex;
+            justify-content: flex-start;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #111;
+        }
+        .back-btn {
+            background: #111;
+            color: #aaa;
+            border: 1px solid #222;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+        }
+        .back-btn:hover {
+            border-color: var(--cab0-yellow);
+            color: #fff;
         }
 
         .logo-main { 
@@ -91,7 +117,6 @@
             font-style: normal; 
         }
 
-        /* DYNAMIC SELECTION AREA GRID */
         .cats-grid { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
@@ -118,7 +143,6 @@
         .cat.on .cat-label { 
             color: #000; 
         } 
-        /* Special style for Vegas Activation tile */
         .cat.vegas-toggle-tile {
             border: 1px dashed var(--cab0-blue);
             background: #050b14;
@@ -273,7 +297,7 @@
 
     <div class="content-wrapper">
         
-        <!-- PAGE 0: SERVICE CATEGORIES -->
+        <!-- PAGE 0: MAIN DASHBOARD SELECTION -->
         <div class="page active" id="pg0">
             <div class="logo-main">Cab<span>0</span>.com</div>
             
@@ -288,9 +312,14 @@
             <button class="main-btn" onclick="goTo(1)">Find Best Rate →</button>
         </div>
 
-        <!-- PAGE 1: GLOBAL INPUT SYSTEM -->
+        <!-- PAGE 1: ADDRESS VERIFICATION SYSTEM -->
         <div class="page" id="pg1">
-            <div style="padding: 10px 0;">
+            <div class="nav-header">
+                <!-- Navigation back to landing grid -->
+                <button class="back-btn" onclick="goTo(0)">← Main Menu</button>
+            </div>
+            
+            <div style="padding: 5px 0;">
                 <h2 style="color:#fff; margin-bottom:20px; font-family: var(--serif); font-size: 32px;">Search Details</h2>
                 
                 <div class="search-group">
@@ -307,8 +336,13 @@
             </div>
         </div>
 
-        <!-- PAGE 2: COMPARISON MARKETPLACE -->
+        <!-- PAGE 2: MARKETPLACE PROVIDER CONSOLE -->
         <div class="page" id="pg2">
+            <div class="nav-header">
+                <!-- Navigation back to landing grid -->
+                <button class="back-btn" onclick="goTo(0)">← Main Menu</button>
+            </div>
+
             <div class="sort-strip">
                 <button class="sort-btn active" id="sort-price" onclick="setSort('price')">CHEAPEST</button>
                 <button class="sort-btn" id="sort-time" onclick="setSort('time')">FASTEST</button>
@@ -385,13 +419,11 @@
             var html = '';
             
             if(!isVegasMode) {
-                // 4 Uniform Selection Grid Buttons for Global Mode
                 html += `<div class="cat ${currentCat === 'ride' ? 'on' : ''}" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>`;
                 html += `<div class="cat ${currentCat === 'delivery' ? 'on' : ''}" onclick="pickCat(this, 'delivery')"><div class="cat-label">Food Delivery</div></div>`;
                 html += `<div class="cat ${currentCat === 'grocery' ? 'on' : ''}" onclick="pickCat(this, 'grocery')"><div class="cat-label">Groceries</div></div>`;
                 html += `<div class="cat vegas-toggle-tile" onclick="toggleVegasMode()"><div class="cat-label">Vegas Mode 🎰</div></div>`;
             } else {
-                // 6 Uniform Selection Grid Buttons for Las Vegas Mode
                 html += `<div class="cat ${currentCat === 'ride' ? 'on' : ''}" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>`;
                 html += `<div class="cat ${currentCat === 'loop' ? 'on' : ''}" onclick="pickCat(this, 'loop')"><div class="cat-label">Vegas Loop</div></div>`;
                 html += `<div class="cat ${currentCat === 'robotaxi' ? 'on' : ''}" onclick="pickCat(this, 'robotaxi')"><div class="cat-label">Robotaxis</div></div>`;
