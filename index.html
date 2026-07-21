@@ -6,11 +6,9 @@
     <title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
     <style>
         :root { 
-            --park-bg: #d4af37;        /* Gold Background */
-            --park-card: #f3e5ab;      /* Lighter Gold/Cream Card */
-            --park-border: #b89728;    /* Deep Gold Border */
-            --park-blue: #004080;      /* Rich Blue Font */
-            --park-blue-dark: #00264d; /* Darker Blue for Contrast */
+            --cab0-yellow: #ffff00;    /* Bright Yellow Background / Accents */
+            --cab0-blue: #0000ff;      /* Bright Blue Font */
+            --cab0-blue-dark: #0000cc; /* Deep Bright Blue */
             --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; 
             --serif: 'DM Serif Display', Georgia, serif; 
         }
@@ -21,10 +19,10 @@
             padding: 0; 
         }
 
-        /* PARK-LV GOLD & BLUE THEME */
+        /* TOUR-LV INSPIRED DYNAMIC GRID & LAYOUT FORMAT */
         html, body { 
-            background-color: var(--park-bg) !important;
-            color: var(--park-blue-dark); 
+            background-color: var(--cab0-yellow) !important;
+            color: var(--cab0-blue); 
             font-family: var(--sans);
             min-height: 100vh;
             overflow-x: hidden;
@@ -36,7 +34,7 @@
         /* 100% EDGE-TO-EDGE FLUID VIEWPORT ENGINE */
         .content-wrapper { 
             width: 100vw !important;
-            max-width: 480px; 
+            max-width: 1200px; 
             margin: 0 auto;
             padding: 20px;
             display: flex;
@@ -49,13 +47,13 @@
             justify-content: flex-start;
             padding-bottom: 12px;
             margin-bottom: 15px;
-            border-bottom: 1px solid var(--park-border);
+            border-bottom: 1px solid rgba(0, 0, 255, 0.2);
             width: 100%;
         }
         .back-btn {
-            background: var(--park-card);
-            color: var(--park-blue);
-            border: 1px solid var(--park-border);
+            background: #ffffff;
+            color: var(--cab0-blue);
+            border: 2px solid var(--cab0-blue);
             padding: 10px 18px;
             border-radius: 20px;
             font-size: 13px;
@@ -66,107 +64,116 @@
             transition: all 0.2s ease;
         }
         .back-btn:hover {
-            background: #fff;
-            border-color: var(--park-blue);
+            background: var(--cab0-blue);
+            color: #ffffff;
         }
 
         .logo-main { 
             font-family: var(--serif); 
-            font-size: 46px; 
-            color: var(--park-blue-dark); 
+            font-size: 56px; 
+            color: var(--cab0-blue); 
             margin-bottom: 25px; 
-            font-weight: 700;
+            font-weight: 900;
             text-align: center;
         } 
-        .logo-main span { color: var(--park-blue); }
+        /* LARGE ZERO STYLING */
+        .logo-main .big-zero { 
+            font-size: 1.15em; 
+            vertical-align: baseline; 
+            display: inline-block;
+            line-height: 1;
+        }
 
         .woz-box { 
-            margin-bottom: 25px; 
-            padding: 18px; 
-            background: var(--park-card);
+            margin: 0 auto 30px auto; 
+            padding: 20px; 
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 14px;
-            border: 1px solid var(--park-border);
+            border: 2px solid var(--cab0-blue);
             text-align: center;
+            max-width: 600px;
             width: 100%;
         } 
         .woz-quote { 
             font-family: var(--serif); 
             font-style: italic; 
-            font-size: 19px; 
-            color: var(--park-blue); 
+            font-size: 20px; 
+            color: var(--cab0-blue); 
             line-height: 1.4; 
             margin-bottom: 10px; 
         } 
         .woz-attribution { 
             display: block; 
             font-family: var(--sans); 
-            font-size: 11px; 
-            font-weight: 700; 
+            font-size: 12px; 
+            font-weight: 800; 
             text-transform: uppercase; 
             letter-spacing: 1.2px; 
-            color: var(--park-blue-dark); 
-            opacity: 0.8;
+            color: var(--cab0-blue); 
         }
 
         h1 { 
             font-family: var(--serif); 
-            font-size: 38px; 
-            line-height: 1.15; 
+            font-size: 42px; 
+            line-height: 1.2; 
             margin-bottom: 30px; 
-            color: var(--park-blue-dark); 
+            color: var(--cab0-blue); 
             text-align: center; 
             width: 100%;
         } 
         h1 em { 
-            color: var(--park-blue); 
+            color: #0000cc; 
             font-style: normal; 
+            text-decoration: underline;
         }
 
+        /* TOUR-LV CARD GRID FORMATTING */
         .cats-grid { 
             display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 14px; 
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+            gap: 20px; 
             margin-bottom: 30px; 
-            text-align: center; 
             width: 100%;
         } 
         .cat { 
-            background: var(--park-card); 
-            border: 1px solid var(--park-border); 
+            background: #ffffff; 
+            border: 2px solid var(--cab0-blue); 
             border-radius: 16px; 
-            padding: 26px 10px; 
+            padding: 30px 20px; 
             cursor: pointer; 
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 255, 0.15);
         } 
         .cat:hover {
-            border-color: var(--park-blue);
-            background: #fff;
+            transform: translateY(-5px);
+            background: #f0f0ff;
         }
         .cat.on { 
-            background: var(--park-blue); 
-            border-color: var(--park-blue); 
+            background: var(--cab0-blue); 
+            border-color: var(--cab0-blue); 
         } 
         .cat.on .cat-label { 
-            color: #fff; 
+            color: #ffffff; 
         } 
         .cat.vegas-toggle-tile {
-            border: 1px dashed var(--park-blue);
-            background: rgba(0, 64, 128, 0.05);
+            border: 2px dashed var(--cab0-blue);
+            background: rgba(255, 255, 255, 0.4);
         }
         .cat.vegas-toggle-tile.vegas-active {
-            border: 1px solid var(--park-blue);
-            background: var(--park-blue);
+            border: 2px solid var(--cab0-blue);
+            background: var(--cab0-blue);
         }
         .cat.vegas-toggle-tile.vegas-active .cat-label {
-            color: #fff;
+            color: #ffffff;
         }
         .cat-label { 
-            font-size: 14px; 
-            font-weight: 800; 
-            color: var(--park-blue-dark); 
+            font-size: 16px; 
+            font-weight: 900; 
+            color: var(--cab0-blue); 
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -174,21 +181,24 @@
         .search-group {
             margin-bottom: 20px;
             width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .search-group label {
             display: block;
-            font-size: 12px;
+            font-size: 13px;
             text-transform: uppercase;
-            color: var(--park-blue-dark);
+            color: var(--cab0-blue);
             margin-bottom: 8px;
-            font-weight: 700;
+            font-weight: 900;
             text-align: left;
         }
         .search-field {
             width: 100%;
-            background: var(--park-card);
-            border: 1px solid var(--park-border);
-            color: var(--park-blue-dark);
+            background: #ffffff;
+            border: 2px solid var(--cab0-blue);
+            color: var(--cab0-blue);
             padding: 18px;
             border-radius: 14px;
             font-size: 16px;
@@ -196,28 +206,30 @@
             -webkit-appearance: none;
         }
         .search-field:focus {
-            border-color: var(--park-blue);
-            background: #fff;
+            background: #f0f0ff;
         }
         .search-field::placeholder {
-            color: #555;
+            color: #6666aa;
         }
 
         .main-btn { 
-            background: var(--park-blue); 
-            color: #fff; 
+            background: var(--cab0-blue); 
+            color: #ffffff; 
             padding: 20px; 
             border-radius: 16px; 
             text-align: center; 
-            font-weight: 800; 
+            font-weight: 900; 
             font-size: 18px; 
             cursor: pointer; 
             text-transform: uppercase;
             letter-spacing: 0.5px;
             width: 100%;
+            max-width: 600px;
+            margin: 10px auto 0 auto;
+            display: block;
             border: none;
-            margin-top: 10px;
             transition: opacity 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 255, 0.3);
         }
         .main-btn:hover {
             opacity: 0.9;
@@ -228,33 +240,40 @@
 
         .sort-strip { 
             display: flex; 
-            background: var(--park-bg); 
+            background: transparent; 
             padding: 10px 0 15px; 
-            gap: 8px; 
+            gap: 10px; 
             width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
         } 
         .sort-btn { 
             flex: 1; 
             padding: 14px; 
-            border-radius: 8px; 
-            border: 1px solid var(--park-border); 
-            font-size: 11px; 
-            font-weight: 800; 
-            background: var(--park-card); 
-            color: var(--park-blue-dark); 
+            border-radius: 10px; 
+            border: 2px solid var(--cab0-blue); 
+            font-size: 12px; 
+            font-weight: 900; 
+            background: #ffffff; 
+            color: var(--cab0-blue); 
             cursor: pointer; 
             text-transform: uppercase;
         } 
         .sort-btn.active { 
-            background: var(--park-blue); 
-            color: #fff; 
-            border-color: var(--park-blue); 
+            background: var(--cab0-blue); 
+            color: #ffffff; 
         } 
         
+        #p3-grid {
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
         .pcard { 
-            background: var(--park-card); 
+            background: #ffffff; 
             border-radius: 15px; 
-            border: 1px solid var(--park-border); 
+            border: 2px solid var(--cab0-blue); 
             padding: 18px; 
             margin-bottom: 12px; 
             display: flex; 
@@ -263,14 +282,15 @@
             cursor: pointer; 
             text-align: left; 
             width: 100%;
-            transition: border-color 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0,0,255,0.1);
+            transition: transform 0.2s ease;
         } 
         .pcard:hover {
-            border-color: var(--park-blue);
+            transform: translateY(-2px);
         }
         .pcard.sel { 
-            border: 2px solid var(--park-blue); 
-            background: #fff; 
+            border: 3px solid var(--cab0-blue); 
+            background: #f0f0ff; 
         }
         .pcard-logo {
             width: 45px;
@@ -279,30 +299,32 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
-            color: #fff;
+            font-weight: 900;
+            color: #ffffff;
             font-size: 16px;
         }
 
         /* INTEGRATED ACTION PANEL STYLE */
         .inline-action-panel {
-            background: var(--park-card);
-            border: 1px solid var(--park-border);
+            background: #ffffff;
+            border: 2px solid var(--cab0-blue);
             border-radius: 16px;
             padding: 20px;
-            margin-top: 15px;
+            margin: 15px auto 0 auto;
+            max-width: 600px;
             width: 100%;
             display: flex;
             flex-direction: column;
             gap: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,255,0.15);
         }
         .inline-btn {
-            background: var(--park-blue);
-            color: #fff;
+            background: var(--cab0-blue);
+            color: #ffffff;
             padding: 18px;
             border-radius: 14px;
             text-align: center;
-            font-weight: 800;
+            font-weight: 900;
             font-size: 18px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -318,7 +340,7 @@
         
         <!-- PAGE 0: MAIN DASHBOARD SELECTION -->
         <div class="page active" id="pg0">
-            <div class="logo-main">Cab<span>0</span>.com</div>
+            <div class="logo-main">Cab<span class="big-zero">0</span>.com</div>
             
             <div class="woz-box">
                 <p class="woz-quote">"Best of luck to you on this worthy venture, its your turn"</p>
@@ -338,7 +360,7 @@
             </div>
             
             <div style="padding: 5px 0;">
-                <h2 style="color:var(--park-blue-dark); margin-bottom:20px; font-family: var(--serif); font-size: 32px;">Search Details</h2>
+                <h2 style="color:var(--cab0-blue); margin-bottom:20px; font-family: var(--serif); font-size: 32px; text-align: center;">Search Details</h2>
                 
                 <div class="search-group">
                     <label>1. Pickup Location</label>
@@ -371,7 +393,7 @@
             <!-- INLINE UNIFIED ACTION ZONE -->
             <div class="inline-action-panel">
                 <div style="text-align: left;">
-                    <div id="sel-name" style="font-weight:800; color:var(--park-blue-dark); font-size: 16px;">Select Service</div>
+                    <div id="sel-name" style="font-weight:900; color:var(--cab0-blue); font-size: 16px;">Select Service</div>
                     <div style="font-size:12px; color:#555; margin-top: 3px;">Secure Official Booking Link</div>
                 </div>
                 <a href="#" id="final-link" target="_blank" class="inline-btn">Book Now</a>
@@ -486,10 +508,10 @@
                     <div class="pcard ${activeClass}" onclick="selectProvider('${p.id}')">
                         <div class="pcard-logo" style="background:${p.c}">${p.s}</div>
                         <div style="flex:1;">
-                            <div style="font-weight:700; color:var(--park-blue-dark); font-size:16px;">${p.name}</div>
-                            <div style="font-size:13px; color:#555; margin-top:2px;">${p.time} min response time</div>
+                            <div style="font-weight:900; color:var(--cab0-blue); font-size:16px;">${p.name}</div>
+                            <div style="font-size:13px; color:#444; margin-top:2px;">${p.time} min response time</div>
                         </div>
-                        <div style="font-weight:800; color:var(--park-blue); font-size:18px;">${displayPrice}</div>
+                        <div style="font-weight:900; color:var(--cab0-blue); font-size:18px;">${displayPrice}</div>
                     </div>
                 `; 
             }); 
