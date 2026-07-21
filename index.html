@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
     <style>
         :root { 
@@ -25,15 +25,17 @@
             color: var(--cab0-blue); 
             font-family: var(--sans);
             min-height: 100vh;
-            overflow-x: hidden;
-            width: 100vw !important;
+            margin: 0;
+            padding: 0;
+            width: 100%;
             -webkit-text-size-adjust: 100%;
             -webkit-font-smoothing: antialiased;
         }
 
+        /* FLUID MOBILE-FIRST CONTAINER */
         .content-wrapper { 
-            width: 100vw !important;
-            max-width: 480px; 
+            width: 100%;
+            max-width: 500px; 
             margin: 0 auto;
             padding: 16px;
             display: flex;
@@ -61,22 +63,16 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             box-shadow: 0 4px 10px rgba(0,68,204,0.1);
-            transition: all 0.2s ease;
-        }
-        .back-btn:hover {
-            background: var(--cab0-blue);
-            color: #ffffff;
         }
 
         .logo-main { 
             font-family: var(--serif); 
-            font-size: 46px; 
+            font-size: 48px; 
             color: var(--cab0-blue-dark); 
-            margin-bottom: 15px; 
+            margin-bottom: 18px; 
             font-weight: 900;
             text-align: center;
             letter-spacing: -1px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
         } 
         .logo-main .big-zero { 
             font-size: 1.15em; 
@@ -87,8 +83,8 @@
         }
 
         .woz-box { 
-            margin-bottom: 20px; 
-            padding: 18px; 
+            margin-bottom: 22px; 
+            padding: 20px; 
             background: linear-gradient(135deg, #ffffff, #fffef9);
             border-radius: 18px;
             border: 2px solid var(--cab0-blue);
@@ -107,9 +103,9 @@
         .woz-quote { 
             font-family: var(--serif); 
             font-style: italic; 
-            font-size: 16px; 
+            font-size: 17px; 
             color: var(--cab0-blue-dark); 
-            line-height: 1.35; 
+            line-height: 1.4; 
             margin-bottom: 8px; 
             font-weight: 700;
         } 
@@ -119,7 +115,7 @@
             padding: 4px 12px;
             border-radius: 12px;
             font-family: var(--sans); 
-            font-size: 10px; 
+            font-size: 11px; 
             font-weight: 900; 
             text-transform: uppercase; 
             letter-spacing: 1.2px; 
@@ -128,9 +124,9 @@
 
         h1 { 
             font-family: var(--serif); 
-            font-size: 32px; 
+            font-size: 34px; 
             line-height: 1.15; 
-            margin-bottom: 20px; 
+            margin-bottom: 22px; 
             color: var(--cab0-blue-dark); 
             text-align: center; 
             width: 100%;
@@ -147,7 +143,7 @@
             display: grid; 
             grid-template-columns: 1fr 1fr; 
             gap: 12px; 
-            margin-bottom: 20px; 
+            margin-bottom: 22px; 
             text-align: center; 
             width: 100%;
         } 
@@ -155,22 +151,16 @@
             background: #ffffff; 
             border: 2px solid var(--cab0-blue); 
             border-radius: 18px; 
-            padding: 22px 10px; 
+            padding: 24px 10px; 
             cursor: pointer; 
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 12px rgba(0, 68, 204, 0.08);
         } 
-        .cat:hover, .cat:active {
-            transform: scale(0.97);
-            background: #f0f4ff;
-        }
         .cat.on { 
             background: var(--cab0-blue); 
             border-color: var(--cab0-blue); 
-            box-shadow: 0 6px 18px rgba(0, 68, 204, 0.3);
         } 
         .cat.on .cat-label { 
             color: #ffffff; 
@@ -217,14 +207,6 @@
             font-size: 16px;
             outline: none;
             -webkit-appearance: none;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
-        }
-        .search-field:focus {
-            background: #f0f4ff;
-            box-shadow: 0 0 10px rgba(0, 68, 204, 0.2);
-        }
-        .search-field::placeholder {
-            color: #6688cc;
         }
 
         .main-btn { 
@@ -237,15 +219,10 @@
             font-size: 17px; 
             cursor: pointer; 
             text-transform: uppercase;
-            letter-spacing: 0.5px;
             width: 100%;
             border: none;
             margin-top: 5px;
             box-shadow: 0 6px 20px rgba(0, 68, 204, 0.3);
-            transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-        .main-btn:active {
-            transform: scale(0.98);
         }
 
         .page { display: none; width: 100%; } 
@@ -253,7 +230,6 @@
 
         .sort-strip { 
             display: flex; 
-            background: transparent; 
             padding: 8px 0 12px; 
             gap: 10px; 
             width: 100%;
@@ -269,7 +245,6 @@
             color: var(--cab0-blue); 
             cursor: pointer; 
             text-transform: uppercase;
-            box-shadow: 0 2px 6px rgba(0,68,204,0.08);
         } 
         .sort-btn.active { 
             background: var(--cab0-blue); 
@@ -286,18 +261,11 @@
             align-items: center; 
             gap: 15px; 
             cursor: pointer; 
-            text-align: left; 
             width: 100%;
-            box-shadow: 0 4px 12px rgba(0, 68, 204, 0.08);
-            transition: transform 0.2s ease;
         } 
-        .pcard:active {
-            transform: scale(0.98);
-        }
         .pcard.sel { 
             border: 3px solid var(--cab0-blue); 
             background: #f0f4ff; 
-            box-shadow: 0 6px 18px rgba(0, 68, 204, 0.2);
         }
         .pcard-logo {
             width: 44px;
@@ -321,7 +289,6 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            box-shadow: 0 8px 25px rgba(0, 68, 204, 0.15);
         }
         .inline-btn {
             background: linear-gradient(135deg, #0044cc, #002677);
@@ -332,11 +299,9 @@
             font-weight: 900;
             font-size: 17px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
             text-decoration: none;
             width: 100%;
             display: block;
-            box-shadow: 0 4px 15px rgba(0, 68, 204, 0.3);
         }
 
         .site-footer {
