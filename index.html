@@ -85,18 +85,18 @@
             color: var(--cab0-blue);
         }
 
-        /* MASTER UNIFORM BOX STYLE: WOZ-BOX AND EVERY .CAT SHARE EXACT DIMENSIONS */
+        /* MASTER UNIFORM BOX STYLE: MUCH LARGER PADDING AND MIN-HEIGHT */
         .woz-box, .cat { 
-            margin: 0 auto 16px auto !important; 
-            padding: 28px 24px !important; 
+            margin: 0 auto 20px auto !important; 
+            padding: 38px 28px !important; 
             background: rgba(255, 255, 255, 0.95) !important;
             backdrop-filter: blur(10px);
-            border-radius: 18px !important;
+            border-radius: 20px !important;
             border: 2px solid var(--cab0-blue) !important;
             text-align: center !important;
             width: 100% !important;
-            min-height: 110px !important;
-            box-shadow: 0 8px 25px rgba(0, 68, 204, 0.12) !important;
+            min-height: 150px !important;
+            box-shadow: 0 10px 30px rgba(0, 68, 204, 0.15) !important;
             position: relative !important;
             overflow: hidden !important;
             display: flex !important;
@@ -110,26 +110,27 @@
         .woz-box::before, .cat::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 6px; height: 100%;
+            top: 0; left: 0; width: 8px; height: 100%;
             background: var(--cab0-blue);
         }
 
+        /* QUOTE FONT MATCHED EXACTLY TO THE HEADLINE FONT SIZE */
         .woz-quote { 
-            font-family: var(--serif); 
+            font-family: var(--serif) !important; 
             font-style: italic; 
-            font-size: clamp(16px, 4vw, 19px); 
-            color: var(--cab0-blue-dark); 
-            line-height: 1.4; 
-            margin-bottom: 10px; 
-            font-weight: 700;
+            font-size: clamp(30px, 6vw, 38px) !important; 
+            color: var(--cab0-blue-dark) !important; 
+            line-height: 1.15 !important; 
+            margin-bottom: 14px !important; 
+            font-weight: 900 !important;
         } 
         .woz-attribution { 
             display: inline-block; 
             background: rgba(0, 68, 204, 0.08);
-            padding: 4px 12px;
+            padding: 6px 14px;
             border-radius: 12px;
             font-family: var(--sans); 
-            font-size: 11px; 
+            font-size: 12px; 
             font-weight: 900; 
             text-transform: uppercase; 
             letter-spacing: 1.2px; 
@@ -138,9 +139,9 @@
 
         h1 { 
             font-family: var(--serif); 
-            font-size: clamp(32px, 7vw, 42px); 
+            font-size: clamp(30px, 6vw, 38px); 
             line-height: 1.15; 
-            margin-bottom: 20px; 
+            margin-bottom: 25px; 
             color: var(--cab0-blue-dark); 
             text-align: center; 
             width: 100%;
@@ -171,7 +172,7 @@
         .cat.on { 
             background: var(--cab0-blue) !important; 
             border-color: var(--cab0-blue) !important; 
-            box-shadow: 0 8px 22px rgba(0, 68, 204, 0.3) !important;
+            box-shadow: 0 10px 28px rgba(0, 68, 204, 0.35) !important;
         } 
         .cat.on::before {
             background: #ffffff !important;
@@ -192,12 +193,18 @@
             color: #ffffff !important;
         }
         
+        /* CATEGORY LABEL FONT MATCHED EXACTLY TO THE HEADLINE FONT SIZE */
         .cat-label { 
-            font-size: 19px !important; 
+            font-family: var(--serif) !important;
+            font-size: clamp(30px, 6vw, 38px) !important; 
             font-weight: 900 !important; 
             color: var(--cab0-blue-dark); 
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            text-transform: none !important;
+            letter-spacing: -0.5px !important;
+        }
+        
+        .cat.on .cat-label, .cat.vegas-toggle-tile.vegas-active .cat-label { 
+            color: #ffffff !important; 
         }
 
         .search-group {
