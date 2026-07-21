@@ -1,534 +1,573 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
-    <style>
-        :root { 
-            --cab0-yellow: #ffff00;    /* Bright Yellow Background / Accents */
-            --cab0-blue: #0000ff;      /* Bright Blue Font */
-            --cab0-blue-dark: #0000cc; /* Deep Bright Blue */
-            --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; 
-            --serif: 'DM Serif Display', Georgia, serif; 
-        }
-
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
-        }
-
-        /* TOUR-LV INSPIRED DYNAMIC GRID & LAYOUT FORMAT */
-        html, body { 
-            background-color: var(--cab0-yellow) !important;
-            color: var(--cab0-blue); 
-            font-family: var(--sans);
-            min-height: 100vh;
-            overflow-x: hidden;
-            width: 100vw !important;
-            -webkit-text-size-adjust: 100%;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* 100% EDGE-TO-EDGE FLUID VIEWPORT ENGINE */
-        .content-wrapper { 
-            width: 100vw !important;
-            max-width: 1200px; 
-            margin: 0 auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        .nav-header {
-            display: flex;
-            justify-content: flex-start;
-            padding-bottom: 12px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(0, 0, 255, 0.2);
-            width: 100%;
-        }
-        .back-btn {
-            background: #ffffff;
-            color: var(--cab0-blue);
-            border: 2px solid var(--cab0-blue);
-            padding: 10px 18px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.2s ease;
-        }
-        .back-btn:hover {
-            background: var(--cab0-blue);
-            color: #ffffff;
-        }
-
-        .logo-main { 
-            font-family: var(--serif); 
-            font-size: 56px; 
-            color: var(--cab0-blue); 
-            margin-bottom: 25px; 
-            font-weight: 900;
-            text-align: center;
-        } 
-        /* LARGE ZERO STYLING */
-        .logo-main .big-zero { 
-            font-size: 1.15em; 
-            vertical-align: baseline; 
-            display: inline-block;
-            line-height: 1;
-        }
-
-        .woz-box { 
-            margin: 0 auto 30px auto; 
-            padding: 20px; 
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 14px;
-            border: 2px solid var(--cab0-blue);
-            text-align: center;
-            max-width: 600px;
-            width: 100%;
-        } 
-        .woz-quote { 
-            font-family: var(--serif); 
-            font-style: italic; 
-            font-size: 20px; 
-            color: var(--cab0-blue); 
-            line-height: 1.4; 
-            margin-bottom: 10px; 
-        } 
-        .woz-attribution { 
-            display: block; 
-            font-family: var(--sans); 
-            font-size: 12px; 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            letter-spacing: 1.2px; 
-            color: var(--cab0-blue); 
-        }
-
-        h1 { 
-            font-family: var(--serif); 
-            font-size: 42px; 
-            line-height: 1.2; 
-            margin-bottom: 30px; 
-            color: var(--cab0-blue); 
-            text-align: center; 
-            width: 100%;
-        } 
-        h1 em { 
-            color: #0000cc; 
-            font-style: normal; 
-            text-decoration: underline;
-        }
-
-        /* TOUR-LV CARD GRID FORMATTING */
-        .cats-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
-            gap: 20px; 
-            margin-bottom: 30px; 
-            width: 100%;
-        } 
-        .cat { 
-            background: #ffffff; 
-            border: 2px solid var(--cab0-blue); 
-            border-radius: 16px; 
-            padding: 30px 20px; 
-            cursor: pointer; 
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 255, 0.15);
-        } 
-        .cat:hover {
-            transform: translateY(-5px);
-            background: #f0f0ff;
-        }
-        .cat.on { 
-            background: var(--cab0-blue); 
-            border-color: var(--cab0-blue); 
-        } 
-        .cat.on .cat-label { 
-            color: #ffffff; 
-        } 
-        .cat.vegas-toggle-tile {
-            border: 2px dashed var(--cab0-blue);
-            background: rgba(255, 255, 255, 0.4);
-        }
-        .cat.vegas-toggle-tile.vegas-active {
-            border: 2px solid var(--cab0-blue);
-            background: var(--cab0-blue);
-        }
-        .cat.vegas-toggle-tile.vegas-active .cat-label {
-            color: #ffffff;
-        }
-        .cat-label { 
-            font-size: 16px; 
-            font-weight: 900; 
-            color: var(--cab0-blue); 
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .search-group {
-            margin-bottom: 20px;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .search-group label {
-            display: block;
-            font-size: 13px;
-            text-transform: uppercase;
-            color: var(--cab0-blue);
-            margin-bottom: 8px;
-            font-weight: 900;
-            text-align: left;
-        }
-        .search-field {
-            width: 100%;
-            background: #ffffff;
-            border: 2px solid var(--cab0-blue);
-            color: var(--cab0-blue);
-            padding: 18px;
-            border-radius: 14px;
-            font-size: 16px;
-            outline: none;
-            -webkit-appearance: none;
-        }
-        .search-field:focus {
-            background: #f0f0ff;
-        }
-        .search-field::placeholder {
-            color: #6666aa;
-        }
-
-        .main-btn { 
-            background: var(--cab0-blue); 
-            color: #ffffff; 
-            padding: 20px; 
-            border-radius: 16px; 
-            text-align: center; 
-            font-weight: 900; 
-            font-size: 18px; 
-            cursor: pointer; 
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            width: 100%;
-            max-width: 600px;
-            margin: 10px auto 0 auto;
-            display: block;
-            border: none;
-            transition: opacity 0.2s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 255, 0.3);
-        }
-        .main-btn:hover {
-            opacity: 0.9;
-        }
-
-        .page { display: none; width: 100%; } 
-        .page.active { display: block; }
-
-        .sort-strip { 
-            display: flex; 
-            background: transparent; 
-            padding: 10px 0 15px; 
-            gap: 10px; 
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-        } 
-        .sort-btn { 
-            flex: 1; 
-            padding: 14px; 
-            border-radius: 10px; 
-            border: 2px solid var(--cab0-blue); 
-            font-size: 12px; 
-            font-weight: 900; 
-            background: #ffffff; 
-            color: var(--cab0-blue); 
-            cursor: pointer; 
-            text-transform: uppercase;
-        } 
-        .sort-btn.active { 
-            background: var(--cab0-blue); 
-            color: #ffffff; 
-        } 
-        
-        #p3-grid {
-            max-width: 600px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .pcard { 
-            background: #ffffff; 
-            border-radius: 15px; 
-            border: 2px solid var(--cab0-blue); 
-            padding: 18px; 
-            margin-bottom: 12px; 
-            display: flex; 
-            align-items: center; 
-            gap: 15px; 
-            cursor: pointer; 
-            text-align: left; 
-            width: 100%;
-            box-shadow: 0 2px 8px rgba(0,0,255,0.1);
-            transition: transform 0.2s ease;
-        } 
-        .pcard:hover {
-            transform: translateY(-2px);
-        }
-        .pcard.sel { 
-            border: 3px solid var(--cab0-blue); 
-            background: #f0f0ff; 
-        }
-        .pcard-logo {
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            color: #ffffff;
-            font-size: 16px;
-        }
-
-        /* INTEGRATED ACTION PANEL STYLE */
-        .inline-action-panel {
-            background: #ffffff;
-            border: 2px solid var(--cab0-blue);
-            border-radius: 16px;
-            padding: 20px;
-            margin: 15px auto 0 auto;
-            max-width: 600px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,255,0.15);
-        }
-        .inline-btn {
-            background: var(--cab0-blue);
-            color: #ffffff;
-            padding: 18px;
-            border-radius: 14px;
-            text-align: center;
-            font-weight: 900;
-            font-size: 18px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            text-decoration: none;
-            width: 100%;
-            display: block;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,
+user-scalable=no, viewport-fit=cover">
+<title>Cab0.com — Every Ride. Every Delivery. One Search.
+</title>
+<style>
+:root {
+--cab0-blue: #3b82f6;
+--cab0-yellow: #FACC15;
+--serif: 'DM Serif Display'
+, serif;
+--sans: 'DM Sans'
+, sans-serif;
+--fancy: 'Playfair Display'
+, serif;
+}
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+/* STRICT MOBILE ENVIRONMENT LOCKDOWN */
+html, body {
+background-color: #000000 !important;
+color: #ffffff;
+font-family: var(--sans);
+min-height: 100vh;
+overflow-x: hidden;
+width: 100vw !important;
+-webkit-text-size-adjust: 100%;
+-webkit-font-smoothing: antialiased;
+}
+/* 100% EDGE-TO-EDGE FLUID VIEWPORT ENGINE */
+.content-wrapper {
+width: 100vw !important;
+max-width: 480px;
+margin: 0 auto;
+padding: 20px;
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+}
+.nav-header {
+display: flex;
+justify-content: flex-start;
+padding-bottom: 12px;
+margin-bottom: 15px;
+border-bottom: 1px solid #111;
+width: 100%;
+}
+.back-btn {
+background: #111;
+color: #aaa;
+border: 1px solid #222;
+padding: 10px 18px;
+border-radius: 20px;
+font-size: 13px;
+font-weight: 700;
+cursor: pointer;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.logo-main {
+font-family: var(--serif);
+font-size: 46px;
+color: var(--cab0-blue);
+margin-bottom: 25px;
+font-weight: 700;
+text-align: center;
+}
+.logo-main span { color: var(--cab0-yellow); }
+.woz-box {
+margin-bottom: 25px;
+padding: 18px;
+background: #0d0d0d;
+border-radius: 14px;
+border: 1px solid #1a1a1a;
+text-align: center;
+width: 100%;
+}
+.woz-quote {
+font-family: var(--fancy);
+font-style: italic;
+font-size: 19px;
+color: var(--cab0-yellow);
+line-height: 1.4;
+margin-bottom: 10px;
+}
+.woz-attribution {
+display: block;
+font-family: var(--sans);
+font-size: 11px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 1.2px;
+color: var(--cab0-yellow);
+opacity: 0.8;
+}
+h1 {
+font-family: var(--serif);
+font-size: 38px;
+line-height: 1.15;
+margin-bottom: 30px;
+color: #fff;
+text-align: center;
+width: 100%;
+}
+h1 em {
+color: var(--cab0-yellow);
+font-style: normal;
+}
+.cats-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 14px;
+margin-bottom: 30px;
+text-align: center;
+width: 100%;
+}
+.cat {
+background: #111;
+border: 1px solid #222;
+border-radius: 16px;
+padding: 26px 10px;
+cursor: pointer;
+transition: all 0.2s ease;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.cat.on {
+background: var(--cab0-yellow);
+border-color: var(--cab0-yellow);
+}
+.cat.on .cat-label {
+color: #000;
+}
+.cat.vegas-toggle-tile {
+border: 1px dashed var(--cab0-blue);
+background: #050b14;
+}
+.cat.vegas-toggle-tile.vegas-active {
+border: 1px solid var(--cab0-yellow);
+background: #1c1802;
+}
+.cat.vegas-toggle-tile.vegas-active .cat-label {
+color: var(--cab0-yellow);
+}
+.cat-label {
+font-size: 14px;
+font-weight: 800;
+color: #aaa;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.search-group {
+margin-bottom: 20px;
+width: 100%;
+}
+.search-group label {
+display: block;
+font-size: 12px;
+text-transform: uppercase;
+color: #888;
+margin-bottom: 8px;
+font-weight: 700;
+text-align: left;
+}
+.search-field {
+width: 100%;
+background: #111;
+border: 1px solid #333;
+color: #fff;
+padding: 18px;
+border-radius: 14px;
+font-size: 16px;
+outline: none;
+-webkit-appearance: none;
+}
+.search-field:focus {
+border-color: var(--cab0-blue);
+}
+.main-btn {
+background: var(--cab0-yellow);
+color: #000;
+padding: 20px;
+border-radius: 16px;
+text-align: center;
+font-weight: 800;
+font-size: 18px;
+cursor: pointer;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+width: 100%;
+border: none;
+margin-top: 10px;
+}
+.page { display: none; width: 100%; }
+.page.active { display: block; }
+.sort-strip {
+display: flex;
+background: #000;
+padding: 10px 0 15px;
+gap: 8px;
+width: 100%;
+}
+.sort-btn {
+flex: 1;
+padding: 14px;
+}
+border-radius: 8px;
+border: 1px solid #222;
+font-size: 11px;
+font-weight: 800;
+background: #000;
+color: #888;
+cursor: pointer;
+text-transform: uppercase;
+.sort-btn.active {
+background: var(--cab0-yellow);
+color: #000;
+border-color: var(--cab0-yellow);
+}
+.pcard {
+background: #111;
+border-radius: 15px;
+border: 1px solid #222;
+padding: 18px;
+margin-bottom: 12px;
+display: flex;
+align-items: center;
+gap: 15px;
+cursor: pointer;
+text-align: left;
+width: 100%;
+}
+.pcard.sel {
+border: 2px solid var(--cab0-yellow);
+background: #0a0a0a;
+}
+.pcard-logo {
+width: 45px;
+height: 45px;
+border-radius: 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 800;
+color: #fff;
+font-size: 16px;
+}
+/* INTEGRATED ACTION PANEL STYLE (BELOW GRID) */
+.inline-action-panel {
+background: #0d0d0d;
+border: 1px solid #1a1a1a;
+border-radius: 16px;
+padding: 20px;
+margin-top: 15px;
+width: 100%;
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+.inline-btn {
+background: var(--cab0-yellow);
+color: #000;
+padding: 18px;
+border-radius: 14px;
+text-align: center;
+font-weight: 800;
+font-size: 18px;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+text-decoration: none;
+width: 100%;
+display: block;
+}
+</style>
 </head>
 <body>
-
-    <div class="content-wrapper">
-        
-        <!-- PAGE 0: MAIN DASHBOARD SELECTION -->
-        <div class="page active" id="pg0">
-            <div class="logo-main">Cab<span class="big-zero">0</span>.com</div>
-            
-            <div class="woz-box">
-                <p class="woz-quote">"Best of luck to you on this worthy venture, its your turn"</p>
-                <span class="woz-attribution">Steve Wozniak, Apple Co-Founder</span>
-            </div>
-
-            <h1 id="main-headline">Every ride.<br>Every delivery.<br><em>One search.</em></h1>
-
-            <div class="cats-grid" id="categories-container"></div>
-            <button class="main-btn" onclick="goTo(1)">Find Best Rate →</button>
-        </div>
-
-        <!-- PAGE 1: ADDRESS VERIFICATION SYSTEM -->
-        <div class="page" id="pg1">
-            <div class="nav-header">
-                <button class="back-btn" onclick="goTo(0)">← Main Menu</button>
-            </div>
-            
-            <div style="padding: 5px 0;">
-                <h2 style="color:var(--cab0-blue); margin-bottom:20px; font-family: var(--serif); font-size: 32px; text-align: center;">Search Details</h2>
-                
-                <div class="search-group">
-                    <label>1. Pickup Location</label>
-                    <input type="text" id="pickup-input" class="search-field" placeholder="Current Location / Address...">
-                </div>
-
-                <div class="search-group">
-                    <label>2. Dropoff Destination</label>
-                    <input type="text" id="dropoff-input" class="search-field" placeholder="Enter landmark, city, or address...">
-                </div>
-
-                <button class="main-btn" onclick="goTo(2)">Compare Rates →</button>
-            </div>
-        </div>
-
-        <!-- PAGE 2: MARKETPLACE PROVIDER CONSOLE -->
-        <div class="page" id="pg2">
-            <div class="nav-header">
-                <button class="back-btn" onclick="goTo(0)">← Main Menu</button>
-            </div>
-
-            <div class="sort-strip">
-                <button class="sort-btn active" id="sort-price" onclick="setSort('price')">CHEAPEST</button>
-                <button class="sort-btn" id="sort-time" onclick="setSort('time')">FASTEST</button>
-            </div>
-            
-            <!-- Dynamic selection list displays directly here -->
-            <div style="padding: 5px 0;" id="p3-grid"></div>
-            
-            <!-- INLINE UNIFIED ACTION ZONE -->
-            <div class="inline-action-panel">
-                <div style="text-align: left;">
-                    <div id="sel-name" style="font-weight:900; color:var(--cab0-blue); font-size: 16px;">Select Service</div>
-                    <div style="font-size:12px; color:#555; margin-top: 3px;">Secure Official Booking Link</div>
-                </div>
-                <a href="#" id="final-link" target="_blank" class="inline-btn">Book Now</a>
-            </div>
-        </div>
-
-    </div>
-
-    <script> 
-        var isVegasMode = false;
-        var currentCat = 'ride', currentSort = 'price', selectedId = null; 
-
-        var LINKS = { 
-            'uber': 'https://m.uber.com', 
-            'lyft': 'https://www.lyft.com', 
-            'vegas_loop': 'https://www.boringcompany.com/loop', 
-            'zoox': 'https://zoox.com',
-            'doordash': 'https://www.doordash.com', 
-            'ubereats': 'https://www.ubereats.com', 
-            'instacart': 'https://www.instacart.com',
-            'amazon_fresh': 'https://www.amazon.com/fresh',
-            'walmart_plus': 'https://www.walmart.com/plus'
-        }; 
-
-        var PROVIDERS = { 
-            ride: [ 
-                { id:'uber', name:'Uber X', s:'Ub', c:'#111111', price:12.50, time:4 }, 
-                { id:'lyft', name:'Lyft Ride', s:'Ly', c:'#FF00BF', price:11.20, time:6 }
-            ], 
-            loop: [ 
-                { id:'vegas_loop', name:'Vegas Loop (Tunnel Ride)', s:'TL', c:'#cc0000', price:0.00, time:2 }
-            ],
-            robotaxi: [
-                { id:'zoox', name:'Zoox Autonomous (Free Local)', s:'Zx', c:'#2c3e50', price:0.00, time:5 }
-            ],
-            delivery: [ 
-                { id:'doordash', name:'DoorDash', s:'DD', c:'#FF3008', price:2.99, time:22 }, 
-                { id:'ubereats', name:'Uber Eats', s:'UE', c:'#06C167', price:3.49, time:18 }
-            ],
-            grocery: [
-                { id:'amazon_fresh', name:'Amazon Fresh / Prime', s:'Az', c:'#FF9900', price:0.00, time:30 },
-                { id:'walmart_plus', name:'Walmart+ Grocery Delivery', s:'Wm', c:'#0071DC', price:0.00, time:45 },
-                { id:'instacart', name:'Instacart Delivery', s:'IC', c:'#00AD31', price:4.99, time:40 }
-            ]
-        }; 
-
-        function toggleVegasMode() {
-            isVegasMode = !isVegasMode;
-            var headline = document.getElementById('main-headline');
-            
-            if(isVegasMode) {
-                headline.innerHTML = "Vegas ride.<br>Vegas delivery.<br><em>One search.</em>";
-            } else {
-                headline.innerHTML = "Every ride.<br>Every delivery.<br><em>One search.</em>";
-                if(currentCat === 'loop' || currentCat === 'robotaxi') {
-                    currentCat = 'ride';
-                }
-            }
-            renderCategories();
-        }
-
-        function renderCategories() {
-            var container = document.getElementById('categories-container');
-            var html = '';
-            
-            if(!isVegasMode) {
-                html += `<div class="cat ${currentCat === 'ride' ? 'on' : ''}" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>`;
-                html += `<div class="cat ${currentCat === 'delivery' ? 'on' : ''}" onclick="pickCat(this, 'delivery')"><div class="cat-label">Food Delivery</div></div>`;
-                html += `<div class="cat ${currentCat === 'grocery' ? 'on' : ''}" onclick="pickCat(this, 'grocery')"><div class="cat-label">Groceries</div></div>`;
-                html += `<div class="cat vegas-toggle-tile" onclick="toggleVegasMode()"><div class="cat-label">Vegas Mode 🎰</div></div>`;
-            } else {
-                html += `<div class="cat ${currentCat === 'ride' ? 'on' : ''}" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>`;
-                html += `<div class="cat ${currentCat === 'loop' ? 'on' : ''}" onclick="pickCat(this, 'loop')"><div class="cat-label">Vegas Loop</div></div>`;
-                html += `<div class="cat ${currentCat === 'robotaxi' ? 'on' : ''}" onclick="pickCat(this, 'robotaxi')"><div class="cat-label">Robotaxis</div></div>`;
-                html += `<div class="cat ${currentCat === 'delivery' ? 'on' : ''}" onclick="pickCat(this, 'delivery')"><div class="cat-label">Food Delivery</div></div>`;
-                html += `<div class="cat ${currentCat === 'grocery' ? 'on' : ''}" onclick="pickCat(this, 'grocery')"><div class="cat-label">Groceries</div></div>`;
-                html += `<div class="cat vegas-toggle-tile vegas-active" onclick="toggleVegasMode()"><div class="cat-label">Exit Vegas</div></div>`;
-            }
-            
-            container.innerHTML = html;
-        }
-
-        function goTo(n) { 
-            document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active', i === n)); 
-            if (n === 2) renderProviders(); 
-            window.scrollTo(0,0); 
-        } 
-
-        function pickCat(el, cat) { 
-            document.querySelectorAll('.cat').forEach(c => c.classList.remove('on')); 
-            el.classList.add('on'); 
-            currentCat = cat; 
-            selectedId = null; 
-        } 
-
-        function setSort(type) { 
-            currentSort = type; 
-            document.querySelectorAll('.sort-btn').forEach(b => b.classList.toggle('active', b.id === 'sort-'+type)); 
-            renderProviders(); 
-        } 
-
-        function renderProviders() { 
-            var list = [...PROVIDERS[currentCat]].sort((a,b) => a[currentSort] - b[currentSort]); 
-            if (list.length > 0 && !selectedId) selectProvider(list[0].id); 
-            
-            var html = ''; 
-            list.forEach(p => { 
-                var activeClass = p.id === selectedId ? 'sel' : '';
-                var displayPrice = p.price === 0 ? "FREE" : `$${p.price.toFixed(2)}`;
-                
-                html += `
-                    <div class="pcard ${activeClass}" onclick="selectProvider('${p.id}')">
-                        <div class="pcard-logo" style="background:${p.c}">${p.s}</div>
-                        <div style="flex:1;">
-                            <div style="font-weight:900; color:var(--cab0-blue); font-size:16px;">${p.name}</div>
-                            <div style="font-size:13px; color:#444; margin-top:2px;">${p.time} min response time</div>
-                        </div>
-                        <div style="font-weight:900; color:var(--cab0-blue); font-size:18px;">${displayPrice}</div>
-                    </div>
-                `; 
-            }); 
-            document.getElementById('p3-grid').innerHTML = html; 
-        } 
-
-        function selectProvider(id) { 
-            selectedId = id; 
-            var p = Object.values(PROVIDERS).flat().find(x => x.id === id); 
-            if(p) { 
-                document.getElementById('sel-name').textContent = p.name; 
-                document.getElementById('final-link').href = LINKS[id] || '#'; 
-                renderProviders(); 
-            } 
-        } 
-
-        renderCategories();
-    </script>
+<div class="content-wrapper">
+<!-- PAGE 0: MAIN DASHBOARD SELECTION -->
+<div class="page active" id="pg0">
+<div class="logo-main">Cab<span>0</span>
+.com</div>
+<div class="woz-box">
+<p class="woz-quote">"Best of luck to you on this worthy venture, its your turn"</p>
+<span class="woz-attribution">Steve Wozniak, Apple Co-Founder</span>
+</div>
+<h1 id="main-headline">Every ride.
+<br>Every delivery.
+<br><em>One
+search.
+</em></h1>
+<div class="cats-grid" id="categories-container"></div>
+<button class="main-btn" onclick="goTo(1)">Find Best Rate →</button>
+</div>
+<!-- PAGE 1: ADDRESS VERIFICATION SYSTEM -->
+<div class="page" id="pg1">
+<div class="nav-header">
+<button class="back-btn" onclick="goTo(0)">← Main Menu</button>
+</div>
+<div style="padding: 5px 0;">
+<h2 style="color:#fff; margin-bottom:20px; font-family: var(--serif); font-size:
+32px;">Search Details</h2>
+<div class="search-group">
+<label>1. Pickup Location</label>
+<input type="text" id="pickup-input" class="search-field" placeholder="Current
+Location / Address...
+">
+</div>
+<div class="search-group">
+<label>2. Dropoff Destination</label>
+<input type="text" id="dropoff-input" class="search-field" placeholder="Enter
+landmark, city, or address...
+">
+</div>
+<button class="main-btn" onclick="goTo(2)">Compare Rates →</button>
+</div>
+</div>
+<!-- PAGE 2: MARKETPLACE PROVIDER CONSOLE -->
+<div class="page" id="pg2">
+<div class="nav-header">
+<button class="back-btn" onclick="goTo(0)">← Main Menu</button>
+</div>
+<div class="sort-strip">
+<button class="sort-btn active" id="sort-price"
+onclick="setSort('price')">CHEAPEST</button>
+<button class="sort-btn" id="sort-time" onclick="setSort('time')">FASTEST</button>
+</div>
+<!-- Dynamic selection list displays directly here -->
+<div style="padding: 5px 0;" id="p3-grid"></div>
+<!-- INLINE UNIFIED ACTION ZONE: Always shows immediately below grid list -->
+<div class="inline-action-panel">
+<div style="text-align: left;">
+<div id="sel-name" style="font-weight:800; color:#fff; font-size: 16px;">Select
+Service</div>
+<div style="font-size:12px; color:#888; margin-top: 3px;">Secure Official Booking
+Link</div>
+</div>
+</div>
+</div>
+<a href="#" id="final-link" target="
+blank" class="inline-btn">Book Now</a>
+_
+</div>
+<script>
+var isVegasMode = false;
+var currentCat = 'ride'
+, currentSort = 'price'
+, selectedId = null;
+var LINKS = {
+'uber': 'https://m.uber.com'
+,
+'lyft': 'https://www.lyft.com'
+,
+'vegas
+_
+loop': 'https://www.boringcompany.com/loop'
+,
+'zoox': 'https://zoox.com'
+,
+'doordash': 'https://www.doordash.com'
+,
+'ubereats': 'https://www.ubereats.com'
+,
+'instacart': 'https://www.instacart.com'
+,
+'amazon
+_
+fresh': 'https://www.amazon.com/fresh'
+,
+'walmart
+_plus': 'https://www.walmart.com/plus'
+};
+var PROVIDERS = {
+ride: [
+{ id:'uber'
+, name:'Uber X'
+, s:'Ub'
+, c:'#111111'
+, price:12.50, time:4 },
+{ id:'lyft'
+, name:'Lyft Ride'
+, s:'Ly'
+, c:'#FF00BF'
+, price:11.20, time:6 }
+],
+loop: [
+{ id:'vegas
+_
+loop'
+, name:'Vegas Loop (Tunnel Ride)'
+, s:'TL'
+, c:'#cc0000'
+, price:0.00,
+time:2 }
+],
+robotaxi: [
+{ id:'zoox'
+, name:'Zoox Autonomous (Free Local)'
+, s:'Zx'
+, c:'#2c3e50'
+, price:0.00,
+time:5 }
+],
+delivery: [
+{ id:'doordash'
+, name:'DoorDash'
+, s:'DD'
+, c:'#FF3008'
+, price:2.99, time:22 },
+{ id:'ubereats'
+, name:'Uber Eats'
+, s:'UE'
+, c:'#06C167'
+, price:3.49, time:18 }
+],
+grocery: [
+{ id:'amazon
+fresh'
+, name:'Amazon Fresh / Prime'
+, s:'Az'
+, c:'#FF9900'
+_
+, price:0.00,
+time:30 },
+{ id:'walmart
+_plus'
+, name:'Walmart+ Grocery Delivery'
+, s:'Wm'
+, c:'#0071DC'
+,
+price:0.00, time:45 },
+{ id:'instacart'
+, name:'Instacart Delivery'
+, s:'IC'
+, c:'#00AD31'
+, price:4.99, time:40 }
+]
+};
+function toggleVegasMode() {
+isVegasMode = !isVegasMode;
+var headline = document.getElementById('main-headline');
+if(isVegasMode) {
+headline.innerHTML = "Vegas ride.
+<br>Vegas delivery.
+<br><em>One search.
+</em>";
+} else {
+headline.innerHTML = "Every ride.
+<br>Every delivery.
+<br><em>One search.
+</em>";
+if(currentCat === 'loop' || currentCat === 'robotaxi') {
+currentCat = 'ride';
+}
+}
+renderCategories();
+}
+function renderCategories() {
+var container = document.getElementById('categories-container');
+var html = '';
+if(!isVegasMode) {
+html +=
+`<div class="cat ${currentCat === 'ride' ? 'on' : ''}" onclick="pickCat(this,
+'ride')"><div class="cat-label">Rideshare</div></div>`
+;
+html +=
+`<div class="cat ${currentCat === 'delivery' ? 'on' : ''}" onclick="pickCat(this,
+'delivery')"><div class="cat-label">Food Delivery</div></div>`
+;
+html +=
+`<div class="cat ${currentCat === 'grocery' ? 'on' : ''}" onclick="pickCat(this,
+'grocery')"><div class="cat-label">Groceries</div></div>`
+;
+html +=
+`<div class="cat vegas-toggle-tile" onclick="toggleVegasMode()"><div
+class="cat-label">Vegas Mode 🎰</div></div>`
+;
+} else {
+html +=
+`<div class="cat ${currentCat === 'ride' ? 'on' : ''}" onclick="pickCat(this,
+'ride')"><div class="cat-label">Rideshare</div></div>`
+;
+html +=
+`<div class="cat ${currentCat === 'loop' ? 'on' : ''}" onclick="pickCat(this,
+'loop')"><div class="cat-label">Vegas Loop</div></div>`
+;
+html +=
+`<div class="cat ${currentCat === 'robotaxi' ? 'on' : ''}" onclick="pickCat(this,
+'robotaxi')"><div class="cat-label">Robotaxis</div></div>`
+;
+html +=
+`<div class="cat ${currentCat === 'delivery' ? 'on' : ''}" onclick="pickCat(this,
+'delivery')"><div class="cat-label">Food Delivery</div></div>`
+;
+html +=
+`<div class="cat ${currentCat === 'grocery' ? 'on' : ''}" onclick="pickCat(this,
+'grocery')"><div class="cat-label">Groceries</div></div>`
+;
+html +=
+`<div class="cat vegas-toggle-tile vegas-active"
+onclick="toggleVegasMode()"><div class="cat-label">Exit Vegas</div></div>`
+;
+}
+container.innerHTML = html;
+}
+function goTo(n) {
+document.querySelectorAll('
+.page').forEach((p, i) => p.classList.toggle('active'
+, i === n));
+if (n === 2) renderProviders();
+window.scrollTo(0,0);
+}
+function pickCat(el, cat) {
+document.querySelectorAll('
+.cat').forEach(c => c.classList.remove('on'));
+el.classList.add('on');
+currentCat = cat;
+selectedId = null;
+}
+function setSort(type) {
+currentSort = type;
+document.querySelectorAll('
+.sort-btn').forEach(b => b.classList.toggle('active'
+, b.id ===
+'sort-
+'+type));
+renderProviders();
+}
+function renderProviders() {
+var list = [...PROVIDERS[currentCat]].sort((a,b) => a[currentSort] - b[currentSort]);
+if (list.length > 0 && !selectedId) selectProvider(list[0].id);
+var html = '';
+list.forEach(p => {
+var activeClass = p.id === selectedId ? 'sel' : '';
+var displayPrice = p.price === 0 ? "FREE" :
+`$${p.price.toFixed(2)}`
+;
+html +=
+`
+<div class="pcard ${activeClass}" onclick="selectProvider('${p.id}')">
+<div class="pcard-logo" style="background:${p.c}">${p.s}</div>
+<div style="flex:1;">
+<div style="font-weight:700; color:#fff; font-size:16px;">${p.name}</div>
+<div style="font-size:13px; color:#666; margin-top:2px;">${p.time} min
+response time</div>
+</div>
+<div style="font-weight:800; color:var(--cab0-yellow);
+font-size:18px;">${displayPrice}</div>
+</div>
+`
+;
+});
+document.getElementById('p3-grid').innerHTML = html;
+}
+function selectProvider(id) {
+selectedId = id;
+var p = Object.values(PROVIDERS).flat().find(x => x.id === id);
+if(p) {
+document.getElementById('sel-name').textContent = p.name;
+document.getElementById('final-link').href = LINKS[id] || '#';
+renderProviders();
+}
+}
+renderCategories();
+</script>
 </body>
 </html>
