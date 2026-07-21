@@ -85,24 +85,26 @@
             color: var(--cab0-blue);
         }
 
-        /* IDENTICAL SIZE, PADDING, HEIGHT, AND WIDTH FOR WOZ BOX AND ALL SELECTION BOXES */
+        /* MASTER UNIFORM BOX STYLE: WOZ-BOX AND EVERY .CAT SHARE EXACT DIMENSIONS */
         .woz-box, .cat { 
-            margin: 0 auto 16px auto; 
-            padding: 28px 24px; 
-            background: rgba(255, 255, 255, 0.95);
+            margin: 0 auto 16px auto !important; 
+            padding: 28px 24px !important; 
+            background: rgba(255, 255, 255, 0.95) !important;
             backdrop-filter: blur(10px);
-            border-radius: 18px;
-            border: 2px solid var(--cab0-blue);
-            text-align: center;
-            width: 100%;
-            min-height: 105px;
-            box-shadow: 0 8px 25px rgba(0, 68, 204, 0.12);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            border-radius: 18px !important;
+            border: 2px solid var(--cab0-blue) !important;
+            text-align: center !important;
+            width: 100% !important;
+            min-height: 110px !important;
+            box-shadow: 0 8px 25px rgba(0, 68, 204, 0.12) !important;
+            position: relative !important;
+            overflow: hidden !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         } 
         
         .woz-box::before, .cat::before {
@@ -151,55 +153,48 @@
             text-underline-offset: 4px;
         }
 
-        /* SINGLE COLUMN STACK FOR SELECTION BOXES */
+        /* SINGLE COLUMN STACK CONTAINER */
         .cats-grid { 
             display: flex !important; 
             flex-direction: column !important; 
-            grid-template-columns: none !important;
             gap: 0px !important; 
             margin-bottom: 10px !important; 
             width: 100% !important;
         } 
 
-        .cat { 
-            cursor: pointer; 
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        } 
-        
-        .cat::before {
-            transition: background 0.2s ease;
-        }
-
         .cat:hover, .cat:active {
             transform: translateY(-2px);
-            background: #f0f4ff;
-            border-color: var(--cab0-blue-dark);
+            background: #f0f4ff !important;
+            border-color: var(--cab0-blue-dark) !important;
         }
+        
         .cat.on { 
-            background: var(--cab0-blue); 
-            border-color: var(--cab0-blue); 
-            box-shadow: 0 8px 22px rgba(0, 68, 204, 0.3);
+            background: var(--cab0-blue) !important; 
+            border-color: var(--cab0-blue) !important; 
+            box-shadow: 0 8px 22px rgba(0, 68, 204, 0.3) !important;
         } 
         .cat.on::before {
-            background: #ffffff;
+            background: #ffffff !important;
         }
         .cat.on .cat-label { 
-            color: #ffffff; 
+            color: #ffffff !important; 
         } 
+
         .cat.vegas-toggle-tile {
-            border: 2px dashed var(--cab0-blue);
-            background: rgba(255, 255, 255, 0.9);
+            border: 2px dashed var(--cab0-blue) !important;
+            background: rgba(255, 255, 255, 0.9) !important;
         }
         .cat.vegas-toggle-tile.vegas-active {
-            border: 2px solid var(--cab0-blue);
-            background: var(--cab0-blue);
+            border: 2px solid var(--cab0-blue) !important;
+            background: var(--cab0-blue) !important;
         }
         .cat.vegas-toggle-tile.vegas-active .cat-label {
-            color: #ffffff;
+            color: #ffffff !important;
         }
+        
         .cat-label { 
-            font-size: 19px; 
-            font-weight: 900; 
+            font-size: 19px !important; 
+            font-weight: 900 !important; 
             color: var(--cab0-blue-dark); 
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -499,7 +494,7 @@
                 html += `<div class="cat ${currentCat === 'ride' ? 'on' : ''}" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>`;
                 html += `<div class="cat ${currentCat === 'delivery' ? 'on' : ''}" onclick="pickCat(this, 'delivery')"><div class="cat-label">Food Delivery</div></div>`;
                 html += `<div class="cat ${currentCat === 'grocery' ? 'on' : ''}" onclick="pickCat(this, 'grocery')"><div class="cat-label">Groceries</div></div>`;
-                html += `<div class="cat vegas-toggle-tile" onclick="toggleVegasMode()"><div class="cat-label">Vegas Mode 🎰</div></div>`;
+                html += `<div class="cat vegas-toggle-tile ${currentCat === 'loop' || currentCat === 'robotaxi' ? 'vegas-active' : ''}" onclick="toggleVegasMode()"><div class="cat-label">Vegas Mode 🎰</div></div>`;
             } else {
                 html += `<div class="cat ${currentCat === 'ride' ? 'on' : ''}" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>`;
                 html += `<div class="cat ${currentCat === 'loop' ? 'on' : ''}" onclick="pickCat(this, 'loop')"><div class="cat-label">Vegas Loop</div></div>`;
