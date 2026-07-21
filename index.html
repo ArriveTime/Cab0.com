@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
     <style>
         :root { 
@@ -20,27 +20,20 @@
             padding: 0; 
         }
 
-        html {
-            width: 100%;
-            height: 100%;
-        }
-
-        body { 
+        html, body { 
             background: linear-gradient(135deg, #fbf8f2, #f3ebd8) !important;
             color: var(--cab0-blue); 
             font-family: var(--sans);
             min-height: 100vh;
-            width: 100%;
-            margin: 0;
-            padding: 0;
+            overflow-x: hidden;
+            width: 100vw !important;
             -webkit-text-size-adjust: 100%;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* RESPONSIVE FLUID CONTAINER MATCHING TOURLV */
         .content-wrapper { 
-            width: 100%;
-            max-width: 600px; 
+            width: 100vw !important;
+            max-width: 480px; 
             margin: 0 auto;
             padding: 16px;
             display: flex;
@@ -77,9 +70,9 @@
 
         .logo-main { 
             font-family: var(--serif); 
-            font-size: clamp(40px, 10vw, 52px); 
+            font-size: 46px; 
             color: var(--cab0-blue-dark); 
-            margin-bottom: 20px; 
+            margin-bottom: 15px; 
             font-weight: 900;
             text-align: center;
             letter-spacing: -1px;
@@ -94,8 +87,8 @@
         }
 
         .woz-box { 
-            margin-bottom: 25px; 
-            padding: 22px; 
+            margin-bottom: 20px; 
+            padding: 18px; 
             background: linear-gradient(135deg, #ffffff, #fffef9);
             border-radius: 18px;
             border: 2px solid var(--cab0-blue);
@@ -114,10 +107,10 @@
         .woz-quote { 
             font-family: var(--serif); 
             font-style: italic; 
-            font-size: clamp(16px, 4.5vw, 18px); 
+            font-size: 16px; 
             color: var(--cab0-blue-dark); 
-            line-height: 1.4; 
-            margin-bottom: 10px; 
+            line-height: 1.35; 
+            margin-bottom: 8px; 
             font-weight: 700;
         } 
         .woz-attribution { 
@@ -126,7 +119,7 @@
             padding: 4px 12px;
             border-radius: 12px;
             font-family: var(--sans); 
-            font-size: 11px; 
+            font-size: 10px; 
             font-weight: 900; 
             text-transform: uppercase; 
             letter-spacing: 1.2px; 
@@ -135,9 +128,9 @@
 
         h1 { 
             font-family: var(--serif); 
-            font-size: clamp(30px, 8vw, 38px); 
+            font-size: 32px; 
             line-height: 1.15; 
-            margin-bottom: 25px; 
+            margin-bottom: 20px; 
             color: var(--cab0-blue-dark); 
             text-align: center; 
             width: 100%;
@@ -153,8 +146,8 @@
         .cats-grid { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
-            gap: 14px; 
-            margin-bottom: 25px; 
+            gap: 12px; 
+            margin-bottom: 20px; 
             text-align: center; 
             width: 100%;
         } 
@@ -162,7 +155,7 @@
             background: #ffffff; 
             border: 2px solid var(--cab0-blue); 
             border-radius: 18px; 
-            padding: 24px 12px; 
+            padding: 22px 10px; 
             cursor: pointer; 
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
@@ -194,7 +187,7 @@
             color: #ffffff;
         }
         .cat-label { 
-            font-size: 15px; 
+            font-size: 14px; 
             font-weight: 900; 
             color: var(--cab0-blue-dark); 
             text-transform: uppercase;
@@ -202,15 +195,15 @@
         }
 
         .search-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             width: 100%;
         }
         .search-group label {
             display: block;
-            font-size: 13px;
+            font-size: 12px;
             text-transform: uppercase;
             color: var(--cab0-blue-dark);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 900;
             text-align: left;
         }
@@ -219,7 +212,7 @@
             background: #ffffff;
             border: 2px solid var(--cab0-blue);
             color: var(--cab0-blue-dark);
-            padding: 18px;
+            padding: 16px;
             border-radius: 16px;
             font-size: 16px;
             outline: none;
@@ -237,17 +230,17 @@
         .main-btn { 
             background: linear-gradient(135deg, #0044cc, #002677); 
             color: #ffffff; 
-            padding: 20px; 
+            padding: 18px; 
             border-radius: 16px; 
             text-align: center; 
             font-weight: 900; 
-            font-size: 18px; 
+            font-size: 17px; 
             cursor: pointer; 
             text-transform: uppercase;
             letter-spacing: 0.5px;
             width: 100%;
             border: none;
-            margin-top: 10px;
+            margin-top: 5px;
             box-shadow: 0 6px 20px rgba(0, 68, 204, 0.3);
             transition: transform 0.2s ease, opacity 0.2s ease;
         }
@@ -261,13 +254,13 @@
         .sort-strip { 
             display: flex; 
             background: transparent; 
-            padding: 10px 0 15px; 
+            padding: 8px 0 12px; 
             gap: 10px; 
             width: 100%;
         } 
         .sort-btn { 
             flex: 1; 
-            padding: 16px; 
+            padding: 14px; 
             border-radius: 12px; 
             border: 2px solid var(--cab0-blue); 
             font-size: 12px; 
@@ -287,8 +280,8 @@
             background: #ffffff; 
             border-radius: 16px; 
             border: 2px solid var(--cab0-blue); 
-            padding: 20px; 
-            margin-bottom: 14px; 
+            padding: 18px; 
+            margin-bottom: 12px; 
             display: flex; 
             align-items: center; 
             gap: 15px; 
@@ -307,37 +300,37 @@
             box-shadow: 0 6px 18px rgba(0, 68, 204, 0.2);
         }
         .pcard-logo {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 900;
             color: #ffffff;
-            font-size: 17px;
+            font-size: 16px;
         }
 
         .inline-action-panel {
             background: #ffffff;
             border: 2px solid var(--cab0-blue);
             border-radius: 18px;
-            padding: 22px;
-            margin-top: 20px;
+            padding: 20px;
+            margin-top: 15px;
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
             box-shadow: 0 8px 25px rgba(0, 68, 204, 0.15);
         }
         .inline-btn {
             background: linear-gradient(135deg, #0044cc, #002677);
             color: #ffffff;
-            padding: 18px;
+            padding: 16px;
             border-radius: 14px;
             text-align: center;
             font-weight: 900;
-            font-size: 18px;
+            font-size: 17px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             text-decoration: none;
@@ -347,8 +340,8 @@
         }
 
         .site-footer {
-            margin-top: 30px; 
-            padding: 20px 0; 
+            margin-top: 25px; 
+            padding: 18px 0; 
             text-align: center; 
             border-top: 2px solid rgba(0, 68, 204, 0.15); 
             font-size: 11px; 
@@ -378,7 +371,7 @@
 
             <!-- LEGAL FOOTER DISCLAIMER -->
             <footer class="site-footer">
-                <p style="margin-bottom: 8px; font-weight: 700;">Cab0.com is an independent search and comparison service. Not affiliated with Uber, Lyft, or other listed brands.</p>
+                <p style="margin-bottom: 6px; font-weight: 700;">Cab0.com is an independent search and comparison service. Not affiliated with Uber, Lyft, or other listed brands.</p>
                 <p>&copy; 2026 Cab0.com. All rights reserved. <br>
                 <a href="privacy.html" style="color: var(--cab0-blue); text-decoration: underline;">Privacy Policy</a> | 
                 <a href="terms.html" style="color: var(--cab0-blue); text-decoration: underline;">Terms of Service</a></p>
@@ -392,7 +385,7 @@
             </div>
             
             <div style="padding: 5px 0;">
-                <h2 style="color:var(--cab0-blue-dark); margin-bottom:20px; font-family: var(--serif); font-size: 32px;">Search Details</h2>
+                <h2 style="color:var(--cab0-blue-dark); margin-bottom:18px; font-family: var(--serif); font-size: 28px;">Search Details</h2>
                 
                 <div class="search-group">
                     <label>1. Pickup Location</label>
@@ -423,8 +416,8 @@
             
             <div class="inline-action-panel">
                 <div style="text-align: left;">
-                    <div id="sel-name" style="font-weight:900; color:var(--cab0-blue-dark); font-size: 17px;">Select Service</div>
-                    <div style="font-size:12px; color:#5577bb; margin-top: 3px; font-weight: 700;">Secure Official Booking Link</div>
+                    <div id="sel-name" style="font-weight:900; color:var(--cab0-blue-dark); font-size: 16px;">Select Service</div>
+                    <div style="font-size:12px; color:#5577bb; margin-top: 2px; font-weight: 700;">Secure Official Booking Link</div>
                 </div>
                 <a href="#" id="final-link" target="_blank" class="inline-btn">Book Now</a>
             </div>
