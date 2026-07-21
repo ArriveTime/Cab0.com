@@ -86,7 +86,7 @@
         }
 
         .woz-box { 
-            margin: 0 auto 25px auto; 
+            margin: 0 auto 20px auto; 
             padding: 24px; 
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
@@ -130,7 +130,7 @@
             font-family: var(--serif); 
             font-size: clamp(32px, 7vw, 42px); 
             line-height: 1.15; 
-            margin-bottom: 25px; 
+            margin-bottom: 20px; 
             color: var(--cab0-blue-dark); 
             text-align: center; 
             width: 100%;
@@ -143,30 +143,39 @@
             text-underline-offset: 4px;
         }
 
-        /* UNIFORM 2x2 GRID WITH LARGE WOZ-SIZED BUTTON CARDS */
+        /* FULL-WIDTH SINGLE COLUMN STACK MATCHING WOZ BOX SIZE */
         .cats-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 16px; 
-            margin-bottom: 25px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 14px; 
+            margin-bottom: 22px; 
             width: 100%;
         } 
         .cat { 
             background: #ffffff; 
             border: 2px solid var(--cab0-blue); 
             border-radius: 18px; 
-            padding: 32px 16px; 
+            padding: 24px; 
             cursor: pointer; 
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            box-shadow: 0 6px 18px rgba(0, 68, 204, 0.1);
-            min-height: 95px;
+            box-shadow: 0 8px 25px rgba(0, 68, 204, 0.12);
+            width: 100%;
+            position: relative;
+            overflow: hidden;
         } 
+        .cat::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 6px; height: 100%;
+            background: var(--cab0-blue);
+            transition: background 0.2s ease;
+        }
         .cat:hover, .cat:active {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             background: #f0f4ff;
             border-color: var(--cab0-blue-dark);
         }
@@ -175,12 +184,15 @@
             border-color: var(--cab0-blue); 
             box-shadow: 0 8px 22px rgba(0, 68, 204, 0.3);
         } 
+        .cat.on::before {
+            background: #ffffff;
+        }
         .cat.on .cat-label { 
             color: #ffffff; 
         } 
         .cat.vegas-toggle-tile {
             border: 2px dashed var(--cab0-blue);
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.85);
         }
         .cat.vegas-toggle-tile.vegas-active {
             border: 2px solid var(--cab0-blue);
@@ -190,11 +202,11 @@
             color: #ffffff;
         }
         .cat-label { 
-            font-size: 16px; 
+            font-size: 18px; 
             font-weight: 900; 
             color: var(--cab0-blue-dark); 
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 1px;
         }
 
         .search-group {
@@ -240,7 +252,7 @@
             letter-spacing: 0.5px;
             width: 100%;
             border: none;
-            margin-top: 10px;
+            margin-top: 5px;
             box-shadow: 0 8px 22px rgba(0, 68, 204, 0.3);
             transition: transform 0.2s ease;
         }
@@ -354,8 +366,6 @@
         @media (max-width: 768px) {
             .content-wrapper { padding: 12px; }
             header { padding: 15px 0 10px 0; }
-            .cats-grid { gap: 12px; }
-            .cat { padding: 24px 12px; min-height: 85px; }
         }
     </style>
 </head>
