@@ -139,7 +139,7 @@
             color: var(--cab0-blue) !important; 
         }
 
-        /* HEADLINE ADJUSTED FOR RESPONSIVE SINGLE-LINE FIT */
+        /* HEADLINE ADJUSTED TO GUARANTEE SINGLE-LINE FIT */
         .headline-container {
             width: 100%;
             overflow: hidden;
@@ -149,8 +149,8 @@
 
         h1 { 
             font-family: var(--serif); 
-            /* Scaled down clamp range so it comfortably fits mobile screens on one line */
-            font-size: clamp(20px, 4.3vw, 42px); 
+            /* Scaled down further to ensure no cutoff on smaller screen widths */
+            font-size: clamp(16px, 3.6vw, 36px); 
             line-height: 1.1; 
             color: var(--cab0-blue-dark); 
             display: inline-block;
