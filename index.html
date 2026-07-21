@@ -1,27 +1,27 @@
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Park Fast. Park Free. Park LV.</title>
-    <!-- Leaflet Open-Source Mapping CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <title>Cab0 | Every Ride. Every Delivery. One Search.</title>
     <style>
         :root {
             --bg-gold: #ffd700;
             --text-blue: #0d47a1;
             --text-light: #ffffff;
-            --map-bg-white: #ffffff;
+            --bg-white: #ffffff;
             --border-color: #bbdefb;
+            --accent-blue: #1565c0;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
 
         body {
             background-color: var(--bg-gold);
             background-image: 
-                linear-gradient(to bottom, rgba(255, 215, 0, 0.8), rgba(255, 215, 0, 0.95)),
-                url('https://images.unsplash.com/photo-1605035012319-110213f4525c?q=80&w=2000');
+                linear-gradient(to bottom, rgba(255, 215, 0, 0.85), rgba(255, 215, 0, 0.98)),
+                url('https://images.unsplash.com/photo-1508962914676-134849a727f0?q=80&w=2000');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -31,79 +31,131 @@
             min-height: 100vh;
         }
 
+        /* ─── HEADER FIX: Keeps text on one line ─── */
         header {
             text-align: center;
-            padding: 25px 15px;
-            border-bottom: 2px solid var(--border-color);
-            background-color: rgba(255, 215, 0, 0.95);
-            overflow: hidden; /* Prevents any overflow on small screens */
+            padding: 20px 10px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-bottom: 3px solid var(--text-blue);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        /* ─── FIXED TITLE TO STAY ON ONE LINE ─── */
         .logo-title { 
-            font-size: clamp(1.2rem, 3.5vw, 2.2rem); /* Scales smoothly down on mobile */
+            /* clamp() ensures it shrinks on small screens and never wraps */
+            font-size: clamp(1rem, 3.5vw, 2.2rem); 
             font-weight: 900; 
             text-transform: uppercase; 
             color: var(--text-blue); 
-            white-space: nowrap; /* Forces text onto a single line */
+            white-space: nowrap; 
             letter-spacing: -0.5px;
         }
         
+        /* ─── MAIN DASHBOARD ─── */
         .main-container {
             flex: 1;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-            padding: 25px;
-            max-width: 1400px;
+            padding: 20px;
+            max-width: 800px;
             margin: 0 auto;
             width: 100%;
         }
 
-        @media (min-width: 992px) { .main-container { grid-template-columns: 1fr 380px; } }
-
-        .map-wrapper { display: flex; flex-direction: column; gap: 10px; }
-
-        .btn-locate {
+        .dashboard-panel {
             background-color: var(--text-blue);
-            color: var(--text-light);
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            text-transform: uppercase;
-            align-self: flex-start;
-        }
-
-        .map-panel {
-            background-color: var(--map-bg-white);
-            border-radius: 16px;
-            border: 4px solid var(--text-blue) !important;
-            height: 500px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-        }
-        #map { height: 100%; width: 100%; }
-
-        .control-panel {
-            background-color: var(--text-blue);
-            color: var(--text-light);
             border-radius: 16px;
             padding: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            color: var(--text-light);
         }
 
+        /* ─── TOGGLES & MODES ─── */
+        .mode-toggles {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            background-color: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .service-type {
+            display: flex;
+            gap: 10px;
+        }
+
+        .service-btn {
+            background: transparent;
+            border: 1px solid var(--bg-gold);
+            color: var(--bg-gold);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .service-btn.active {
+            background: var(--bg-gold);
+            color: var(--text-blue);
+        }
+
+        .vegas-mode {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            color: var(--bg-gold);
+        }
+
+        /* Toggle Switch for Vegas Mode */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 24px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255,255,255,0.3);
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: var(--bg-gold); }
+        input:checked + .slider:before { transform: translateX(16px); }
+
+        /* ─── SEARCH INPUTS ─── */
+        .input-group { margin-bottom: 15px; }
+        .input-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--bg-gold);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
         .input-field {
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: var(--bg-white);
+            border: none;
             padding: 16px;
             border-radius: 8px;
-            border: none;
-            margin-top: 5px;
+            color: var(--text-blue);
+            font-size: 1rem;
+            font-weight: 500;
         }
 
         .btn-action {
@@ -112,92 +164,141 @@
             border: none;
             padding: 18px;
             border-radius: 8px;
-            font-weight: 800;
+            font-size: 1.1rem;
+            font-weight: 900;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+        }
+        .btn-action:hover { background-color: #ffe033; transform: translateY(-2px); }
+
+        /* ─── PROVIDER COMPARISON TOOL ─── */
+        .comparison-results {
+            margin-top: 30px;
+            display: none; /* Hidden until searched */
+        }
+        .results-header {
+            font-size: 1.1rem;
+            color: var(--bg-gold);
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,215,0,0.3);
+            padding-bottom: 8px;
+        }
+        .provider-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-blue);
+        }
+        .provider-info h4 { font-size: 1.2rem; font-weight: 800; }
+        .provider-info p { font-size: 0.85rem; font-weight: 600; color: #555; }
+        .provider-price { font-size: 1.4rem; font-weight: 900; color: #2e7d32; }
+        
+        .book-btn {
+            background-color: var(--text-blue);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
             cursor: pointer;
         }
 
-        .status-box { background-color: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 8px; }
-        
-        .user-location-marker {
-            background-color: var(--text-blue);
-            border: 3px solid var(--bg-gold);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(13, 71, 161, 0.5); }
-            70% { box-shadow: 0 0 0 15px rgba(13, 71, 161, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(13, 71, 161, 0); }
-        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1 class="logo-title">Park Fast. Park Free. Park LV.</h1>
+        <!-- The text is now scaled dynamically so it will never cut off or wrap to two lines -->
+        <h1 class="logo-title">Every Ride. Every Delivery. One Search.</h1>
     </header>
 
     <div class="main-container">
-        <div class="map-wrapper">
-            <button class="btn-locate" onclick="initRealTimeLocation()">📍 Pin My Location</button>
-            <div class="map-panel">
-                <div id="map"></div>
-            </div>
-        </div>
-
-        <div class="control-panel">
-            <div class="panel-header">Find Parking</div>
-            <label>1. Your Location</label>
-            <input type="text" id="start-loc" class="input-field" placeholder="Click 'Pin My Location'..." readonly />
+        <div class="dashboard-panel">
             
-            <label>2. Destination</label>
-            <input type="text" id="dest-loc" class="input-field" value="The Cosmopolitan of Las Vegas" />
-
-            <button class="btn-action" onclick="locateAndRoute()">Find Closest Free Spot</button>
-            
-            <div class="status-box">
-                <div id="output-log">Awaiting location permission...</div>
+            <div class="mode-toggles">
+                <div class="service-type">
+                    <button class="service-btn active">Rideshare</button>
+                    <button class="service-btn">Delivery</button>
+                </div>
+                <div class="vegas-mode">
+                    <span>Vegas Mode</span>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
             </div>
+
+            <div class="input-group">
+                <label>Pickup Location</label>
+                <input type="text" class="input-field" placeholder="Enter pickup address or hotel..." />
+            </div>
+
+            <div class="input-group">
+                <label>Dropoff Destination</label>
+                <input type="text" class="input-field" placeholder="Where to?" />
+            </div>
+
+            <button class="btn-action" onclick="showComparisons()">Compare Prices</button>
+
+            <!-- Dynamic Provider Comparison Tool -->
+            <div class="comparison-results" id="results-panel">
+                <div class="results-header">Best Options Available Now</div>
+                
+                <div class="provider-card">
+                    <div class="provider-info">
+                        <h4>UberX</h4>
+                        <p>3 mins away • Dropoff 2:15 PM</p>
+                    </div>
+                    <div class="provider-price">$14.50</div>
+                    <button class="book-btn">Book</button>
+                </div>
+
+                <div class="provider-card">
+                    <div class="provider-info">
+                        <h4>Lyft</h4>
+                        <p>5 mins away • Dropoff 2:18 PM</p>
+                    </div>
+                    <div class="provider-price">$16.20</div>
+                    <button class="book-btn">Book</button>
+                </div>
+
+                <div class="provider-card" style="border: 2px solid var(--bg-gold);">
+                    <div class="provider-info">
+                        <h4>Local Taxi</h4>
+                        <p>Cab Stand (0.1 mi) • No Surge</p>
+                    </div>
+                    <div class="provider-price">$12.00 (Est)</p>
+                    <button class="book-btn" style="background-color: var(--bg-gold); color: var(--text-blue);">View</button>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        let map = L.map('map').setView([36.1147, -115.1728], 16);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-            subdomains: 'abcd',
-            maxZoom: 19
-        }).addTo(map);
-
-        let userMarker;
-        const userIcon = L.divIcon({ className: 'user-location-marker', iconSize: [24, 24], iconAnchor: [12, 12] });
-        const logger = document.getElementById('output-log');
-
-        function initRealTimeLocation() {
-            if (!navigator.geolocation) { logger.innerHTML = "❌ Geolocation unsupported."; return; }
-            logger.innerHTML = "📡 Searching for location...";
-
-            navigator.geolocation.watchPosition(
-                (position) => {
-                    const lat = position.coords.latitude;
-                    const lng = position.coords.longitude;
-                    logger.innerHTML = `✅ Tracking: ${lat.toFixed(4)}, ${lng.toFixed(4)}`;
-                    document.getElementById('start-loc').value = `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
-
-                    if (userMarker) { map.removeLayer(userMarker); }
-                    userMarker = L.marker([lat, lng], { icon: userIcon }).addTo(map);
-                    
-                    if (!window.hasCentered) { map.setView([lat, lng], 17); window.hasCentered = true; }
-                },
-                (error) => { logger.innerHTML = `❌ GPS Error: ${error.message}`; },
-                { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
-            );
+        // Simple script to reveal the comparison panel when search is clicked
+        function showComparisons() {
+            document.getElementById('results-panel').style.display = 'block';
         }
 
-        function locateAndRoute() { alert("Routing logic active."); }
+        // Toggle logic for Rideshare vs Delivery buttons
+        const serviceBtns = document.querySelectorAll('.service-btn');
+        serviceBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                serviceBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
     </script>
 </body>
 </html>
