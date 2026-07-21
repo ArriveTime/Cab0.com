@@ -1,16 +1,16 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
-    <title>Park Fast. Park Free. Park LV.</title>
-    <!-- Leaflet Open-Source Mapping CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         :root { 
-            --cab0-blue: #0044cc;      
-            --cab0-blue-dark: #002677; 
+            --park-bg: #d4af37;        /* Gold Background */
+            --park-card: #f3e5ab;      /* Lighter Gold/Cream Card */
+            --park-border: #b89728;    /* Deep Gold Border */
+            --park-blue: #004080;      /* Rich Blue Font */
+            --park-blue-dark: #00264d; /* Darker Blue for Contrast */
             --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; 
             --serif: 'DM Serif Display', Georgia, serif; 
         }
@@ -21,244 +21,155 @@ DOCTYPE html>
             padding: 0; 
         }
 
+        /* PARK-LV GOLD & BLUE THEME */
         html, body { 
-            min-height: 100%;
+            background-color: var(--park-bg) !important;
+            color: var(--park-blue-dark); 
             font-family: var(--sans);
-            color: var(--cab0-blue);
-            background: linear-gradient(135deg, #fbf8f2, #f3ebd8) !important;
+            min-height: 100vh;
             overflow-x: hidden;
+            width: 100vw !important;
+            -webkit-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
         }
 
+        /* 100% EDGE-TO-EDGE FLUID VIEWPORT ENGINE */
         .content-wrapper { 
-            position: relative;
-            z-index: 10;
-        :root {
-            --bg-gold: #ffd700;
-            --text-blue: #0d47a1;
-            --text-light: #ffffff;
-            --map-bg-white: #ffffff;
-            --border-color: #bbdefb;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
-
-        body {
-            background-color: var(--bg-gold);
-            background-image: 
-                linear-gradient(to bottom, rgba(255, 215, 0, 0.8), rgba(255, 215, 0, 0.95)),
-                url('https://images.unsplash.com/photo-1605035012319-110213f4525c?q=80&w=2000');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: var(--text-blue);
+            width: 100vw !important;
+            max-width: 480px; 
+            margin: 0 auto;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
         }
 
         .nav-header {
             display: flex;
             justify-content: flex-start;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid rgba(0, 68, 204, 0.15);
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--park-border);
             width: 100%;
         }
         .back-btn {
-            background: #ffffff;
-            color: var(--cab0-blue);
-            border: 2px solid var(--cab0-blue);
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 800;
+            background: var(--park-card);
+            color: var(--park-blue);
+            border: 1px solid var(--park-border);
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            box-shadow: 0 4px 10px rgba(0,68,204,0.1);
             transition: all 0.2s ease;
         }
         .back-btn:hover {
-            background: var(--cab0-blue);
-            color: #ffffff;
-        }
-
-        header {
-            text-align: center;
-            padding: 20px 0 10px 0;
-            padding: 25px 15px;
-            border-bottom: 2px solid var(--border-color);
-            background-color: rgba(255, 215, 0, 0.95);
-            overflow: hidden; /* Prevents any overflow on small screens */
+            background: #fff;
+            border-color: var(--park-blue);
         }
 
         .logo-main { 
             font-family: var(--serif); 
-            font-size: clamp(42px, 8vw, 56px); 
-            color: var(--cab0-blue-dark); 
-            margin-bottom: 15px; 
-            font-weight: 900;
-            letter-spacing: -1px;
-        } 
-        .logo-main .big-zero { 
-            font-size: 1.15em; 
-            vertical-align: baseline; 
-            display: inline-block;
-            line-height: 1;
-            color: var(--cab0-blue);
-        }
-
-        /* MASTER UNIFORM BOX STYLE */
-        .woz-box, .cat, .main-btn { 
-            margin: 0 auto 20px auto !important; 
-            padding: 38px 28px !important; 
-            background: rgba(255, 255, 255, 0.95) !important;
-            backdrop-filter: blur(10px);
-            border-radius: 20px !important;
-            border: 2px solid var(--cab0-blue) !important;
-            text-align: center !important;
-            width: 100% !important;
-            min-height: 150px !important;
-            box-shadow: 0 10px 30px rgba(0, 68, 204, 0.15) !important;
-            position: relative !important;
-            overflow: hidden !important;
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            justify-content: center !important;
-            cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        } 
-        
-        .woz-box::before, .cat::before, .main-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 8px; height: 100%;
-            background: var(--cab0-blue);
-        /* ─── FIXED TITLE TO STAY ON ONE LINE ─── */
-        .logo-title { 
-            font-size: clamp(1.2rem, 3.5vw, 2.2rem); /* Scales smoothly down on mobile */
-            font-weight: 900; 
-            text-transform: uppercase; 
-            color: var(--text-blue); 
-            white-space: nowrap; /* Forces text onto a single line */
-            letter-spacing: -0.5px;
-        }
-
-        /* QUOTE FONT */
-        .woz-quote { 
-            font-family: var(--serif) !important; 
-            font-style: italic; 
-            font-size: clamp(30px, 6vw, 38px) !important; 
-            color: var(--cab0-blue-dark) !important; 
-            line-height: 1.15 !important; 
-            margin-bottom: 14px !important; 
-            font-weight: 900 !important;
-        } 
-
-        /* ATTRIBUTION FONT MATCHED TO QUOTE SIZE */
-        .woz-attribution { 
-            display: inline-block; 
-            background: rgba(0, 68, 204, 0.08);
-            padding: 6px 14px;
-            border-radius: 12px;
-            font-family: var(--serif) !important; 
-            font-size: clamp(30px, 6vw, 38px) !important; 
-            font-weight: 900 !important; 
-            text-transform: none !important; 
-            letter-spacing: normal !important; 
-            color: var(--cab0-blue) !important; 
-        }
-
-        /* HEADLINE DOUBLED IN SIZE, FORCED TO SINGLE LINE USING SCALING CONTAINER */
-        .headline-container {
-        .main-container {
-            flex: 1;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-            padding: 25px;
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-            overflow: hidden;
+            font-size: 46px; 
+            color: var(--park-blue-dark); 
+            margin-bottom: 25px; 
+            font-weight: 700;
             text-align: center;
-            margin-bottom: 25px;
+        } 
+        .logo-main span { color: var(--park-blue); }
+
+        .woz-box { 
+            margin-bottom: 25px; 
+            padding: 18px; 
+            background: var(--park-card);
+            border-radius: 14px;
+            border: 1px solid var(--park-border);
+            text-align: center;
+            width: 100%;
+        } 
+        .woz-quote { 
+            font-family: var(--serif); 
+            font-style: italic; 
+            font-size: 19px; 
+            color: var(--park-blue); 
+            line-height: 1.4; 
+            margin-bottom: 10px; 
+        } 
+        .woz-attribution { 
+            display: block; 
+            font-family: var(--sans); 
+            font-size: 11px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 1.2px; 
+            color: var(--park-blue-dark); 
+            opacity: 0.8;
         }
 
         h1 { 
             font-family: var(--serif); 
-            font-size: clamp(48px, 9vw, 76px); 
-            line-height: 1.1; 
-            color: var(--cab0-blue-dark); 
-            display: inline-block;
-            white-space: nowrap;
+            font-size: 38px; 
+            line-height: 1.15; 
+            margin-bottom: 30px; 
+            color: var(--park-blue-dark); 
+            text-align: center; 
+            width: 100%;
         } 
         h1 em { 
-            color: var(--cab0-blue); 
+            color: var(--park-blue); 
             font-style: normal; 
-            text-decoration: underline;
-            text-decoration-thickness: 4px;
-            text-underline-offset: 6px;
         }
 
-        /* SINGLE COLUMN STACK CONTAINER */
         .cats-grid { 
-            display: flex !important; 
-            flex-direction: column !important; 
-            gap: 0px !important; 
-            margin-bottom: 10px !important; 
-            width: 100% !important;
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 14px; 
+            margin-bottom: 30px; 
+            text-align: center; 
+            width: 100%;
         } 
-        @media (min-width: 992px) { .main-container { grid-template-columns: 1fr 380px; } }
-
-        .cat:hover, .cat:active, .main-btn:hover {
-            transform: translateY(-2px);
-            background: #f0f4ff !important;
-            border-color: var(--cab0-blue-dark) !important;
+        .cat { 
+            background: var(--park-card); 
+            border: 1px solid var(--park-border); 
+            border-radius: 16px; 
+            padding: 26px 10px; 
+            cursor: pointer; 
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        } 
+        .cat:hover {
+            border-color: var(--park-blue);
+            background: #fff;
         }
-        
         .cat.on { 
-            background: var(--cab0-blue) !important; 
-            border-color: var(--cab0-blue) !important; 
-            box-shadow: 0 10px 28px rgba(0, 68, 204, 0.35) !important;
+            background: var(--park-blue); 
+            border-color: var(--park-blue); 
         } 
-        .cat.on::before {
-            background: #ffffff !important;
-        }
         .cat.on .cat-label { 
-            color: #ffffff !important; 
+            color: #fff; 
         } 
-
         .cat.vegas-toggle-tile {
-            border: 2px dashed var(--cab0-blue) !important;
-            background: rgba(255, 255, 255, 0.9) !important;
+            border: 1px dashed var(--park-blue);
+            background: rgba(0, 64, 128, 0.05);
         }
         .cat.vegas-toggle-tile.vegas-active {
-            border: 2px solid var(--cab0-blue) !important;
-            background: var(--cab0-blue) !important;
+            border: 1px solid var(--park-blue);
+            background: var(--park-blue);
         }
         .cat.vegas-toggle-tile.vegas-active .cat-label {
-            color: #ffffff !important;
+            color: #fff;
         }
-        
-        /* CATEGORY LABEL FONT */
         .cat-label { 
-            font-family: var(--serif) !important;
-            font-size: clamp(30px, 6vw, 38px) !important; 
-            font-weight: 900 !important; 
-            color: var(--cab0-blue-dark); 
-            text-transform: none !important;
-            letter-spacing: -0.5px !important;
+            font-size: 14px; 
+            font-weight: 800; 
+            color: var(--park-blue-dark); 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        
-        .cat.on .cat-label, .cat.vegas-toggle-tile.vegas-active .cat-label { 
-            color: #ffffff !important; 
-        }
-        .map-wrapper { display: flex; flex-direction: column; gap: 10px; }
 
         .search-group {
             margin-bottom: 20px;
@@ -266,205 +177,138 @@ DOCTYPE html>
         }
         .search-group label {
             display: block;
-            font-size: 13px;
-        .btn-locate {
-            background-color: var(--text-blue);
-            color: var(--text-light);
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
+            font-size: 12px;
             text-transform: uppercase;
-            color: var(--cab0-blue-dark);
+            color: var(--park-blue-dark);
             margin-bottom: 8px;
-            font-weight: 900;
+            font-weight: 700;
             text-align: left;
         }
         .search-field {
             width: 100%;
-            background: #ffffff;
-            border: 2px solid var(--cab0-blue);
-            color: var(--cab0-blue-dark);
+            background: var(--park-card);
+            border: 1px solid var(--park-border);
+            color: var(--park-blue-dark);
             padding: 18px;
-            border-radius: 16px;
+            border-radius: 14px;
             font-size: 16px;
             outline: none;
             -webkit-appearance: none;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
         }
         .search-field:focus {
-            background: #f0f4ff;
-            box-shadow: 0 0 10px rgba(0, 68, 204, 0.2);
-            align-self: flex-start;
+            border-color: var(--park-blue);
+            background: #fff;
+        }
+        .search-field::placeholder {
+            color: #555;
         }
 
-        /* FIND BEST RATE BUTTON MATCHED */
         .main-btn { 
-            background: linear-gradient(135deg, #0044cc, #002677) !important; 
-            color: #ffffff !important; 
-            font-family: var(--serif) !important;
-            font-size: clamp(30px, 6vw, 38px) !important; 
-            font-weight: 900 !important; 
-            text-transform: none !important;
-            letter-spacing: -0.5px !important;
-            border: 2px solid var(--cab0-blue) !important;
-            margin-top: 5px !important;
+            background: var(--park-blue); 
+            color: #fff; 
+            padding: 20px; 
+            border-radius: 16px; 
+            text-align: center; 
+            font-weight: 800; 
+            font-size: 18px; 
+            cursor: pointer; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            width: 100%;
+            border: none;
+            margin-top: 10px;
+            transition: opacity 0.2s ease;
         }
-        .main-btn::before {
-            background: #ffffff !important;
+        .main-btn:hover {
+            opacity: 0.9;
         }
-        .main-btn:active {
-            transform: scale(0.98);
-        .map-panel {
-            background-color: var(--map-bg-white);
-            border-radius: 16px;
-            border: 4px solid var(--text-blue) !important;
-            height: 500px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-        }
-        #map { height: 100%; width: 100%; }
 
         .page { display: none; width: 100%; } 
         .page.active { display: block; }
 
         .sort-strip { 
             display: flex; 
+            background: var(--park-bg); 
             padding: 10px 0 15px; 
-            gap: 10px; 
+            gap: 8px; 
             width: 100%;
         } 
         .sort-btn { 
             flex: 1; 
-            padding: 16px; 
-            border-radius: 12px; 
-            border: 2px solid var(--cab0-blue); 
-            font-size: 12px; 
-            font-weight: 900; 
-            background: #ffffff; 
-            color: var(--cab0-blue); 
+            padding: 14px; 
+            border-radius: 8px; 
+            border: 1px solid var(--park-border); 
+            font-size: 11px; 
+            font-weight: 800; 
+            background: var(--park-card); 
+            color: var(--park-blue-dark); 
             cursor: pointer; 
             text-transform: uppercase;
-            box-shadow: 0 2px 6px rgba(0,68,204,0.08);
         } 
         .sort-btn.active { 
-            background: var(--cab0-blue); 
-            color: #ffffff; 
+            background: var(--park-blue); 
+            color: #fff; 
+            border-color: var(--park-blue); 
         } 
         
         .pcard { 
-            background: #ffffff; 
-            border-radius: 16px; 
-            border: 2px solid var(--cab0-blue); 
-            padding: 20px; 
-            margin-bottom: 14px; 
+            background: var(--park-card); 
+            border-radius: 15px; 
+            border: 1px solid var(--park-border); 
+            padding: 18px; 
+            margin-bottom: 12px; 
             display: flex; 
             align-items: center; 
             gap: 15px; 
             cursor: pointer; 
             text-align: left; 
             width: 100%;
-            box-shadow: 0 4px 12px rgba(0, 68, 204, 0.08);
-            transition: transform 0.2s ease;
+            transition: border-color 0.2s ease;
         } 
-        .pcard:active {
-            transform: scale(0.98);
+        .pcard:hover {
+            border-color: var(--park-blue);
         }
         .pcard.sel { 
-            border: 3px solid var(--cab0-blue); 
-            background: #f0f4ff; 
-            box-shadow: 0 6px 18px rgba(0, 68, 204, 0.2);
+            border: 2px solid var(--park-blue); 
+            background: #fff; 
         }
         .pcard-logo {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-        .control-panel {
-            background-color: var(--text-blue);
-            color: var(--text-light);
-            border-radius: 16px;
-            padding: 30px;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 900;
-            color: #ffffff;
-            font-size: 17px;
-            flex-direction: column;
-            gap: 20px;
+            font-weight: 800;
+            color: #fff;
+            font-size: 16px;
         }
 
+        /* INTEGRATED ACTION PANEL STYLE */
         .inline-action-panel {
-            background: #ffffff;
-            border: 2px solid var(--cab0-blue);
-            border-radius: 18px;
-            padding: 22px;
-            margin-top: 20px;
-        .input-field {
+            background: var(--park-card);
+            border: 1px solid var(--park-border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 15px;
             width: 100%;
             display: flex;
             flex-direction: column;
             gap: 15px;
-            box-shadow: 0 8px 25px rgba(0, 68, 204, 0.15);
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 16px;
-            border-radius: 8px;
-            border: none;
-            margin-top: 5px;
         }
         .inline-btn {
-            background: linear-gradient(135deg, #0044cc, #002677);
-            color: #ffffff;
-
-        .btn-action {
-            background-color: var(--bg-gold);
-            color: var(--text-blue);
-            border: none;
+            background: var(--park-blue);
+            color: #fff;
             padding: 18px;
             border-radius: 14px;
             text-align: center;
-            font-weight: 900;
-            font-size: 18px;
-            border-radius: 8px;
             font-weight: 800;
+            font-size: 18px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             text-decoration: none;
             width: 100%;
             display: block;
-            box-shadow: 0 4px 15px rgba(0, 68, 204, 0.3);
-            cursor: pointer;
-        }
-
-        footer {
-            margin-top: auto;
-            text-align: center;
-            padding: 30px 20px;
-            font-size: 0.9em;
-            color: var(--cab0-blue-dark);
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(5px);
-            border-top: 1px solid rgba(0, 68, 204, 0.1);
-        .status-box { background-color: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 8px; }
-        
-        .user-location-marker {
-            background-color: var(--text-blue);
-            border: 3px solid var(--bg-gold);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-        footer a { color: var(--cab0-blue); text-decoration: none; margin: 0 10px; transition: color 0.3s; font-weight: 700; }
-        footer a:hover { color: var(--cab0-blue-dark); text-decoration: underline; }
-
-        @media (max-width: 768px) {
-            .content-wrapper { padding: 12px; }
-            header { padding: 15px 0 10px 0; }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(13, 71, 161, 0.5); }
-            70% { box-shadow: 0 0 0 15px rgba(13, 71, 161, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(13, 71, 161, 0); }
         }
     </style>
 </head>
@@ -474,26 +318,14 @@ DOCTYPE html>
         
         <!-- PAGE 0: MAIN DASHBOARD SELECTION -->
         <div class="page active" id="pg0">
-            <header>
-                <div class="logo-main">Cab<span class="big-zero">0</span>.com</div>
-            </header>
+            <div class="logo-main">Cab<span>0</span>.com</div>
             
             <div class="woz-box">
                 <p class="woz-quote">"Best of luck to you on this worthy venture, its your turn"</p>
                 <span class="woz-attribution">Steve Wozniak, Apple Co-Founder</span>
             </div>
-    <header>
-        <h1 class="logo-title">Park Fast. Park Free. Park LV.</h1>
-    </header>
 
-            <div class="headline-container">
-                <h1 id="main-headline">Every Ride. Every Delivery. <em>One Search.</em></h1>
-    <div class="main-container">
-        <div class="map-wrapper">
-            <button class="btn-locate" onclick="initRealTimeLocation()">📍 Pin My Location</button>
-            <div class="map-panel">
-                <div id="map"></div>
-            </div>
+            <h1 id="main-headline">Every ride.<br>Every delivery.<br><em>One search.</em></h1>
 
             <div class="cats-grid" id="categories-container"></div>
             <button class="main-btn" onclick="goTo(1)">Find Best Rate →</button>
@@ -504,20 +336,14 @@ DOCTYPE html>
             <div class="nav-header">
                 <button class="back-btn" onclick="goTo(0)">← Main Menu</button>
             </div>
-        <div class="control-panel">
-            <div class="panel-header">Find Parking</div>
-            <label>1. Your Location</label>
-            <input type="text" id="start-loc" class="input-field" placeholder="Click 'Pin My Location'..." readonly />
-
+            
             <div style="padding: 5px 0;">
-                <h2 style="color:var(--cab0-blue-dark); margin-bottom:20px; font-family: var(--serif); font-size: 32px;">Search Details</h2>
+                <h2 style="color:var(--park-blue-dark); margin-bottom:20px; font-family: var(--serif); font-size: 32px;">Search Details</h2>
                 
                 <div class="search-group">
                     <label>1. Pickup Location</label>
                     <input type="text" id="pickup-input" class="search-field" placeholder="Current Location / Address...">
                 </div>
-            <label>2. Destination</label>
-            <input type="text" id="dest-loc" class="input-field" value="The Cosmopolitan of Las Vegas" />
 
                 <div class="search-group">
                     <label>2. Dropoff Destination</label>
@@ -538,26 +364,20 @@ DOCTYPE html>
                 <button class="sort-btn active" id="sort-price" onclick="setSort('price')">CHEAPEST</button>
                 <button class="sort-btn" id="sort-time" onclick="setSort('time')">FASTEST</button>
             </div>
-            <button class="btn-action" onclick="locateAndRoute()">Find Closest Free Spot</button>
-
+            
+            <!-- Dynamic selection list displays directly here -->
             <div style="padding: 5px 0;" id="p3-grid"></div>
             
+            <!-- INLINE UNIFIED ACTION ZONE -->
             <div class="inline-action-panel">
                 <div style="text-align: left;">
-                    <div id="sel-name" style="font-weight:900; color:var(--cab0-blue-dark); font-size: 17px;">Select Service</div>
-                    <div style="font-size:12px; color:#5577bb; margin-top: 3px; font-weight: 700;">Secure Official Booking Link</div>
+                    <div id="sel-name" style="font-weight:800; color:var(--park-blue-dark); font-size: 16px;">Select Service</div>
+                    <div style="font-size:12px; color:#555; margin-top: 3px;">Secure Official Booking Link</div>
                 </div>
                 <a href="#" id="final-link" target="_blank" class="inline-btn">Book Now</a>
-            <div class="status-box">
-                <div id="output-log">Awaiting location permission...</div>
             </div>
         </div>
 
-        <footer>
-            <p style="margin-bottom: 8px; font-weight: 700;">Cab0.com is an independent search and comparison service. Not affiliated with Uber, Lyft, or other listed brands.</p>
-            <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
-            <p style="margin-top: 8px;">&copy; 2026 Cab0.com - Independent Information Service</p>
-        </footer>
     </div>
 
     <script> 
@@ -603,9 +423,9 @@ DOCTYPE html>
             var headline = document.getElementById('main-headline');
             
             if(isVegasMode) {
-                headline.innerHTML = "Vegas Ride. Vegas Delivery. <em>One Search.</em>";
+                headline.innerHTML = "Vegas ride.<br>Vegas delivery.<br><em>One search.</em>";
             } else {
-                headline.innerHTML = "Every Ride. Every Delivery. <em>One Search.</em>";
+                headline.innerHTML = "Every ride.<br>Every delivery.<br><em>One search.</em>";
                 if(currentCat === 'loop' || currentCat === 'robotaxi') {
                     currentCat = 'ride';
                 }
@@ -621,7 +441,7 @@ DOCTYPE html>
                 html += `<div class="cat ${currentCat === 'ride' ? 'on' : ''}" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>`;
                 html += `<div class="cat ${currentCat === 'delivery' ? 'on' : ''}" onclick="pickCat(this, 'delivery')"><div class="cat-label">Food Delivery</div></div>`;
                 html += `<div class="cat ${currentCat === 'grocery' ? 'on' : ''}" onclick="pickCat(this, 'grocery')"><div class="cat-label">Groceries</div></div>`;
-                html += `<div class="cat vegas-toggle-tile ${currentCat === 'loop' || currentCat === 'robotaxi' ? 'vegas-active' : ''}" onclick="toggleVegasMode()"><div class="cat-label">Vegas Mode</div></div>`;
+                html += `<div class="cat vegas-toggle-tile" onclick="toggleVegasMode()"><div class="cat-label">Vegas Mode 🎰</div></div>`;
             } else {
                 html += `<div class="cat ${currentCat === 'ride' ? 'on' : ''}" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>`;
                 html += `<div class="cat ${currentCat === 'loop' ? 'on' : ''}" onclick="pickCat(this, 'loop')"><div class="cat-label">Vegas Loop</div></div>`;
@@ -666,10 +486,10 @@ DOCTYPE html>
                     <div class="pcard ${activeClass}" onclick="selectProvider('${p.id}')">
                         <div class="pcard-logo" style="background:${p.c}">${p.s}</div>
                         <div style="flex:1;">
-                            <div style="font-weight:900; color:var(--cab0-blue-dark); font-size:16px;">${p.name}</div>
-                            <div style="font-size:13px; color:#5577bb; margin-top:2px; font-weight:700;">${p.time} min response time</div>
+                            <div style="font-weight:700; color:var(--park-blue-dark); font-size:16px;">${p.name}</div>
+                            <div style="font-size:13px; color:#555; margin-top:2px;">${p.time} min response time</div>
                         </div>
-                        <div style="font-weight:900; color:var(--cab0-blue); font-size:18px;">${displayPrice}</div>
+                        <div style="font-weight:800; color:var(--park-blue); font-size:18px;">${displayPrice}</div>
                     </div>
                 `; 
             }); 
@@ -687,41 +507,6 @@ DOCTYPE html>
         } 
 
         renderCategories();
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-        let map = L.map('map').setView([36.1147, -115.1728], 16);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-            subdomains: 'abcd',
-            maxZoom: 19
-        }).addTo(map);
-
-        let userMarker;
-        const userIcon = L.divIcon({ className: 'user-location-marker', iconSize: [24, 24], iconAnchor: [12, 12] });
-        const logger = document.getElementById('output-log');
-
-        function initRealTimeLocation() {
-            if (!navigator.geolocation) { logger.innerHTML = "❌ Geolocation unsupported."; return; }
-            logger.innerHTML = "📡 Searching for location...";
-
-            navigator.geolocation.watchPosition(
-                (position) => {
-                    const lat = position.coords.latitude;
-                    const lng = position.coords.longitude;
-                    logger.innerHTML = `✅ Tracking: ${lat.toFixed(4)}, ${lng.toFixed(4)}`;
-                    document.getElementById('start-loc').value = `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
-
-                    if (userMarker) { map.removeLayer(userMarker); }
-                    userMarker = L.marker([lat, lng], { icon: userIcon }).addTo(map);
-                    
-                    if (!window.hasCentered) { map.setView([lat, lng], 17); window.hasCentered = true; }
-                },
-                (error) => { logger.innerHTML = `❌ GPS Error: ${error.message}`; },
-                { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
-            );
-        }
-
-        function locateAndRoute() { alert("Routing logic active."); }
     </script>
 </body>
 </html>
