@@ -139,7 +139,7 @@
             color: var(--cab0-blue) !important; 
         }
 
-        /* HEADLINE DOUBLED IN SIZE, FORCED TO SINGLE LINE USING SCALING CONTAINER */
+        /* HEADLINE ADJUSTED FOR RESPONSIVE SINGLE-LINE FIT */
         .headline-container {
             width: 100%;
             overflow: hidden;
@@ -149,7 +149,8 @@
 
         h1 { 
             font-family: var(--serif); 
-            font-size: clamp(48px, 9vw, 76px); 
+            /* Scaled down clamp range so it comfortably fits mobile screens on one line */
+            font-size: clamp(20px, 4.3vw, 42px); 
             line-height: 1.1; 
             color: var(--cab0-blue-dark); 
             display: inline-block;
@@ -159,8 +160,8 @@
             color: var(--cab0-blue); 
             font-style: normal; 
             text-decoration: underline;
-            text-decoration-thickness: 4px;
-            text-underline-offset: 6px;
+            text-decoration-thickness: 3px;
+            text-underline-offset: 4px;
         }
 
         /* SINGLE COLUMN STACK CONTAINER */
