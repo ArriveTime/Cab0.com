@@ -6,11 +6,13 @@
     <title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
     <style>
         :root { 
-            --cab0-blue: #3b82f6; 
-            --cab0-yellow: #FACC15; 
-            --serif: 'DM Serif Display', serif; 
-            --sans: 'DM Sans', sans-serif; 
-            --fancy: 'Playfair Display', serif; 
+            --park-bg: #d4af37;        /* Gold Background */
+            --park-card: #f3e5ab;      /* Lighter Gold/Cream Card */
+            --park-border: #b89728;    /* Deep Gold Border */
+            --park-blue: #004080;      /* Rich Blue Font */
+            --park-blue-dark: #00264d; /* Darker Blue for Contrast */
+            --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; 
+            --serif: 'DM Serif Display', Georgia, serif; 
         }
 
         * { 
@@ -19,10 +21,10 @@
             padding: 0; 
         }
 
-        /* STRICT MOBILE ENVIRONMENT LOCKDOWN */
+        /* PARK-LV GOLD & BLUE THEME */
         html, body { 
-            background-color: #000000 !important; 
-            color: #ffffff; 
+            background-color: var(--park-bg) !important;
+            color: var(--park-blue-dark); 
             font-family: var(--sans);
             min-height: 100vh;
             overflow-x: hidden;
@@ -47,13 +49,13 @@
             justify-content: flex-start;
             padding-bottom: 12px;
             margin-bottom: 15px;
-            border-bottom: 1px solid #111;
+            border-bottom: 1px solid var(--park-border);
             width: 100%;
         }
         .back-btn {
-            background: #111;
-            color: #aaa;
-            border: 1px solid #222;
+            background: var(--park-card);
+            color: var(--park-blue);
+            border: 1px solid var(--park-border);
             padding: 10px 18px;
             border-radius: 20px;
             font-size: 13px;
@@ -61,32 +63,37 @@
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+        }
+        .back-btn:hover {
+            background: #fff;
+            border-color: var(--park-blue);
         }
 
         .logo-main { 
             font-family: var(--serif); 
             font-size: 46px; 
-            color: var(--cab0-blue); 
+            color: var(--park-blue-dark); 
             margin-bottom: 25px; 
             font-weight: 700;
             text-align: center;
         } 
-        .logo-main span { color: var(--cab0-yellow); }
+        .logo-main span { color: var(--park-blue); }
 
         .woz-box { 
             margin-bottom: 25px; 
             padding: 18px; 
-            background: #0d0d0d;
+            background: var(--park-card);
             border-radius: 14px;
-            border: 1px solid #1a1a1a;
+            border: 1px solid var(--park-border);
             text-align: center;
             width: 100%;
         } 
         .woz-quote { 
-            font-family: var(--fancy); 
+            font-family: var(--serif); 
             font-style: italic; 
             font-size: 19px; 
-            color: var(--cab0-yellow); 
+            color: var(--park-blue); 
             line-height: 1.4; 
             margin-bottom: 10px; 
         } 
@@ -97,8 +104,8 @@
             font-weight: 700; 
             text-transform: uppercase; 
             letter-spacing: 1.2px; 
-            color: var(--cab0-yellow); 
-            opacity: 0.8; 
+            color: var(--park-blue-dark); 
+            opacity: 0.8;
         }
 
         h1 { 
@@ -106,12 +113,12 @@
             font-size: 38px; 
             line-height: 1.15; 
             margin-bottom: 30px; 
-            color: #fff; 
+            color: var(--park-blue-dark); 
             text-align: center; 
             width: 100%;
         } 
         h1 em { 
-            color: var(--cab0-yellow); 
+            color: var(--park-blue); 
             font-style: normal; 
         }
 
@@ -124,8 +131,8 @@
             width: 100%;
         } 
         .cat { 
-            background: #111; 
-            border: 1px solid #222; 
+            background: var(--park-card); 
+            border: 1px solid var(--park-border); 
             border-radius: 16px; 
             padding: 26px 10px; 
             cursor: pointer; 
@@ -134,28 +141,32 @@
             align-items: center;
             justify-content: center;
         } 
+        .cat:hover {
+            border-color: var(--park-blue);
+            background: #fff;
+        }
         .cat.on { 
-            background: var(--cab0-yellow); 
-            border-color: var(--cab0-yellow); 
+            background: var(--park-blue); 
+            border-color: var(--park-blue); 
         } 
         .cat.on .cat-label { 
-            color: #000; 
+            color: #fff; 
         } 
         .cat.vegas-toggle-tile {
-            border: 1px dashed var(--cab0-blue);
-            background: #050b14;
+            border: 1px dashed var(--park-blue);
+            background: rgba(0, 64, 128, 0.05);
         }
         .cat.vegas-toggle-tile.vegas-active {
-            border: 1px solid var(--cab0-yellow);
-            background: #1c1802;
+            border: 1px solid var(--park-blue);
+            background: var(--park-blue);
         }
         .cat.vegas-toggle-tile.vegas-active .cat-label {
-            color: var(--cab0-yellow);
+            color: #fff;
         }
         .cat-label { 
             font-size: 14px; 
             font-weight: 800; 
-            color: #aaa; 
+            color: var(--park-blue-dark); 
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -168,16 +179,16 @@
             display: block;
             font-size: 12px;
             text-transform: uppercase;
-            color: #888;
+            color: var(--park-blue-dark);
             margin-bottom: 8px;
             font-weight: 700;
             text-align: left;
         }
         .search-field {
             width: 100%;
-            background: #111;
-            border: 1px solid #333;
-            color: #fff;
+            background: var(--park-card);
+            border: 1px solid var(--park-border);
+            color: var(--park-blue-dark);
             padding: 18px;
             border-radius: 14px;
             font-size: 16px;
@@ -185,12 +196,16 @@
             -webkit-appearance: none;
         }
         .search-field:focus {
-            border-color: var(--cab0-blue);
+            border-color: var(--park-blue);
+            background: #fff;
+        }
+        .search-field::placeholder {
+            color: #555;
         }
 
         .main-btn { 
-            background: var(--cab0-yellow); 
-            color: #000; 
+            background: var(--park-blue); 
+            color: #fff; 
             padding: 20px; 
             border-radius: 16px; 
             text-align: center; 
@@ -202,6 +217,10 @@
             width: 100%;
             border: none;
             margin-top: 10px;
+            transition: opacity 0.2s ease;
+        }
+        .main-btn:hover {
+            opacity: 0.9;
         }
 
         .page { display: none; width: 100%; } 
@@ -209,7 +228,7 @@
 
         .sort-strip { 
             display: flex; 
-            background: #000; 
+            background: var(--park-bg); 
             padding: 10px 0 15px; 
             gap: 8px; 
             width: 100%;
@@ -218,24 +237,24 @@
             flex: 1; 
             padding: 14px; 
             border-radius: 8px; 
-            border: 1px solid #222; 
+            border: 1px solid var(--park-border); 
             font-size: 11px; 
             font-weight: 800; 
-            background: #000; 
-            color: #888; 
+            background: var(--park-card); 
+            color: var(--park-blue-dark); 
             cursor: pointer; 
             text-transform: uppercase;
         } 
         .sort-btn.active { 
-            background: var(--cab0-yellow); 
-            color: #000; 
-            border-color: var(--cab0-yellow); 
+            background: var(--park-blue); 
+            color: #fff; 
+            border-color: var(--park-blue); 
         } 
         
         .pcard { 
-            background: #111; 
+            background: var(--park-card); 
             border-radius: 15px; 
-            border: 1px solid #222; 
+            border: 1px solid var(--park-border); 
             padding: 18px; 
             margin-bottom: 12px; 
             display: flex; 
@@ -244,10 +263,14 @@
             cursor: pointer; 
             text-align: left; 
             width: 100%;
+            transition: border-color 0.2s ease;
         } 
+        .pcard:hover {
+            border-color: var(--park-blue);
+        }
         .pcard.sel { 
-            border: 2px solid var(--cab0-yellow); 
-            background: #0a0a0a; 
+            border: 2px solid var(--park-blue); 
+            background: #fff; 
         }
         .pcard-logo {
             width: 45px;
@@ -261,10 +284,10 @@
             font-size: 16px;
         }
 
-        /* INTEGRATED ACTION PANEL STYLE (BELOW GRID) */
+        /* INTEGRATED ACTION PANEL STYLE */
         .inline-action-panel {
-            background: #0d0d0d;
-            border: 1px solid #1a1a1a;
+            background: var(--park-card);
+            border: 1px solid var(--park-border);
             border-radius: 16px;
             padding: 20px;
             margin-top: 15px;
@@ -274,8 +297,8 @@
             gap: 15px;
         }
         .inline-btn {
-            background: var(--cab0-yellow);
-            color: #000;
+            background: var(--park-blue);
+            color: #fff;
             padding: 18px;
             border-radius: 14px;
             text-align: center;
@@ -315,7 +338,7 @@
             </div>
             
             <div style="padding: 5px 0;">
-                <h2 style="color:#fff; margin-bottom:20px; font-family: var(--serif); font-size: 32px;">Search Details</h2>
+                <h2 style="color:var(--park-blue-dark); margin-bottom:20px; font-family: var(--serif); font-size: 32px;">Search Details</h2>
                 
                 <div class="search-group">
                     <label>1. Pickup Location</label>
@@ -345,11 +368,11 @@
             <!-- Dynamic selection list displays directly here -->
             <div style="padding: 5px 0;" id="p3-grid"></div>
             
-            <!-- INLINE UNIFIED ACTION ZONE: Always shows immediately below grid list -->
+            <!-- INLINE UNIFIED ACTION ZONE -->
             <div class="inline-action-panel">
                 <div style="text-align: left;">
-                    <div id="sel-name" style="font-weight:800; color:#fff; font-size: 16px;">Select Service</div>
-                    <div style="font-size:12px; color:#888; margin-top: 3px;">Secure Official Booking Link</div>
+                    <div id="sel-name" style="font-weight:800; color:var(--park-blue-dark); font-size: 16px;">Select Service</div>
+                    <div style="font-size:12px; color:#555; margin-top: 3px;">Secure Official Booking Link</div>
                 </div>
                 <a href="#" id="final-link" target="_blank" class="inline-btn">Book Now</a>
             </div>
@@ -463,10 +486,10 @@
                     <div class="pcard ${activeClass}" onclick="selectProvider('${p.id}')">
                         <div class="pcard-logo" style="background:${p.c}">${p.s}</div>
                         <div style="flex:1;">
-                            <div style="font-weight:700; color:#fff; font-size:16px;">${p.name}</div>
-                            <div style="font-size:13px; color:#666; margin-top:2px;">${p.time} min response time</div>
+                            <div style="font-weight:700; color:var(--park-blue-dark); font-size:16px;">${p.name}</div>
+                            <div style="font-size:13px; color:#555; margin-top:2px;">${p.time} min response time</div>
                         </div>
-                        <div style="font-weight:800; color:var(--cab0-yellow); font-size:18px;">${displayPrice}</div>
+                        <div style="font-weight:800; color:var(--park-blue); font-size:18px;">${displayPrice}</div>
                     </div>
                 `; 
             }); 
