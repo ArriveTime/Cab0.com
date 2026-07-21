@@ -6,11 +6,10 @@
     <title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
     <style>
         :root { 
-            --cab0-bg: #f9f6ee;        /* Soft, warm luxury ivory-gold background */
-            --cab0-card: #ffffff;      /* Crisp white cards */
-            --cab0-blue: #0044cc;      /* Rich, readable royal blue font */
-            --cab0-blue-dark: #002677; /* Deep accent blue */
-            --cab0-gold-glow: #e6c687; /* Subtle warm border glow */
+            --cab0-bg: #f9f6ee;        
+            --cab0-card: #ffffff;      
+            --cab0-blue: #0044cc;      
+            --cab0-blue-dark: #002677; 
             --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; 
             --serif: 'DM Serif Display', Georgia, serif; 
         }
@@ -21,7 +20,6 @@
             padding: 0; 
         }
 
-        /* EYE-FRIENDLY LUXURY MOBILE-FIRST ENGINE */
         html, body { 
             background: linear-gradient(135deg, #fbf8f2, #f3ebd8) !important;
             color: var(--cab0-blue); 
@@ -33,10 +31,9 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* 100% FLUID MOBILE OPTIMIZED CONTAINER */
         .content-wrapper { 
             width: 100vw !important;
-            max-width: 480px; /* Locked to optimal smartphone viewing width */
+            max-width: 480px; 
             margin: 0 auto;
             padding: 20px;
             display: flex;
@@ -81,7 +78,6 @@
             letter-spacing: -1px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.05);
         } 
-        /* LARGE ZERO STYLING */
         .logo-main .big-zero { 
             font-size: 1.15em; 
             vertical-align: baseline; 
@@ -90,7 +86,6 @@
             color: var(--cab0-blue);
         }
 
-        /* MODERN DYNAMIC WOZNIAK HIGHLIGHT BOX */
         .woz-box { 
             margin-bottom: 25px; 
             padding: 22px; 
@@ -148,7 +143,6 @@
             text-underline-offset: 4px;
         }
 
-        /* ROW OF 2 ASCENDING GRID (OPTIMIZED FOR LARGE MOBILE TOUCH TARGETS) */
         .cats-grid { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
@@ -317,7 +311,6 @@
             font-size: 17px;
         }
 
-        /* INTEGRATED ACTION PANEL STYLE */
         .inline-action-panel {
             background: #ffffff;
             border: 2px solid var(--cab0-blue);
@@ -345,6 +338,17 @@
             display: block;
             box-shadow: 0 4px 15px rgba(0, 68, 204, 0.3);
         }
+
+        .site-footer {
+            margin-top: 30px; 
+            padding: 20px 0; 
+            text-align: center; 
+            border-top: 2px solid rgba(0, 68, 204, 0.15); 
+            font-size: 11px; 
+            color: var(--cab0-blue-dark); 
+            opacity: 0.85; 
+            line-height: 1.4;
+        }
     </style>
 </head>
 <body>
@@ -364,6 +368,14 @@
 
             <div class="cats-grid" id="categories-container"></div>
             <button class="main-btn" onclick="goTo(1)">Find Best Rate →</button>
+
+            <!-- LEGAL FOOTER DISCLAIMER -->
+            <footer class="site-footer">
+                <p style="margin-bottom: 8px; font-weight: 700;">Cab0.com is an independent search and comparison service. Not affiliated with Uber, Lyft, or other listed brands.</p>
+                <p>&copy; 2026 Cab0.com. All rights reserved. <br>
+                <a href="privacy.html" style="color: var(--cab0-blue); text-decoration: underline;">Privacy Policy</a> | 
+                <a href="terms.html" style="color: var(--cab0-blue); text-decoration: underline;">Terms of Service</a></p>
+            </footer>
         </div>
 
         <!-- PAGE 1: ADDRESS VERIFICATION SYSTEM -->
@@ -400,10 +412,8 @@
                 <button class="sort-btn" id="sort-time" onclick="setSort('time')">FASTEST</button>
             </div>
             
-            <!-- Dynamic selection list displays directly here -->
             <div style="padding: 5px 0;" id="p3-grid"></div>
             
-            <!-- INLINE UNIFIED ACTION ZONE -->
             <div class="inline-action-panel">
                 <div style="text-align: left;">
                     <div id="sel-name" style="font-weight:900; color:var(--cab0-blue-dark); font-size: 17px;">Select Service</div>
