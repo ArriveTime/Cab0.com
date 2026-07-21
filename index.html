@@ -26,7 +26,6 @@
             overflow-x: hidden;
         }
 
-        /* EXACT RESPONSIVE CONTAINER PATTERN FROM TOURLV */
         .content-wrapper { 
             position: relative;
             z-index: 10;
@@ -67,7 +66,7 @@
 
         header {
             text-align: center;
-            padding: 30px 0 20px 0;
+            padding: 20px 0 10px 0;
         }
 
         .logo-main { 
@@ -144,10 +143,10 @@
             text-underline-offset: 4px;
         }
 
-        /* FLUID GRID PATTERN MATCHING TOURLV */
+        /* UNIFORM 2x2 GRID WITH LARGE WOZ-SIZED BUTTON CARDS */
         .cats-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+            grid-template-columns: 1fr 1fr; 
             gap: 16px; 
             margin-bottom: 25px; 
             width: 100%;
@@ -156,31 +155,32 @@
             background: #ffffff; 
             border: 2px solid var(--cab0-blue); 
             border-radius: 18px; 
-            padding: 28px 16px; 
+            padding: 32px 16px; 
             cursor: pointer; 
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 68, 204, 0.08);
+            box-shadow: 0 6px 18px rgba(0, 68, 204, 0.1);
+            min-height: 95px;
         } 
         .cat:hover, .cat:active {
-            transform: translateY(-4px);
+            transform: translateY(-3px);
             background: #f0f4ff;
             border-color: var(--cab0-blue-dark);
         }
         .cat.on { 
             background: var(--cab0-blue); 
             border-color: var(--cab0-blue); 
-            box-shadow: 0 6px 18px rgba(0, 68, 204, 0.3);
+            box-shadow: 0 8px 22px rgba(0, 68, 204, 0.3);
         } 
         .cat.on .cat-label { 
             color: #ffffff; 
         } 
         .cat.vegas-toggle-tile {
             border: 2px dashed var(--cab0-blue);
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.7);
         }
         .cat.vegas-toggle-tile.vegas-active {
             border: 2px solid var(--cab0-blue);
@@ -190,11 +190,11 @@
             color: #ffffff;
         }
         .cat-label { 
-            font-size: 15px; 
+            font-size: 16px; 
             font-weight: 900; 
             color: var(--cab0-blue-dark); 
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
         }
 
         .search-group {
@@ -230,8 +230,8 @@
         .main-btn { 
             background: linear-gradient(135deg, #0044cc, #002677); 
             color: #ffffff; 
-            padding: 20px; 
-            border-radius: 16px; 
+            padding: 22px; 
+            border-radius: 18px; 
             text-align: center; 
             font-weight: 900; 
             font-size: 18px; 
@@ -241,7 +241,7 @@
             width: 100%;
             border: none;
             margin-top: 10px;
-            box-shadow: 0 6px 20px rgba(0, 68, 204, 0.3);
+            box-shadow: 0 8px 22px rgba(0, 68, 204, 0.3);
             transition: transform 0.2s ease;
         }
         .main-btn:active {
@@ -338,7 +338,6 @@
             box-shadow: 0 4px 15px rgba(0, 68, 204, 0.3);
         }
 
-        /* EXACT FOOTER PATTERN FROM TOURLV */
         footer {
             margin-top: auto;
             text-align: center;
@@ -352,12 +351,11 @@
         footer a { color: var(--cab0-blue); text-decoration: none; margin: 0 10px; transition: color 0.3s; font-weight: 700; }
         footer a:hover { color: var(--cab0-blue-dark); text-decoration: underline; }
 
-        /* MOBILE RESPONSIVE BREAKPOINT MATCHING TOURLV */
         @media (max-width: 768px) {
             .content-wrapper { padding: 12px; }
-            header { padding: 20px 0 15px 0; }
+            header { padding: 15px 0 10px 0; }
             .cats-grid { gap: 12px; }
-            .cat { padding: 20px 10px; }
+            .cat { padding: 24px 12px; min-height: 85px; }
         }
     </style>
 </head>
@@ -427,7 +425,6 @@
             </div>
         </div>
 
-        <!-- EXACT TOURLV FOOTER ARCHITECTURE -->
         <footer>
             <p style="margin-bottom: 8px; font-weight: 700;">Cab0.com is an independent search and comparison service. Not affiliated with Uber, Lyft, or other listed brands.</p>
             <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
