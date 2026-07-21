@@ -1,304 +1,573 @@
-HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cab0 | Every Ride. Every Delivery. One Search.</title>
-    <style>
-        :root {
-            --bg-gold: #ffd700;
-            --text-blue: #0d47a1;
-            --text-light: #ffffff;
-            --bg-white: #ffffff;
-            --border-color: #bbdefb;
-            --accent-blue: #1565c0;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-
-        body {
-            background-color: var(--bg-gold);
-            background-image: 
-                linear-gradient(to bottom, rgba(255, 215, 0, 0.85), rgba(255, 215, 0, 0.98)),
-                url('https://images.unsplash.com/photo-1508962914676-134849a727f0?q=80&w=2000');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: var(--text-blue);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* ─── HEADER FIX: Keeps text on one line ─── */
-        header {
-            text-align: center;
-            padding: 20px 10px;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-bottom: 3px solid var(--text-blue);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .logo-title { 
-            /* clamp() ensures it shrinks on small screens and never wraps */
-            font-size: clamp(1rem, 3.5vw, 2.2rem); 
-            font-weight: 900; 
-            text-transform: uppercase; 
-            color: var(--text-blue); 
-            white-space: nowrap; 
-            letter-spacing: -0.5px;
-        }
-        
-        /* ─── MAIN DASHBOARD ─── */
-        .main-container {
-            flex: 1;
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .dashboard-panel {
-            background-color: var(--text-blue);
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            color: var(--text-light);
-        }
-
-        /* ─── TOGGLES & MODES ─── */
-        .mode-toggles {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            background-color: rgba(255,255,255,0.1);
-            padding: 10px;
-            border-radius: 12px;
-        }
-
-        .service-type {
-            display: flex;
-            gap: 10px;
-        }
-
-        .service-btn {
-            background: transparent;
-            border: 1px solid var(--bg-gold);
-            color: var(--bg-gold);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .service-btn.active {
-            background: var(--bg-gold);
-            color: var(--text-blue);
-        }
-
-        .vegas-mode {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: bold;
-            color: var(--bg-gold);
-        }
-
-        /* Toggle Switch for Vegas Mode */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 40px;
-            height: 24px;
-        }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(255,255,255,0.3);
-            transition: .4s;
-            border-radius: 24px;
-        }
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        input:checked + .slider { background-color: var(--bg-gold); }
-        input:checked + .slider:before { transform: translateX(16px); }
-
-        /* ─── SEARCH INPUTS ─── */
-        .input-group { margin-bottom: 15px; }
-        .input-group label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--bg-gold);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .input-field {
-            width: 100%;
-            background-color: var(--bg-white);
-            border: none;
-            padding: 16px;
-            border-radius: 8px;
-            color: var(--text-blue);
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .btn-action {
-            background-color: var(--bg-gold);
-            color: var(--text-blue);
-            border: none;
-            padding: 18px;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 900;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.2s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 10px;
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
-        }
-        .btn-action:hover { background-color: #ffe033; transform: translateY(-2px); }
-
-        /* ─── PROVIDER COMPARISON TOOL ─── */
-        .comparison-results {
-            margin-top: 30px;
-            display: none; /* Hidden until searched */
-        }
-        .results-header {
-            font-size: 1.1rem;
-            color: var(--bg-gold);
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255,215,0,0.3);
-            padding-bottom: 8px;
-        }
-        .provider-card {
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--text-blue);
-        }
-        .provider-info h4 { font-size: 1.2rem; font-weight: 800; }
-        .provider-info p { font-size: 0.85rem; font-weight: 600; color: #555; }
-        .provider-price { font-size: 1.4rem; font-weight: 900; color: #2e7d32; }
-        
-        .book-btn {
-            background-color: var(--text-blue);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,
+user-scalable=no, viewport-fit=cover">
+<title>Cab0.com — Every Ride. Every Delivery. One Search.
+</title>
+<style>
+:root {
+--cab0-blue: #3b82f6;
+--cab0-yellow: #FACC15;
+--serif: 'DM Serif Display'
+, serif;
+--sans: 'DM Sans'
+, sans-serif;
+--fancy: 'Playfair Display'
+, serif;
+}
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+/* STRICT MOBILE ENVIRONMENT LOCKDOWN */
+html, body {
+background-color: #000000 !important;
+color: #ffffff;
+font-family: var(--sans);
+min-height: 100vh;
+overflow-x: hidden;
+width: 100vw !important;
+-webkit-text-size-adjust: 100%;
+-webkit-font-smoothing: antialiased;
+}
+/* 100% EDGE-TO-EDGE FLUID VIEWPORT ENGINE */
+.content-wrapper {
+width: 100vw !important;
+max-width: 480px;
+margin: 0 auto;
+padding: 20px;
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+}
+.nav-header {
+display: flex;
+justify-content: flex-start;
+padding-bottom: 12px;
+margin-bottom: 15px;
+border-bottom: 1px solid #111;
+width: 100%;
+}
+.back-btn {
+background: #111;
+color: #aaa;
+border: 1px solid #222;
+padding: 10px 18px;
+border-radius: 20px;
+font-size: 13px;
+font-weight: 700;
+cursor: pointer;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.logo-main {
+font-family: var(--serif);
+font-size: 46px;
+color: var(--cab0-blue);
+margin-bottom: 25px;
+font-weight: 700;
+text-align: center;
+}
+.logo-main span { color: var(--cab0-yellow); }
+.woz-box {
+margin-bottom: 25px;
+padding: 18px;
+background: #0d0d0d;
+border-radius: 14px;
+border: 1px solid #1a1a1a;
+text-align: center;
+width: 100%;
+}
+.woz-quote {
+font-family: var(--fancy);
+font-style: italic;
+font-size: 19px;
+color: var(--cab0-yellow);
+line-height: 1.4;
+margin-bottom: 10px;
+}
+.woz-attribution {
+display: block;
+font-family: var(--sans);
+font-size: 11px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 1.2px;
+color: var(--cab0-yellow);
+opacity: 0.8;
+}
+h1 {
+font-family: var(--serif);
+font-size: 38px;
+line-height: 1.15;
+margin-bottom: 30px;
+color: #fff;
+text-align: center;
+width: 100%;
+}
+h1 em {
+color: var(--cab0-yellow);
+font-style: normal;
+}
+.cats-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 14px;
+margin-bottom: 30px;
+text-align: center;
+width: 100%;
+}
+.cat {
+background: #111;
+border: 1px solid #222;
+border-radius: 16px;
+padding: 26px 10px;
+cursor: pointer;
+transition: all 0.2s ease;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.cat.on {
+background: var(--cab0-yellow);
+border-color: var(--cab0-yellow);
+}
+.cat.on .cat-label {
+color: #000;
+}
+.cat.vegas-toggle-tile {
+border: 1px dashed var(--cab0-blue);
+background: #050b14;
+}
+.cat.vegas-toggle-tile.vegas-active {
+border: 1px solid var(--cab0-yellow);
+background: #1c1802;
+}
+.cat.vegas-toggle-tile.vegas-active .cat-label {
+color: var(--cab0-yellow);
+}
+.cat-label {
+font-size: 14px;
+font-weight: 800;
+color: #aaa;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.search-group {
+margin-bottom: 20px;
+width: 100%;
+}
+.search-group label {
+display: block;
+font-size: 12px;
+text-transform: uppercase;
+color: #888;
+margin-bottom: 8px;
+font-weight: 700;
+text-align: left;
+}
+.search-field {
+width: 100%;
+background: #111;
+border: 1px solid #333;
+color: #fff;
+padding: 18px;
+border-radius: 14px;
+font-size: 16px;
+outline: none;
+-webkit-appearance: none;
+}
+.search-field:focus {
+border-color: var(--cab0-blue);
+}
+.main-btn {
+background: var(--cab0-yellow);
+color: #000;
+padding: 20px;
+border-radius: 16px;
+text-align: center;
+font-weight: 800;
+font-size: 18px;
+cursor: pointer;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+width: 100%;
+border: none;
+margin-top: 10px;
+}
+.page { display: none; width: 100%; }
+.page.active { display: block; }
+.sort-strip {
+display: flex;
+background: #000;
+padding: 10px 0 15px;
+gap: 8px;
+width: 100%;
+}
+.sort-btn {
+flex: 1;
+padding: 14px;
+}
+border-radius: 8px;
+border: 1px solid #222;
+font-size: 11px;
+font-weight: 800;
+background: #000;
+color: #888;
+cursor: pointer;
+text-transform: uppercase;
+.sort-btn.active {
+background: var(--cab0-yellow);
+color: #000;
+border-color: var(--cab0-yellow);
+}
+.pcard {
+background: #111;
+border-radius: 15px;
+border: 1px solid #222;
+padding: 18px;
+margin-bottom: 12px;
+display: flex;
+align-items: center;
+gap: 15px;
+cursor: pointer;
+text-align: left;
+width: 100%;
+}
+.pcard.sel {
+border: 2px solid var(--cab0-yellow);
+background: #0a0a0a;
+}
+.pcard-logo {
+width: 45px;
+height: 45px;
+border-radius: 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 800;
+color: #fff;
+font-size: 16px;
+}
+/* INTEGRATED ACTION PANEL STYLE (BELOW GRID) */
+.inline-action-panel {
+background: #0d0d0d;
+border: 1px solid #1a1a1a;
+border-radius: 16px;
+padding: 20px;
+margin-top: 15px;
+width: 100%;
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+.inline-btn {
+background: var(--cab0-yellow);
+color: #000;
+padding: 18px;
+border-radius: 14px;
+text-align: center;
+font-weight: 800;
+font-size: 18px;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+text-decoration: none;
+width: 100%;
+display: block;
+}
+</style>
 </head>
 <body>
-
-    <header>
-        <!-- The text is now scaled dynamically so it will never cut off or wrap to two lines -->
-        <h1 class="logo-title">Every Ride. Every Delivery. One Search.</h1>
-    </header>
-
-    <div class="main-container">
-        <div class="dashboard-panel">
-            
-            <div class="mode-toggles">
-                <div class="service-type">
-                    <button class="service-btn active">Rideshare</button>
-                    <button class="service-btn">Delivery</button>
-                </div>
-                <div class="vegas-mode">
-                    <span>Vegas Mode</span>
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-            </div>
-
-            <div class="input-group">
-                <label>Pickup Location</label>
-                <input type="text" class="input-field" placeholder="Enter pickup address or hotel..." />
-            </div>
-
-            <div class="input-group">
-                <label>Dropoff Destination</label>
-                <input type="text" class="input-field" placeholder="Where to?" />
-            </div>
-
-            <button class="btn-action" onclick="showComparisons()">Compare Prices</button>
-
-            <!-- Dynamic Provider Comparison Tool -->
-            <div class="comparison-results" id="results-panel">
-                <div class="results-header">Best Options Available Now</div>
-                
-                <div class="provider-card">
-                    <div class="provider-info">
-                        <h4>UberX</h4>
-                        <p>3 mins away • Dropoff 2:15 PM</p>
-                    </div>
-                    <div class="provider-price">$14.50</div>
-                    <button class="book-btn">Book</button>
-                </div>
-
-                <div class="provider-card">
-                    <div class="provider-info">
-                        <h4>Lyft</h4>
-                        <p>5 mins away • Dropoff 2:18 PM</p>
-                    </div>
-                    <div class="provider-price">$16.20</div>
-                    <button class="book-btn">Book</button>
-                </div>
-
-                <div class="provider-card" style="border: 2px solid var(--bg-gold);">
-                    <div class="provider-info">
-                        <h4>Local Taxi</h4>
-                        <p>Cab Stand (0.1 mi) • No Surge</p>
-                    </div>
-                    <div class="provider-price">$12.00 (Est)</p>
-                    <button class="book-btn" style="background-color: var(--bg-gold); color: var(--text-blue);">View</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <script>
-        // Simple script to reveal the comparison panel when search is clicked
-        function showComparisons() {
-            document.getElementById('results-panel').style.display = 'block';
-        }
-
-        // Toggle logic for Rideshare vs Delivery buttons
-        const serviceBtns = document.querySelectorAll('.service-btn');
-        serviceBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                serviceBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-    </script>
+<div class="content-wrapper">
+<!-- PAGE 0: MAIN DASHBOARD SELECTION -->
+<div class="page active" id="pg0">
+<div class="logo-main">Cab<span>0</span>
+.com</div>
+<div class="woz-box">
+<p class="woz-quote">"Best of luck to you on this worthy venture, its your turn"</p>
+<span class="woz-attribution">Steve Wozniak, Apple Co-Founder</span>
+</div>
+<h1 id="main-headline">Every ride.
+<br>Every delivery.
+<br><em>One
+search.
+</em></h1>
+<div class="cats-grid" id="categories-container"></div>
+<button class="main-btn" onclick="goTo(1)">Find Best Rate →</button>
+</div>
+<!-- PAGE 1: ADDRESS VERIFICATION SYSTEM -->
+<div class="page" id="pg1">
+<div class="nav-header">
+<button class="back-btn" onclick="goTo(0)">← Main Menu</button>
+</div>
+<div style="padding: 5px 0;">
+<h2 style="color:#fff; margin-bottom:20px; font-family: var(--serif); font-size:
+32px;">Search Details</h2>
+<div class="search-group">
+<label>1. Pickup Location</label>
+<input type="text" id="pickup-input" class="search-field" placeholder="Current
+Location / Address...
+">
+</div>
+<div class="search-group">
+<label>2. Dropoff Destination</label>
+<input type="text" id="dropoff-input" class="search-field" placeholder="Enter
+landmark, city, or address...
+">
+</div>
+<button class="main-btn" onclick="goTo(2)">Compare Rates →</button>
+</div>
+</div>
+<!-- PAGE 2: MARKETPLACE PROVIDER CONSOLE -->
+<div class="page" id="pg2">
+<div class="nav-header">
+<button class="back-btn" onclick="goTo(0)">← Main Menu</button>
+</div>
+<div class="sort-strip">
+<button class="sort-btn active" id="sort-price"
+onclick="setSort('price')">CHEAPEST</button>
+<button class="sort-btn" id="sort-time" onclick="setSort('time')">FASTEST</button>
+</div>
+<!-- Dynamic selection list displays directly here -->
+<div style="padding: 5px 0;" id="p3-grid"></div>
+<!-- INLINE UNIFIED ACTION ZONE: Always shows immediately below grid list -->
+<div class="inline-action-panel">
+<div style="text-align: left;">
+<div id="sel-name" style="font-weight:800; color:#fff; font-size: 16px;">Select
+Service</div>
+<div style="font-size:12px; color:#888; margin-top: 3px;">Secure Official Booking
+Link</div>
+</div>
+</div>
+</div>
+<a href="#" id="final-link" target="
+blank" class="inline-btn">Book Now</a>
+_
+</div>
+<script>
+var isVegasMode = false;
+var currentCat = 'ride'
+, currentSort = 'price'
+, selectedId = null;
+var LINKS = {
+'uber': 'https://m.uber.com'
+,
+'lyft': 'https://www.lyft.com'
+,
+'vegas
+_
+loop': 'https://www.boringcompany.com/loop'
+,
+'zoox': 'https://zoox.com'
+,
+'doordash': 'https://www.doordash.com'
+,
+'ubereats': 'https://www.ubereats.com'
+,
+'instacart': 'https://www.instacart.com'
+,
+'amazon
+_
+fresh': 'https://www.amazon.com/fresh'
+,
+'walmart
+_plus': 'https://www.walmart.com/plus'
+};
+var PROVIDERS = {
+ride: [
+{ id:'uber'
+, name:'Uber X'
+, s:'Ub'
+, c:'#111111'
+, price:12.50, time:4 },
+{ id:'lyft'
+, name:'Lyft Ride'
+, s:'Ly'
+, c:'#FF00BF'
+, price:11.20, time:6 }
+],
+loop: [
+{ id:'vegas
+_
+loop'
+, name:'Vegas Loop (Tunnel Ride)'
+, s:'TL'
+, c:'#cc0000'
+, price:0.00,
+time:2 }
+],
+robotaxi: [
+{ id:'zoox'
+, name:'Zoox Autonomous (Free Local)'
+, s:'Zx'
+, c:'#2c3e50'
+, price:0.00,
+time:5 }
+],
+delivery: [
+{ id:'doordash'
+, name:'DoorDash'
+, s:'DD'
+, c:'#FF3008'
+, price:2.99, time:22 },
+{ id:'ubereats'
+, name:'Uber Eats'
+, s:'UE'
+, c:'#06C167'
+, price:3.49, time:18 }
+],
+grocery: [
+{ id:'amazon
+fresh'
+, name:'Amazon Fresh / Prime'
+, s:'Az'
+, c:'#FF9900'
+_
+, price:0.00,
+time:30 },
+{ id:'walmart
+_plus'
+, name:'Walmart+ Grocery Delivery'
+, s:'Wm'
+, c:'#0071DC'
+,
+price:0.00, time:45 },
+{ id:'instacart'
+, name:'Instacart Delivery'
+, s:'IC'
+, c:'#00AD31'
+, price:4.99, time:40 }
+]
+};
+function toggleVegasMode() {
+isVegasMode = !isVegasMode;
+var headline = document.getElementById('main-headline');
+if(isVegasMode) {
+headline.innerHTML = "Vegas ride.
+<br>Vegas delivery.
+<br><em>One search.
+</em>";
+} else {
+headline.innerHTML = "Every ride.
+<br>Every delivery.
+<br><em>One search.
+</em>";
+if(currentCat === 'loop' || currentCat === 'robotaxi') {
+currentCat = 'ride';
+}
+}
+renderCategories();
+}
+function renderCategories() {
+var container = document.getElementById('categories-container');
+var html = '';
+if(!isVegasMode) {
+html +=
+`<div class="cat ${currentCat === 'ride' ? 'on' : ''}" onclick="pickCat(this,
+'ride')"><div class="cat-label">Rideshare</div></div>`
+;
+html +=
+`<div class="cat ${currentCat === 'delivery' ? 'on' : ''}" onclick="pickCat(this,
+'delivery')"><div class="cat-label">Food Delivery</div></div>`
+;
+html +=
+`<div class="cat ${currentCat === 'grocery' ? 'on' : ''}" onclick="pickCat(this,
+'grocery')"><div class="cat-label">Groceries</div></div>`
+;
+html +=
+`<div class="cat vegas-toggle-tile" onclick="toggleVegasMode()"><div
+class="cat-label">Vegas Mode 🎰</div></div>`
+;
+} else {
+html +=
+`<div class="cat ${currentCat === 'ride' ? 'on' : ''}" onclick="pickCat(this,
+'ride')"><div class="cat-label">Rideshare</div></div>`
+;
+html +=
+`<div class="cat ${currentCat === 'loop' ? 'on' : ''}" onclick="pickCat(this,
+'loop')"><div class="cat-label">Vegas Loop</div></div>`
+;
+html +=
+`<div class="cat ${currentCat === 'robotaxi' ? 'on' : ''}" onclick="pickCat(this,
+'robotaxi')"><div class="cat-label">Robotaxis</div></div>`
+;
+html +=
+`<div class="cat ${currentCat === 'delivery' ? 'on' : ''}" onclick="pickCat(this,
+'delivery')"><div class="cat-label">Food Delivery</div></div>`
+;
+html +=
+`<div class="cat ${currentCat === 'grocery' ? 'on' : ''}" onclick="pickCat(this,
+'grocery')"><div class="cat-label">Groceries</div></div>`
+;
+html +=
+`<div class="cat vegas-toggle-tile vegas-active"
+onclick="toggleVegasMode()"><div class="cat-label">Exit Vegas</div></div>`
+;
+}
+container.innerHTML = html;
+}
+function goTo(n) {
+document.querySelectorAll('
+.page').forEach((p, i) => p.classList.toggle('active'
+, i === n));
+if (n === 2) renderProviders();
+window.scrollTo(0,0);
+}
+function pickCat(el, cat) {
+document.querySelectorAll('
+.cat').forEach(c => c.classList.remove('on'));
+el.classList.add('on');
+currentCat = cat;
+selectedId = null;
+}
+function setSort(type) {
+currentSort = type;
+document.querySelectorAll('
+.sort-btn').forEach(b => b.classList.toggle('active'
+, b.id ===
+'sort-
+'+type));
+renderProviders();
+}
+function renderProviders() {
+var list = [...PROVIDERS[currentCat]].sort((a,b) => a[currentSort] - b[currentSort]);
+if (list.length > 0 && !selectedId) selectProvider(list[0].id);
+var html = '';
+list.forEach(p => {
+var activeClass = p.id === selectedId ? 'sel' : '';
+var displayPrice = p.price === 0 ? "FREE" :
+`$${p.price.toFixed(2)}`
+;
+html +=
+`
+<div class="pcard ${activeClass}" onclick="selectProvider('${p.id}')">
+<div class="pcard-logo" style="background:${p.c}">${p.s}</div>
+<div style="flex:1;">
+<div style="font-weight:700; color:#fff; font-size:16px;">${p.name}</div>
+<div style="font-size:13px; color:#666; margin-top:2px;">${p.time} min
+response time</div>
+</div>
+<div style="font-weight:800; color:var(--cab0-yellow);
+font-size:18px;">${displayPrice}</div>
+</div>
+`
+;
+});
+document.getElementById('p3-grid').innerHTML = html;
+}
+function selectProvider(id) {
+selectedId = id;
+var p = Object.values(PROVIDERS).flat().find(x => x.id === id);
+if(p) {
+document.getElementById('sel-name').textContent = p.name;
+document.getElementById('final-link').href = LINKS[id] || '#';
+renderProviders();
+}
+}
+renderCategories();
+</script>
 </body>
 </html>
