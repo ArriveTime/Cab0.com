@@ -85,19 +85,24 @@
             color: var(--cab0-blue);
         }
 
-        /* WOZ BOX & SELECTION BOXES MATCHED TO EXACT SAME SIZE AND PADDING */
+        /* IDENTICAL SIZE, PADDING, HEIGHT, AND WIDTH FOR WOZ BOX AND ALL SELECTION BOXES */
         .woz-box, .cat { 
-            margin: 0 auto 18px auto; 
-            padding: 26px 24px; 
-            background: rgba(255, 255, 255, 0.9);
+            margin: 0 auto 16px auto; 
+            padding: 28px 24px; 
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 18px;
             border: 2px solid var(--cab0-blue);
             text-align: center;
             width: 100%;
+            min-height: 105px;
             box-shadow: 0 8px 25px rgba(0, 68, 204, 0.12);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         } 
         
         .woz-box::before, .cat::before {
@@ -146,7 +151,7 @@
             text-underline-offset: 4px;
         }
 
-        /* SINGLE COLUMN STACK */
+        /* SINGLE COLUMN STACK FOR SELECTION BOXES */
         .cats-grid { 
             display: flex !important; 
             flex-direction: column !important; 
@@ -159,9 +164,6 @@
         .cat { 
             cursor: pointer; 
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
         } 
         
         .cat::before {
@@ -186,7 +188,7 @@
         } 
         .cat.vegas-toggle-tile {
             border: 2px dashed var(--cab0-blue);
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
         }
         .cat.vegas-toggle-tile.vegas-active {
             border: 2px solid var(--cab0-blue);
@@ -196,7 +198,7 @@
             color: #ffffff;
         }
         .cat-label { 
-            font-size: 18px; 
+            font-size: 19px; 
             font-weight: 900; 
             color: var(--cab0-blue-dark); 
             text-transform: uppercase;
