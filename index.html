@@ -6,9 +6,11 @@
     <title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
     <style>
         :root { 
-            --cab0-yellow: #ffff00;    /* Bright Yellow Background / Accents */
-            --cab0-blue: #0000ff;      /* Bright Blue Font */
-            --cab0-blue-dark: #0000cc; /* Deep Bright Blue */
+            --cab0-bg: #f9f6ee;        /* Soft, warm luxury ivory-gold background */
+            --cab0-card: #ffffff;      /* Crisp white cards */
+            --cab0-blue: #0044cc;      /* Rich, readable royal blue font */
+            --cab0-blue-dark: #002677; /* Deep accent blue */
+            --cab0-gold-glow: #e6c687; /* Subtle warm border glow */
             --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; 
             --serif: 'DM Serif Display', Georgia, serif; 
         }
@@ -19,9 +21,9 @@
             padding: 0; 
         }
 
-        /* TOUR-LV INSPIRED DYNAMIC GRID & LAYOUT FORMAT */
+        /* EYE-FRIENDLY LUXURY MOBILE-FIRST ENGINE */
         html, body { 
-            background-color: var(--cab0-yellow) !important;
+            background: linear-gradient(135deg, #fbf8f2, #f3ebd8) !important;
             color: var(--cab0-blue); 
             font-family: var(--sans);
             min-height: 100vh;
@@ -31,10 +33,10 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* 100% EDGE-TO-EDGE FLUID VIEWPORT ENGINE */
+        /* 100% FLUID MOBILE OPTIMIZED CONTAINER */
         .content-wrapper { 
             width: 100vw !important;
-            max-width: 1200px; 
+            max-width: 480px; /* Locked to optimal smartphone viewing width */
             margin: 0 auto;
             padding: 20px;
             display: flex;
@@ -47,20 +49,21 @@
             justify-content: flex-start;
             padding-bottom: 12px;
             margin-bottom: 15px;
-            border-bottom: 1px solid rgba(0, 0, 255, 0.2);
+            border-bottom: 2px solid rgba(0, 68, 204, 0.15);
             width: 100%;
         }
         .back-btn {
             background: #ffffff;
             color: var(--cab0-blue);
             border: 2px solid var(--cab0-blue);
-            padding: 10px 18px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 800;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            box-shadow: 0 4px 10px rgba(0,68,204,0.1);
             transition: all 0.2s ease;
         }
         .back-btn:hover {
@@ -70,11 +73,13 @@
 
         .logo-main { 
             font-family: var(--serif); 
-            font-size: 56px; 
-            color: var(--cab0-blue); 
-            margin-bottom: 25px; 
+            font-size: 52px; 
+            color: var(--cab0-blue-dark); 
+            margin-bottom: 20px; 
             font-weight: 900;
             text-align: center;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
         } 
         /* LARGE ZERO STYLING */
         .logo-main .big-zero { 
@@ -82,31 +87,45 @@
             vertical-align: baseline; 
             display: inline-block;
             line-height: 1;
+            color: var(--cab0-blue);
         }
 
+        /* MODERN DYNAMIC WOZNIAK HIGHLIGHT BOX */
         .woz-box { 
-            margin: 0 auto 30px auto; 
-            padding: 20px; 
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 14px;
+            margin-bottom: 25px; 
+            padding: 22px; 
+            background: linear-gradient(135deg, #ffffff, #fffef9);
+            border-radius: 18px;
             border: 2px solid var(--cab0-blue);
             text-align: center;
-            max-width: 600px;
             width: 100%;
+            box-shadow: 0 8px 25px rgba(0, 68, 204, 0.12);
+            position: relative;
+            overflow: hidden;
         } 
+        .woz-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 6px; height: 100%;
+            background: var(--cab0-blue);
+        }
         .woz-quote { 
             font-family: var(--serif); 
             font-style: italic; 
-            font-size: 20px; 
-            color: var(--cab0-blue); 
+            font-size: 18px; 
+            color: var(--cab0-blue-dark); 
             line-height: 1.4; 
             margin-bottom: 10px; 
+            font-weight: 700;
         } 
         .woz-attribution { 
-            display: block; 
+            display: inline-block; 
+            background: rgba(0, 68, 204, 0.08);
+            padding: 4px 12px;
+            border-radius: 12px;
             font-family: var(--sans); 
-            font-size: 12px; 
-            font-weight: 800; 
+            font-size: 11px; 
+            font-weight: 900; 
             text-transform: uppercase; 
             letter-spacing: 1.2px; 
             color: var(--cab0-blue); 
@@ -114,54 +133,57 @@
 
         h1 { 
             font-family: var(--serif); 
-            font-size: 42px; 
-            line-height: 1.2; 
-            margin-bottom: 30px; 
-            color: var(--cab0-blue); 
+            font-size: 38px; 
+            line-height: 1.15; 
+            margin-bottom: 25px; 
+            color: var(--cab0-blue-dark); 
             text-align: center; 
             width: 100%;
         } 
         h1 em { 
-            color: #0000cc; 
+            color: var(--cab0-blue); 
             font-style: normal; 
             text-decoration: underline;
+            text-decoration-thickness: 3px;
+            text-underline-offset: 4px;
         }
 
-        /* TOUR-LV CARD GRID FORMATTING */
+        /* ROW OF 2 ASCENDING GRID (OPTIMIZED FOR LARGE MOBILE TOUCH TARGETS) */
         .cats-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
-            gap: 20px; 
-            margin-bottom: 30px; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 14px; 
+            margin-bottom: 25px; 
+            text-align: center; 
             width: 100%;
         } 
         .cat { 
             background: #ffffff; 
             border: 2px solid var(--cab0-blue); 
-            border-radius: 16px; 
-            padding: 30px 20px; 
+            border-radius: 18px; 
+            padding: 28px 12px; 
             cursor: pointer; 
-            transition: all 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 255, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 68, 204, 0.08);
         } 
-        .cat:hover {
-            transform: translateY(-5px);
-            background: #f0f0ff;
+        .cat:hover, .cat:active {
+            transform: scale(0.97);
+            background: #f0f4ff;
         }
         .cat.on { 
             background: var(--cab0-blue); 
             border-color: var(--cab0-blue); 
+            box-shadow: 0 6px 18px rgba(0, 68, 204, 0.3);
         } 
         .cat.on .cat-label { 
             color: #ffffff; 
         } 
         .cat.vegas-toggle-tile {
             border: 2px dashed var(--cab0-blue);
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.6);
         }
         .cat.vegas-toggle-tile.vegas-active {
             border: 2px solid var(--cab0-blue);
@@ -171,9 +193,9 @@
             color: #ffffff;
         }
         .cat-label { 
-            font-size: 16px; 
+            font-size: 15px; 
             font-weight: 900; 
-            color: var(--cab0-blue); 
+            color: var(--cab0-blue-dark); 
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -181,15 +203,12 @@
         .search-group {
             margin-bottom: 20px;
             width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
         .search-group label {
             display: block;
             font-size: 13px;
             text-transform: uppercase;
-            color: var(--cab0-blue);
+            color: var(--cab0-blue-dark);
             margin-bottom: 8px;
             font-weight: 900;
             text-align: left;
@@ -198,22 +217,24 @@
             width: 100%;
             background: #ffffff;
             border: 2px solid var(--cab0-blue);
-            color: var(--cab0-blue);
+            color: var(--cab0-blue-dark);
             padding: 18px;
-            border-radius: 14px;
+            border-radius: 16px;
             font-size: 16px;
             outline: none;
             -webkit-appearance: none;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
         }
         .search-field:focus {
-            background: #f0f0ff;
+            background: #f0f4ff;
+            box-shadow: 0 0 10px rgba(0, 68, 204, 0.2);
         }
         .search-field::placeholder {
-            color: #6666aa;
+            color: #6688cc;
         }
 
         .main-btn { 
-            background: var(--cab0-blue); 
+            background: linear-gradient(135deg, #0044cc, #002677); 
             color: #ffffff; 
             padding: 20px; 
             border-radius: 16px; 
@@ -224,15 +245,13 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             width: 100%;
-            max-width: 600px;
-            margin: 10px auto 0 auto;
-            display: block;
             border: none;
-            transition: opacity 0.2s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 255, 0.3);
+            margin-top: 10px;
+            box-shadow: 0 6px 20px rgba(0, 68, 204, 0.3);
+            transition: transform 0.2s ease, opacity 0.2s ease;
         }
-        .main-btn:hover {
-            opacity: 0.9;
+        .main-btn:active {
+            transform: scale(0.98);
         }
 
         .page { display: none; width: 100%; } 
@@ -244,13 +263,11 @@
             padding: 10px 0 15px; 
             gap: 10px; 
             width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
         } 
         .sort-btn { 
             flex: 1; 
-            padding: 14px; 
-            border-radius: 10px; 
+            padding: 16px; 
+            border-radius: 12px; 
             border: 2px solid var(--cab0-blue); 
             font-size: 12px; 
             font-weight: 900; 
@@ -258,68 +275,63 @@
             color: var(--cab0-blue); 
             cursor: pointer; 
             text-transform: uppercase;
+            box-shadow: 0 2px 6px rgba(0,68,204,0.08);
         } 
         .sort-btn.active { 
             background: var(--cab0-blue); 
             color: #ffffff; 
         } 
         
-        #p3-grid {
-            max-width: 600px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
         .pcard { 
             background: #ffffff; 
-            border-radius: 15px; 
+            border-radius: 16px; 
             border: 2px solid var(--cab0-blue); 
-            padding: 18px; 
-            margin-bottom: 12px; 
+            padding: 20px; 
+            margin-bottom: 14px; 
             display: flex; 
             align-items: center; 
             gap: 15px; 
             cursor: pointer; 
             text-align: left; 
             width: 100%;
-            box-shadow: 0 2px 8px rgba(0,0,255,0.1);
+            box-shadow: 0 4px 12px rgba(0, 68, 204, 0.08);
             transition: transform 0.2s ease;
         } 
-        .pcard:hover {
-            transform: translateY(-2px);
+        .pcard:active {
+            transform: scale(0.98);
         }
         .pcard.sel { 
             border: 3px solid var(--cab0-blue); 
-            background: #f0f0ff; 
+            background: #f0f4ff; 
+            box-shadow: 0 6px 18px rgba(0, 68, 204, 0.2);
         }
         .pcard-logo {
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 900;
             color: #ffffff;
-            font-size: 16px;
+            font-size: 17px;
         }
 
         /* INTEGRATED ACTION PANEL STYLE */
         .inline-action-panel {
             background: #ffffff;
             border: 2px solid var(--cab0-blue);
-            border-radius: 16px;
-            padding: 20px;
-            margin: 15px auto 0 auto;
-            max-width: 600px;
+            border-radius: 18px;
+            padding: 22px;
+            margin-top: 20px;
             width: 100%;
             display: flex;
             flex-direction: column;
             gap: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,255,0.15);
+            box-shadow: 0 8px 25px rgba(0, 68, 204, 0.15);
         }
         .inline-btn {
-            background: var(--cab0-blue);
+            background: linear-gradient(135deg, #0044cc, #002677);
             color: #ffffff;
             padding: 18px;
             border-radius: 14px;
@@ -331,6 +343,7 @@
             text-decoration: none;
             width: 100%;
             display: block;
+            box-shadow: 0 4px 15px rgba(0, 68, 204, 0.3);
         }
     </style>
 </head>
@@ -360,7 +373,7 @@
             </div>
             
             <div style="padding: 5px 0;">
-                <h2 style="color:var(--cab0-blue); margin-bottom:20px; font-family: var(--serif); font-size: 32px; text-align: center;">Search Details</h2>
+                <h2 style="color:var(--cab0-blue-dark); margin-bottom:20px; font-family: var(--serif); font-size: 32px;">Search Details</h2>
                 
                 <div class="search-group">
                     <label>1. Pickup Location</label>
@@ -393,8 +406,8 @@
             <!-- INLINE UNIFIED ACTION ZONE -->
             <div class="inline-action-panel">
                 <div style="text-align: left;">
-                    <div id="sel-name" style="font-weight:900; color:var(--cab0-blue); font-size: 16px;">Select Service</div>
-                    <div style="font-size:12px; color:#555; margin-top: 3px;">Secure Official Booking Link</div>
+                    <div id="sel-name" style="font-weight:900; color:var(--cab0-blue-dark); font-size: 17px;">Select Service</div>
+                    <div style="font-size:12px; color:#5577bb; margin-top: 3px; font-weight: 700;">Secure Official Booking Link</div>
                 </div>
                 <a href="#" id="final-link" target="_blank" class="inline-btn">Book Now</a>
             </div>
@@ -508,8 +521,8 @@
                     <div class="pcard ${activeClass}" onclick="selectProvider('${p.id}')">
                         <div class="pcard-logo" style="background:${p.c}">${p.s}</div>
                         <div style="flex:1;">
-                            <div style="font-weight:900; color:var(--cab0-blue); font-size:16px;">${p.name}</div>
-                            <div style="font-size:13px; color:#444; margin-top:2px;">${p.time} min response time</div>
+                            <div style="font-weight:900; color:var(--cab0-blue-dark); font-size:16px;">${p.name}</div>
+                            <div style="font-size:13px; color:#5577bb; margin-top:2px; font-weight:700;">${p.time} min response time</div>
                         </div>
                         <div style="font-weight:900; color:var(--cab0-blue); font-size:18px;">${displayPrice}</div>
                     </div>
