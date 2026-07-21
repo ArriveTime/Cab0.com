@@ -85,7 +85,7 @@
             color: var(--cab0-blue);
         }
 
-        /* MASTER UNIFORM BOX STYLE: WOZ-BOX, .CAT, AND FIND BEST RATE BUTTON ALL SHARE IDENTICAL DIMENSIONS */
+        /* MASTER UNIFORM BOX STYLE */
         .woz-box, .cat, .main-btn { 
             margin: 0 auto 20px auto !important; 
             padding: 38px 28px !important; 
@@ -114,7 +114,7 @@
             background: var(--cab0-blue);
         }
 
-        /* QUOTE FONT MATCHED TO HEADLINE FONT SIZE */
+        /* QUOTE FONT */
         .woz-quote { 
             font-family: var(--serif) !important; 
             font-style: italic; 
@@ -125,28 +125,30 @@
             font-weight: 900 !important;
         } 
         
-        /* ATTRIBUTION FONT MATCHED TO THE QUOTE SIZE */
+        /* ATTRIBUTION FONT MATCHED TO QUOTE SIZE */
         .woz-attribution { 
             display: inline-block; 
             background: rgba(0, 68, 204, 0.08);
             padding: 6px 14px;
             border-radius: 12px;
             font-family: var(--serif) !important; 
-            font-size: clamp(24px, 5vw, 32px) !important; 
+            font-size: clamp(30px, 6vw, 38px) !important; 
             font-weight: 900 !important; 
             text-transform: none !important; 
             letter-spacing: normal !important; 
             color: var(--cab0-blue) !important; 
         }
 
+        /* HEADLINE FORCED TO SINGLE LINE & LARGER FONT */
         h1 { 
             font-family: var(--serif); 
-            font-size: clamp(30px, 6vw, 38px); 
-            line-height: 1.15; 
+            font-size: clamp(24px, 4.5vw, 36px); 
+            line-height: 1.2; 
             margin-bottom: 25px; 
             color: var(--cab0-blue-dark); 
             text-align: center; 
             width: 100%;
+            white-space: nowrap;
         } 
         h1 em { 
             color: var(--cab0-blue); 
@@ -195,7 +197,7 @@
             color: #ffffff !important;
         }
         
-        /* CATEGORY LABEL FONT MATCHED TO HEADLINE FONT SIZE */
+        /* CATEGORY LABEL FONT */
         .cat-label { 
             font-family: var(--serif) !important;
             font-size: clamp(30px, 6vw, 38px) !important; 
@@ -239,7 +241,7 @@
             box-shadow: 0 0 10px rgba(0, 68, 204, 0.2);
         }
 
-        /* FIND BEST RATE BUTTON FULLY MATCHED TO THE SIZE, FONT, AND STYLE OF SELECTION BOXES */
+        /* FIND BEST RATE BUTTON MATCHED */
         .main-btn { 
             background: linear-gradient(135deg, #0044cc, #002677) !important; 
             color: #ffffff !important; 
@@ -364,6 +366,7 @@
         @media (max-width: 768px) {
             .content-wrapper { padding: 12px; }
             header { padding: 15px 0 10px 0; }
+            h1 { font-size: clamp(16px, 3.8vw, 22px); }
         }
     </style>
 </head>
@@ -382,7 +385,7 @@
                 <span class="woz-attribution">Steve Wozniak, Apple Co-Founder</span>
             </div>
 
-            <h1 id="main-headline">Every ride.<br>Every delivery.<br><em>One search.</em></h1>
+            <h1 id="main-headline">Every Ride. Every Delivery. <em>One Search.</em></h1>
 
             <div class="cats-grid" id="categories-container"></div>
             <button class="main-btn" onclick="goTo(1)">Find Best Rate →</button>
@@ -483,9 +486,9 @@
             var headline = document.getElementById('main-headline');
             
             if(isVegasMode) {
-                headline.innerHTML = "Vegas ride.<br>Vegas delivery.<br><em>One search.</em>";
+                headline.innerHTML = "Vegas Ride. Vegas Delivery. <em>One Search.</em>";
             } else {
-                headline.innerHTML = "Every ride.<br>Every delivery.<br><em>One search.</em>";
+                headline.innerHTML = "Every Ride. Every Delivery. <em>One Search.</em>";
                 if(currentCat === 'loop' || currentCat === 'robotaxi') {
                     currentCat = 'ride';
                 }
