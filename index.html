@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -85,8 +85,8 @@
             color: var(--cab0-blue);
         }
 
-        /* MASTER UNIFORM BOX STYLE */
-        .woz-box, .cat, .main-btn { 
+        /* MASTER UNIFORM BOX STYLE (Applied to front boxes, search fields, and buttons) */
+        .woz-box, .cat, .main-btn, .search-field, .inline-btn { 
             margin: 0 auto 20px auto !important; 
             padding: 38px 28px !important; 
             background: rgba(255, 255, 255, 0.95) !important;
@@ -103,11 +103,14 @@
             flex-direction: column !important;
             align-items: center !important;
             justify-content: center !important;
-            cursor: pointer;
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         } 
         
-        .woz-box::before, .cat::before, .main-btn::before {
+        .cat, .main-btn, .inline-btn {
+            cursor: pointer;
+        }
+
+        .woz-box::before, .cat::before, .main-btn::before, .search-field::before, .inline-btn::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 8px; height: 100%;
@@ -149,7 +152,6 @@
 
         h1 { 
             font-family: var(--serif); 
-            /* Scaled down further to ensure no cutoff on smaller screen widths */
             font-size: clamp(16px, 3.6vw, 36px); 
             line-height: 1.1; 
             color: var(--cab0-blue-dark); 
@@ -173,7 +175,7 @@
             width: 100% !important;
         } 
 
-        .cat:hover, .cat:active, .main-btn:hover {
+        .cat:hover, .cat:active, .main-btn:hover, .inline-btn:hover, .search-field:focus-within {
             transform: translateY(-2px);
             background: #f0f4ff !important;
             border-color: var(--cab0-blue-dark) !important;
@@ -230,21 +232,24 @@
             font-weight: 900;
             text-align: left;
         }
+        
+        /* SEARCH FIELDS MATCHING UNIFORM BOX SIZE */
         .search-field {
-            width: 100%;
-            background: #ffffff;
-            border: 2px solid var(--cab0-blue);
-            color: var(--cab0-blue-dark);
-            padding: 18px;
-            border-radius: 16px;
-            font-size: 16px;
+            color: var(--cab0-blue-dark) !important;
+            font-family: var(--serif) !important;
+            font-size: clamp(24px, 5vw, 34px) !important; 
+            font-weight: 900 !important;
+            text-align: center !important;
             outline: none;
             -webkit-appearance: none;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
+        }
+        .search-field::placeholder {
+            color: #99aabb;
+            font-style: italic;
         }
         .search-field:focus {
-            background: #f0f4ff;
-            box-shadow: 0 0 10px rgba(0, 68, 204, 0.2);
+            background: #f0f4ff !important;
+            box-shadow: 0 0 10px rgba(0, 68, 204, 0.2) !important;
         }
 
         /* FIND BEST RATE BUTTON MATCHED */
@@ -341,19 +346,16 @@
             box-shadow: 0 8px 25px rgba(0, 68, 204, 0.15);
         }
         .inline-btn {
-            background: linear-gradient(135deg, #0044cc, #002677);
-            color: #ffffff;
-            padding: 18px;
-            border-radius: 14px;
-            text-align: center;
-            font-weight: 900;
-            font-size: 18px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            text-decoration: none;
-            width: 100%;
-            display: block;
-            box-shadow: 0 4px 15px rgba(0, 68, 204, 0.3);
+            background: linear-gradient(135deg, #0044cc, #002677) !important;
+            color: #ffffff !important;
+            font-family: var(--serif) !important;
+            font-size: clamp(30px, 6vw, 38px) !important; 
+            text-transform: none !important;
+            letter-spacing: -0.5px !important;
+            text-decoration: none !important;
+        }
+        .inline-btn::before {
+             background: #ffffff !important;
         }
 
         footer {
@@ -409,12 +411,12 @@
                 
                 <div class="search-group">
                     <label>1. Pickup Location</label>
-                    <input type="text" id="pickup-input" class="search-field" placeholder="Current Location / Address...">
+                    <input type="text" id="pickup-input" class="search-field" placeholder="Current Location...">
                 </div>
 
                 <div class="search-group">
                     <label>2. Dropoff Destination</label>
-                    <input type="text" id="dropoff-input" class="search-field" placeholder="Enter landmark, city, or address...">
+                    <input type="text" id="dropoff-input" class="search-field" placeholder="Enter address...">
                 </div>
 
                 <button class="main-btn" onclick="goTo(2)">Compare Rates →</button>
