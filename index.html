@@ -46,7 +46,7 @@
             width: 100%;
         }
 
-        /* BACK BUTTON DOUBLED IN SIZE FOR EASY READING & ACCESS */
+        /* BACK BUTTON DOUBLED IN SIZE */
         .back-btn {
             background: #ffffff;
             color: var(--cab0-blue);
@@ -87,7 +87,7 @@
             color: var(--cab0-blue);
         }
 
-        /* MASTER UNIFORM BOX STYLE (Applied to front boxes, search fields, buttons, and provider cards) */
+        /* MASTER UNIFORM BOX STYLE */
         .woz-box, .cat, .main-btn, .search-field, .inline-btn, .pcard { 
             margin: 0 auto 20px auto !important; 
             padding: 38px 28px !important; 
@@ -119,29 +119,42 @@
             background: var(--cab0-blue);
         }
 
-        /* QUOTE FONT */
+        /* WOZNIAK QUOTE & REPOSITIONED ATTRIBUTION */
         .woz-quote { 
             font-family: var(--serif) !important; 
             font-style: italic; 
-            font-size: clamp(30px, 6vw, 38px) !important; 
+            font-size: clamp(26px, 5.5vw, 36px) !important; 
             color: var(--cab0-blue-dark) !important; 
             line-height: 1.15 !important; 
-            margin-bottom: 14px !important; 
+            margin-bottom: 12px !important; 
             font-weight: 900 !important;
         } 
         
-        /* ATTRIBUTION FONT MATCHED TO QUOTE SIZE */
+        .woz-name-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            width: 100%;
+        }
+
         .woz-attribution { 
-            display: inline-block; 
-            background: rgba(0, 68, 204, 0.08);
-            padding: 6px 14px;
-            border-radius: 12px;
             font-family: var(--serif) !important; 
-            font-size: clamp(30px, 6vw, 38px) !important; 
+            font-size: clamp(20px, 4.5vw, 28px) !important; 
             font-weight: 900 !important; 
-            text-transform: none !important; 
-            letter-spacing: normal !important; 
+            color: var(--cab0-blue-dark) !important; 
+        }
+
+        .woz-subattribution {
+            display: inline-block;
+            background: rgba(0, 68, 204, 0.08);
+            padding: 4px 12px;
+            border-radius: 10px;
+            font-family: var(--serif) !important; 
+            font-size: clamp(16px, 3.5vw, 22px) !important; 
+            font-weight: 900 !important; 
             color: var(--cab0-blue) !important; 
+            letter-spacing: normal !important;
         }
 
         /* HEADLINE ADJUSTED TO GUARANTEE SINGLE-LINE FIT */
@@ -276,36 +289,44 @@
         .page { display: none; width: 100%; } 
         .page.active { display: block; }
 
+        /* FASTEST AND CHEAPEST BOXES DOUBLED IN HEIGHT TO MATCH SELECTION BOXES */
         .sort-strip { 
             display: flex; 
-            padding: 10px 0 15px; 
-            gap: 10px; 
+            padding: 5px 0 20px; 
+            gap: 15px; 
             width: 100%;
         } 
         .sort-btn { 
             flex: 1; 
-            padding: 16px; 
-            border-radius: 12px; 
-            border: 2px solid var(--cab0-blue); 
-            font-size: 12px; 
-            font-weight: 900; 
+            min-height: 150px !important;
+            padding: 28px !important;
+            border-radius: 20px !important; 
+            border: 2px solid var(--cab0-blue) !important; 
+            font-family: var(--serif) !important;
+            font-size: clamp(24px, 5vw, 32px) !important; 
+            font-weight: 900 !important; 
             background: #ffffff; 
             color: var(--cab0-blue); 
             cursor: pointer; 
-            text-transform: uppercase;
-            box-shadow: 0 2px 6px rgba(0,68,204,0.08);
+            text-transform: none !important;
+            box-shadow: 0 10px 30px rgba(0, 68, 204, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         } 
         .sort-btn.active { 
-            background: var(--cab0-blue); 
-            color: #ffffff; 
+            background: var(--cab0-blue) !important; 
+            color: #ffffff !important; 
+            box-shadow: 0 10px 28px rgba(0, 68, 204, 0.35) !important;
         } 
         
-        /* PCARD MATCHES MASTER UNIFORM BOX SIZE */
+        /* PCARD MATCHES MASTER UNIFORM BOX SIZE WITH INCREASED FONTS */
         .pcard { 
             flex-direction: row !important;
             justify-content: flex-start !important;
             gap: 20px !important;
-            padding: 28px !important;
+            padding: 38px 28px !important;
         } 
         .pcard:active {
             transform: scale(0.98);
@@ -316,15 +337,15 @@
             box-shadow: 0 6px 18px rgba(0, 68, 204, 0.2) !important;
         }
         .pcard-logo {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 900;
             color: #ffffff;
-            font-size: 20px;
+            font-size: 24px;
         }
 
         .inline-action-panel {
@@ -383,7 +404,10 @@
             
             <div class="woz-box">
                 <p class="woz-quote">"Best of luck to you on this worthy venture, its your turn"</p>
-                <span class="woz-attribution">Steve Wozniak, Apple Co-Founder</span>
+                <div class="woz-name-block">
+                    <span class="woz-attribution">Steve Wozniak</span>
+                    <span class="woz-subattribution">Apple Co-Founder</span>
+                </div>
             </div>
 
             <div class="headline-container">
@@ -424,8 +448,8 @@
             </div>
 
             <div class="sort-strip">
-                <button class="sort-btn active" id="sort-price" onclick="setSort('price')">CHEAPEST</button>
-                <button class="sort-btn" id="sort-time" onclick="setSort('time')">FASTEST</button>
+                <button class="sort-btn active" id="sort-price" onclick="setSort('price')">Cheapest</button>
+                <button class="sort-btn" id="sort-time" onclick="setSort('time')">Fastest</button>
             </div>
             
             <div style="padding: 5px 0;" id="p3-grid"></div>
@@ -552,10 +576,10 @@
                     <div class="pcard ${activeClass}" onclick="selectProvider('${p.id}')">
                         <div class="pcard-logo" style="background:${p.c}">${p.s}</div>
                         <div style="flex:1; text-align: left;">
-                            <div style="font-weight:900; color:var(--cab0-blue-dark); font-size:18px;">${p.name}</div>
-                            <div style="font-size:14px; color:#5577bb; margin-top:4px; font-weight:700;">${p.time} min response time</div>
+                            <div style="font-family: var(--serif); font-weight:900; color:var(--cab0-blue-dark); font-size:clamp(22px, 4.5vw, 28px);">${p.name}</div>
+                            <div style="font-size:clamp(15px, 3.5vw, 18px); color:#5577bb; margin-top:6px; font-weight:700;">${p.time} min response time</div>
                         </div>
-                        <div style="font-weight:900; color:var(--cab0-blue); font-size:20px;">${displayPrice}</div>
+                        <div style="font-family: var(--serif); font-weight:900; color:var(--cab0-blue); font-size:clamp(24px, 5vw, 32px);">${displayPrice}</div>
                     </div>
                 `; 
             }); 
