@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -45,18 +45,20 @@
             border-bottom: 2px solid rgba(0, 68, 204, 0.15);
             width: 100%;
         }
+
+        /* BACK BUTTON DOUBLED IN SIZE FOR EASY READING & ACCESS */
         .back-btn {
             background: #ffffff;
             color: var(--cab0-blue);
-            border: 2px solid var(--cab0-blue);
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 800;
+            border: 3px solid var(--cab0-blue);
+            padding: 24px 48px;
+            border-radius: 40px;
+            font-size: 24px;
+            font-weight: 900;
             cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 10px rgba(0,68,204,0.1);
+            letter-spacing: 1px;
+            box-shadow: 0 6px 18px rgba(0,68,204,0.15);
             transition: all 0.2s ease;
         }
         .back-btn:hover {
@@ -85,8 +87,8 @@
             color: var(--cab0-blue);
         }
 
-        /* MASTER UNIFORM BOX STYLE (Applied to front boxes, search fields, and buttons) */
-        .woz-box, .cat, .main-btn, .search-field, .inline-btn { 
+        /* MASTER UNIFORM BOX STYLE (Applied to front boxes, search fields, buttons, and provider cards) */
+        .woz-box, .cat, .main-btn, .search-field, .inline-btn, .pcard { 
             margin: 0 auto 20px auto !important; 
             padding: 38px 28px !important; 
             background: rgba(255, 255, 255, 0.95) !important;
@@ -106,11 +108,11 @@
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         } 
         
-        .cat, .main-btn, .inline-btn {
+        .cat, .main-btn, .inline-btn, .pcard {
             cursor: pointer;
         }
 
-        .woz-box::before, .cat::before, .main-btn::before, .search-field::before, .inline-btn::before {
+        .woz-box::before, .cat::before, .main-btn::before, .search-field::before, .inline-btn::before, .pcard::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 8px; height: 100%;
@@ -175,7 +177,7 @@
             width: 100% !important;
         } 
 
-        .cat:hover, .cat:active, .main-btn:hover, .inline-btn:hover, .search-field:focus-within {
+        .cat:hover, .cat:active, .main-btn:hover, .inline-btn:hover, .search-field:focus-within, .pcard:hover {
             transform: translateY(-2px);
             background: #f0f4ff !important;
             border-color: var(--cab0-blue-dark) !important;
@@ -298,39 +300,31 @@
             color: #ffffff; 
         } 
         
+        /* PCARD MATCHES MASTER UNIFORM BOX SIZE */
         .pcard { 
-            background: #ffffff; 
-            border-radius: 16px; 
-            border: 2px solid var(--cab0-blue); 
-            padding: 20px; 
-            margin-bottom: 14px; 
-            display: flex; 
-            align-items: center; 
-            gap: 15px; 
-            cursor: pointer; 
-            text-align: left; 
-            width: 100%;
-            box-shadow: 0 4px 12px rgba(0, 68, 204, 0.08);
-            transition: transform 0.2s ease;
+            flex-direction: row !important;
+            justify-content: flex-start !important;
+            gap: 20px !important;
+            padding: 28px !important;
         } 
         .pcard:active {
             transform: scale(0.98);
         }
         .pcard.sel { 
-            border: 3px solid var(--cab0-blue); 
-            background: #f0f4ff; 
-            box-shadow: 0 6px 18px rgba(0, 68, 204, 0.2);
+            border: 3px solid var(--cab0-blue) !important; 
+            background: #f0f4ff !important; 
+            box-shadow: 0 6px 18px rgba(0, 68, 204, 0.2) !important;
         }
         .pcard-logo {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 900;
             color: #ffffff;
-            font-size: 17px;
+            font-size: 20px;
         }
 
         .inline-action-panel {
@@ -557,11 +551,11 @@
                 html += `
                     <div class="pcard ${activeClass}" onclick="selectProvider('${p.id}')">
                         <div class="pcard-logo" style="background:${p.c}">${p.s}</div>
-                        <div style="flex:1;">
-                            <div style="font-weight:900; color:var(--cab0-blue-dark); font-size:16px;">${p.name}</div>
-                            <div style="font-size:13px; color:#5577bb; margin-top:2px; font-weight:700;">${p.time} min response time</div>
+                        <div style="flex:1; text-align: left;">
+                            <div style="font-weight:900; color:var(--cab0-blue-dark); font-size:18px;">${p.name}</div>
+                            <div style="font-size:14px; color:#5577bb; margin-top:4px; font-weight:700;">${p.time} min response time</div>
                         </div>
-                        <div style="font-weight:900; color:var(--cab0-blue); font-size:18px;">${displayPrice}</div>
+                        <div style="font-weight:900; color:var(--cab0-blue); font-size:20px;">${displayPrice}</div>
                     </div>
                 `; 
             }); 
