@@ -3,523 +3,453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cab0.com — Every Ride. Every Delivery. One Search.</title>
+    <title>Cab0.com — Next-Gen Mobility & Delivery Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --cab0-blue: #0044cc;      
-            --cab0-blue-dark: #002677; 
-            --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; 
-            --serif: 'DM Serif Display', Georgia, serif; 
+        :root {
+            --bg-dark: #070913;
+            --card-bg: rgba(18, 24, 43, 0.75);
+            --card-border: rgba(0, 240, 255, 0.25);
+            --primary-cyan: #00f0ff;
+            --primary-glow: rgba(0, 240, 255, 0.4);
+            --accent-purple: #7000ff;
+            --text-main: #f0f4f8;
+            --text-muted: #8a99ad;
+            --font-head: 'Orbitron', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
         }
 
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        html, body { 
-            min-height: 100%;
-            font-family: var(--sans);
-            color: var(--cab0-blue);
-            background: linear-gradient(135deg, #fbf8f2, #f3ebd8) !important;
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(112, 0, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(0, 240, 255, 0.12) 0%, transparent 40%);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            min-height: 100vh;
             overflow-x: hidden;
-        }
-
-        .content-wrapper { 
-            position: relative;
-            z-index: 10;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
         }
 
-        .nav-header {
-            display: flex;
-            justify-content: flex-start;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid rgba(0, 68, 204, 0.15);
+        .container {
+            max-width: 850px;
             width: 100%;
+            margin: 0 auto;
+            padding: 24px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* BACK BUTTON DOUBLED IN SIZE */
-        .back-btn {
-            background: #ffffff;
-            color: var(--cab0-blue);
-            border: 3px solid var(--cab0-blue);
-            padding: 24px 48px;
-            border-radius: 40px;
-            font-size: 24px;
-            font-weight: 900;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 6px 18px rgba(0,68,204,0.15);
-            transition: all 0.2s ease;
-        }
-        .back-btn:hover {
-            background: var(--cab0-blue);
-            color: #ffffff;
-        }
-
+        /* HEADER & LOGO */
         header {
             text-align: center;
-            padding: 20px 0 10px 0;
+            padding: 20px 0 10px;
         }
 
-        .logo-main { 
-            font-family: var(--serif); 
-            font-size: clamp(42px, 8vw, 56px); 
-            color: var(--cab0-blue-dark); 
-            margin-bottom: 15px; 
+        .logo {
+            font-family: var(--font-head);
+            font-size: clamp(40px, 8vw, 58px);
             font-weight: 900;
-            letter-spacing: -1px;
-        } 
-        .logo-main .big-zero { 
-            font-size: 1.15em; 
-            vertical-align: baseline; 
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .logo .zero {
+            color: var(--primary-cyan);
             display: inline-block;
-            line-height: 1;
-            color: var(--cab0-blue);
+            text-shadow: 0 0 15px var(--primary-cyan);
         }
 
-        /* MASTER UNIFORM BOX STYLE */
-        .woz-box, .cat, .main-btn, .search-field, .inline-btn, .pcard { 
-            margin: 0 auto 20px auto !important; 
-            padding: 38px 28px !important; 
-            background: rgba(255, 255, 255, 0.95) !important;
-            backdrop-filter: blur(10px);
-            border-radius: 20px !important;
-            border: 2px solid var(--cab0-blue) !important;
-            text-align: center !important;
-            width: 100% !important;
-            min-height: 150px !important;
-            box-shadow: 0 10px 30px rgba(0, 68, 204, 0.15) !important;
-            position: relative !important;
-            overflow: hidden !important;
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            justify-content: center !important;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        } 
-        
-        .cat, .main-btn, .inline-btn, .pcard {
-            cursor: pointer;
+        /* WOZNIAK QUOTE CARD */
+        .quote-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .woz-box::before, .cat::before, .main-btn::before, .search-field::before, .inline-btn::before, .pcard::before {
+        .quote-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 8px; height: 100%;
-            background: var(--cab0-blue);
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-cyan), transparent);
         }
 
-        /* WOZNIAK QUOTE & REPOSITIONED ATTRIBUTION */
-        .woz-quote { 
-            font-family: var(--serif) !important; 
-            font-style: italic; 
-            font-size: clamp(26px, 5.5vw, 36px) !important; 
-            color: var(--cab0-blue-dark) !important; 
-            line-height: 1.15 !important; 
-            margin-bottom: 12px !important; 
-            font-weight: 900 !important;
-        } 
-        
-        .woz-name-block {
+        .quote-text {
+            font-size: clamp(18px, 4vw, 22px);
+            font-weight: 600;
+            color: #fff;
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+
+        .quote-author {
+            font-family: var(--font-head);
+            font-size: 14px;
+            color: var(--primary-cyan);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .quote-sub {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* HEADLINE */
+        .headline {
+            text-align: center;
+            font-family: var(--font-head);
+            font-size: clamp(18px, 4.5vw, 28px);
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin: 15px 0 25px;
+            color: var(--text-main);
+        }
+
+        .headline span {
+            color: var(--primary-cyan);
+            border-bottom: 2px solid var(--primary-cyan);
+        }
+
+        /* CATEGORIES & UI BUTTONS */
+        .cat-stack {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            width: 100%;
-        }
-
-        .woz-attribution { 
-            font-family: var(--serif) !important; 
-            font-size: clamp(20px, 4.5vw, 28px) !important; 
-            font-weight: 900 !important; 
-            color: var(--cab0-blue-dark) !important; 
-        }
-
-        .woz-subattribution {
-            display: inline-block;
-            background: rgba(0, 68, 204, 0.08);
-            padding: 4px 12px;
-            border-radius: 10px;
-            font-family: var(--serif) !important; 
-            font-size: clamp(16px, 3.5vw, 22px) !important; 
-            font-weight: 900 !important; 
-            color: var(--cab0-blue) !important; 
-            letter-spacing: normal !important;
-        }
-
-        /* HEADLINE ADJUSTED TO GUARANTEE SINGLE-LINE FIT */
-        .headline-container {
-            width: 100%;
-            overflow: hidden;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        h1 { 
-            font-family: var(--serif); 
-            font-size: clamp(16px, 3.6vw, 36px); 
-            line-height: 1.1; 
-            color: var(--cab0-blue-dark); 
-            display: inline-block;
-            white-space: nowrap;
-        } 
-        h1 em { 
-            color: var(--cab0-blue); 
-            font-style: normal; 
-            text-decoration: underline;
-            text-decoration-thickness: 3px;
-            text-underline-offset: 4px;
-        }
-
-        /* SINGLE COLUMN STACK CONTAINER */
-        .cats-grid { 
-            display: flex !important; 
-            flex-direction: column !important; 
-            gap: 0px !important; 
-            margin-bottom: 10px !important; 
-            width: 100% !important;
-        } 
-
-        .cat:hover, .cat:active, .main-btn:hover, .inline-btn:hover, .search-field:focus-within, .pcard:hover {
-            transform: translateY(-2px);
-            background: #f0f4ff !important;
-            border-color: var(--cab0-blue-dark) !important;
-        }
-        
-        .cat.on { 
-            background: var(--cab0-blue) !important; 
-            border-color: var(--cab0-blue) !important; 
-            box-shadow: 0 10px 28px rgba(0, 68, 204, 0.35) !important;
-        } 
-        .cat.on::before {
-            background: #ffffff !important;
-        }
-        .cat.on .cat-label { 
-            color: #ffffff !important; 
-        } 
-
-        .cat.vegas-toggle-tile {
-            border: 2px dashed var(--cab0-blue) !important;
-            background: rgba(255, 255, 255, 0.9) !important;
-        }
-        .cat.vegas-toggle-tile.vegas-active {
-            border: 2px solid var(--cab0-blue) !important;
-            background: var(--cab0-blue) !important;
-        }
-        .cat.vegas-toggle-tile.vegas-active .cat-label {
-            color: #ffffff !important;
-        }
-        
-        /* CATEGORY LABEL FONT */
-        .cat-label { 
-            font-family: var(--serif) !important;
-            font-size: clamp(30px, 6vw, 38px) !important; 
-            font-weight: 900 !important; 
-            color: var(--cab0-blue-dark); 
-            text-transform: none !important;
-            letter-spacing: -0.5px !important;
-        }
-        
-        .cat.on .cat-label, .cat.vegas-toggle-tile.vegas-active .cat-label { 
-            color: #ffffff !important; 
-        }
-
-        .search-group {
+            gap: 12px;
             margin-bottom: 20px;
-            width: 100%;
         }
-        .search-group label {
-            display: block;
-            font-size: 13px;
-            text-transform: uppercase;
-            color: var(--cab0-blue-dark);
-            margin-bottom: 8px;
+
+        .cat-btn, .action-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 20px 24px;
+            color: #fff;
+            font-family: var(--font-head);
+            font-size: clamp(16px, 3.8vw, 20px);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(8px);
+        }
+
+        .cat-btn:hover, .action-btn:hover {
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 20px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        .cat-btn.active {
+            background: linear-gradient(135deg, rgba(0,240,255,0.2), rgba(112,0,255,0.2));
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 25px var(--primary-glow);
+        }
+
+        .vegas-tile {
+            border-style: dashed;
+            border-color: rgba(255, 215, 0, 0.4);
+            color: #ffd700;
+        }
+
+        .vegas-tile.active {
+            border-style: solid;
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.15);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .main-btn {
+            background: linear-gradient(90deg, var(--accent-purple), var(--primary-cyan));
+            border: none;
+            color: #fff;
+            font-family: var(--font-head);
+            font-size: clamp(18px, 4vw, 22px);
             font-weight: 900;
-            text-align: left;
+            padding: 22px;
+            border-radius: 14px;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+            transition: all 0.25s ease;
+            text-align: center;
+            text-decoration: none;
+            display: block;
         }
-        
-        /* SEARCH FIELDS MATCHING UNIFORM BOX SIZE */
-        .search-field {
-            color: var(--cab0-blue-dark) !important;
-            font-family: var(--serif) !important;
-            font-size: clamp(24px, 5vw, 34px) !important; 
-            font-weight: 900 !important;
-            text-align: center !important;
+
+        .main-btn:hover {
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.6);
+            transform: scale(1.01);
+        }
+
+        /* INPUT FIELDS */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-family: var(--font-head);
+            font-size: 12px;
+            color: var(--primary-cyan);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .input-field {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 18px;
             outline: none;
-            -webkit-appearance: none;
-        }
-        .search-field::placeholder {
-            color: #99aabb;
-            font-style: italic;
-        }
-        .search-field:focus {
-            background: #f0f4ff !important;
-            box-shadow: 0 0 10px rgba(0, 68, 204, 0.2) !important;
+            transition: all 0.25s ease;
         }
 
-        /* FIND BEST RATE BUTTON MATCHED */
-        .main-btn { 
-            background: linear-gradient(135deg, #0044cc, #002677) !important; 
-            color: #ffffff !important; 
-            font-family: var(--serif) !important;
-            font-size: clamp(30px, 6vw, 38px) !important; 
-            font-weight: 900 !important; 
-            text-transform: none !important;
-            letter-spacing: -0.5px !important;
-            border: 2px solid var(--cab0-blue) !important;
-            margin-top: 5px !important;
-        }
-        .main-btn::before {
-            background: #ffffff !important;
-        }
-        .main-btn:active {
-            transform: scale(0.98);
+        .input-field:focus {
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 15px var(--primary-glow);
         }
 
-        .page { display: none; width: 100%; } 
+        /* SORTING & CARDS */
+        .sort-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .sort-btn {
+            flex: 1;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 16px;
+            border-radius: 12px;
+            font-family: var(--font-head);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .sort-btn.active {
+            color: #fff;
+            border-color: var(--primary-cyan);
+            background: rgba(0, 240, 255, 0.15);
+        }
+
+        .pcard {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .pcard.selected {
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 20px var(--primary-glow);
+            background: rgba(0, 240, 255, 0.1);
+        }
+
+        .pcard-badge {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-head);
+            font-weight: 900;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .pcard-title {
+            font-family: var(--font-head);
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .pcard-sub {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .pcard-price {
+            margin-left: auto;
+            font-family: var(--font-head);
+            font-size: 22px;
+            color: var(--primary-cyan);
+            font-weight: 800;
+        }
+
+        .page { display: none; }
         .page.active { display: block; }
 
-        /* FASTEST AND CHEAPEST BOXES DOUBLED IN HEIGHT TO MATCH SELECTION BOXES */
-        .sort-strip { 
-            display: flex; 
-            padding: 5px 0 20px; 
-            gap: 15px; 
-            width: 100%;
-        } 
-        .sort-btn { 
-            flex: 1; 
-            min-height: 150px !important;
-            padding: 28px !important;
-            border-radius: 20px !important; 
-            border: 2px solid var(--cab0-blue) !important; 
-            font-family: var(--serif) !important;
-            font-size: clamp(24px, 5vw, 32px) !important; 
-            font-weight: 900 !important; 
-            background: #ffffff; 
-            color: var(--cab0-blue); 
-            cursor: pointer; 
-            text-transform: none !important;
-            box-shadow: 0 10px 30px rgba(0, 68, 204, 0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        } 
-        .sort-btn.active { 
-            background: var(--cab0-blue) !important; 
-            color: #ffffff !important; 
-            box-shadow: 0 10px 28px rgba(0, 68, 204, 0.35) !important;
-        } 
-        
-        /* PCARD MATCHES MASTER UNIFORM BOX SIZE WITH INCREASED FONTS */
-        .pcard { 
-            flex-direction: row !important;
-            justify-content: flex-start !important;
-            gap: 20px !important;
-            padding: 38px 28px !important;
-        } 
-        .pcard:active {
-            transform: scale(0.98);
-        }
-        .pcard.sel { 
-            border: 3px solid var(--cab0-blue) !important; 
-            background: #f0f4ff !important; 
-            box-shadow: 0 6px 18px rgba(0, 68, 204, 0.2) !important;
-        }
-        .pcard-logo {
-            width: 64px;
-            height: 64px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            color: #ffffff;
-            font-size: 24px;
+        .back-btn {
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--primary-cyan);
+            font-family: var(--font-head);
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.2s ease;
         }
 
-        .inline-action-panel {
-            background: #ffffff;
-            border: 2px solid var(--cab0-blue);
-            border-radius: 18px;
-            padding: 22px;
-            margin-top: 20px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            box-shadow: 0 8px 25px rgba(0, 68, 204, 0.15);
-        }
-        .inline-btn {
-            background: linear-gradient(135deg, #0044cc, #002677) !important;
-            color: #ffffff !important;
-            font-family: var(--serif) !important;
-            font-size: clamp(30px, 6vw, 38px) !important; 
-            text-transform: none !important;
-            letter-spacing: -0.5px !important;
-            text-decoration: none !important;
-        }
-        .inline-btn::before {
-             background: #ffffff !important;
+        .back-btn:hover {
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 10px var(--primary-glow);
         }
 
         footer {
-            margin-top: auto;
             text-align: center;
-            padding: 30px 20px;
-            font-size: 0.9em;
-            color: var(--cab0-blue-dark);
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(5px);
-            border-top: 1px solid rgba(0, 68, 204, 0.1);
+            padding: 24px 20px;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: auto;
         }
-        footer a { color: var(--cab0-blue); text-decoration: none; margin: 0 10px; transition: color 0.3s; font-weight: 700; }
-        footer a:hover { color: var(--cab0-blue-dark); text-decoration: underline; }
 
-        @media (max-width: 768px) {
-            .content-wrapper { padding: 12px; }
-            header { padding: 15px 0 10px 0; }
-        }
+        footer a { color: var(--primary-cyan); text-decoration: none; margin: 0 8px; }
     </style>
 </head>
 <body>
 
-    <div class="content-wrapper">
-        
-        <!-- PAGE 0: MAIN DASHBOARD SELECTION -->
+    <div class="container">
+        <!-- PAGE 0: DASHBOARD -->
         <div class="page active" id="pg0">
             <header>
-                <div class="logo-main">Cab<span class="big-zero">0</span>.com</div>
+                <div class="logo">Cab<span class="zero">0</span>.com</div>
             </header>
-            
-            <div class="woz-box">
-                <p class="woz-quote">"Best of luck to you on this worthy venture, its your turn"</p>
-                <div class="woz-name-block">
-                    <span class="woz-attribution">Steve Wozniak</span>
-                    <span class="woz-subattribution">Apple Co-Founder</span>
-                </div>
+
+            <div class="quote-card">
+                <p class="quote-text">"Best of luck to you on this worthy venture, it's your turn"</p>
+                <div class="quote-author">Steve Wozniak</div>
+                <div class="quote-sub">Apple Co-Founder</div>
             </div>
 
-            <div class="headline-container">
-                <h1 id="main-headline">Every Ride. Every Delivery. <em>One Search.</em></h1>
+            <div class="headline">
+                Every Ride. Every Delivery. <span id="main-headline">One Search.</span>
             </div>
 
-            <div class="cats-grid" id="categories-container"></div>
+            <div class="cat-stack" id="categories-container"></div>
             <button class="main-btn" onclick="goTo(1)">Find Best Rate →</button>
         </div>
 
-        <!-- PAGE 1: ADDRESS VERIFICATION SYSTEM -->
+        <!-- PAGE 1: LOCATIONS -->
         <div class="page" id="pg1">
-            <div class="nav-header">
-                <button class="back-btn" onclick="goTo(0)">← Main Menu</button>
-            </div>
-            
-            <div style="padding: 5px 0;">
-                <h2 style="color:var(--cab0-blue-dark); margin-bottom:20px; font-family: var(--serif); font-size: 32px;">Search Details</h2>
-                
-                <div class="search-group">
-                    <label>1. Pickup Location</label>
-                    <input type="text" id="pickup-input" class="search-field" placeholder="Current Location...">
-                </div>
+            <button class="back-btn" onclick="goTo(0)">← Main Menu</button>
+            <h2 style="font-family: var(--font-head); margin-bottom: 20px;">Search Details</h2>
 
-                <div class="search-group">
-                    <label>2. Dropoff Destination</label>
-                    <input type="text" id="dropoff-input" class="search-field" placeholder="Enter address...">
-                </div>
-
-                <button class="main-btn" onclick="goTo(2)">Compare Rates →</button>
+            <div class="input-group">
+                <label>1. Pickup Location</label>
+                <input type="text" class="input-field" placeholder="Current Location...">
             </div>
+
+            <div class="input-group">
+                <label>2. Dropoff Destination</label>
+                <input type="text" class="input-field" placeholder="Enter Destination Address...">
+            </div>
+
+            <button class="main-btn" onclick="goTo(2)">Compare Rates →</button>
         </div>
 
-        <!-- PAGE 2: MARKETPLACE PROVIDER CONSOLE -->
+        <!-- PAGE 2: MARKETPLACE CONSOLE -->
         <div class="page" id="pg2">
-            <div class="nav-header">
-                <button class="back-btn" onclick="goTo(0)">← Main Menu</button>
-            </div>
+            <button class="back-btn" onclick="goTo(0)">← Main Menu</button>
 
-            <div class="sort-strip">
+            <div class="sort-bar">
                 <button class="sort-btn active" id="sort-price" onclick="setSort('price')">Cheapest</button>
                 <button class="sort-btn" id="sort-time" onclick="setSort('time')">Fastest</button>
             </div>
-            
-            <div style="padding: 5px 0;" id="p3-grid"></div>
-            
-            <div class="inline-action-panel">
-                <div style="text-align: left;">
-                    <div id="sel-name" style="font-weight:900; color:var(--cab0-blue-dark); font-size: 17px;">Select Service</div>
-                    <div style="font-size:12px; color:#5577bb; margin-top: 3px; font-weight: 700;">Secure Official Booking Link</div>
-                </div>
-                <a href="#" id="final-link" target="_blank" class="inline-btn">Book Now</a>
+
+            <div id="p3-grid"></div>
+
+            <div style="margin-top: 20px;">
+                <a href="#" id="final-link" target="_blank" class="main-btn">Book Selection</a>
             </div>
         </div>
 
         <footer>
-            <p style="margin-bottom: 8px; font-weight: 700;">Cab0.com is an independent search and comparison service. Not affiliated with Uber, Lyft, or other listed brands.</p>
-            <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
-            <p style="margin-top: 8px;">&copy; 2026 Cab0.com - Independent Information Service</p>
+            <p>Cab0.com is an independent search console. Not affiliated with Uber, Lyft, or other listed platforms.</p>
+            <p style="margin-top: 8px;"><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
         </footer>
     </div>
 
-    <script> 
+    <script>
         var isVegasMode = false;
-        var currentCat = 'ride', currentSort = 'price', selectedId = null; 
+        var currentCat = 'ride', currentSort = 'price', selectedId = null;
 
-        var LINKS = { 
-            'uber': 'https://m.uber.com', 
-            'lyft': 'https://www.lyft.com', 
-            'vegas_loop': 'https://www.boringcompany.com/loop', 
+        var LINKS = {
+            'uber': 'https://m.uber.com',
+            'lyft': 'https://www.lyft.com',
+            'vegas_loop': 'https://www.boringcompany.com/loop',
             'zoox': 'https://zoox.com',
-            'doordash': 'https://www.doordash.com', 
-            'ubereats': 'https://www.ubereats.com', 
+            'doordash': 'https://www.doordash.com',
+            'ubereats': 'https://www.ubereats.com',
             'instacart': 'https://www.instacart.com',
             'amazon_fresh': 'https://www.amazon.com/fresh',
             'walmart_plus': 'https://www.walmart.com/plus'
-        }; 
+        };
 
-        var PROVIDERS = { 
-            ride: [ 
-                { id:'uber', name:'Uber X', s:'Ub', c:'#111111', price:12.50, time:4 }, 
+        var PROVIDERS = {
+            ride: [
+                { id:'uber', name:'Uber X', s:'Ub', c:'#111111', price:12.50, time:4 },
                 { id:'lyft', name:'Lyft Ride', s:'Ly', c:'#FF00BF', price:11.20, time:6 }
-            ], 
-            loop: [ 
+            ],
+            loop: [
                 { id:'vegas_loop', name:'Vegas Loop (Tunnel Ride)', s:'TL', c:'#cc0000', price:0.00, time:2 }
             ],
             robotaxi: [
-                { id:'zoox', name:'Zoox Autonomous (Free Local)', s:'Zx', c:'#2c3e50', price:0.00, time:5 }
+                { id:'zoox', name:'Zoox Autonomous (Free Local)', s:'Zx', c:'#00f0ff', price:0.00, time:5 }
             ],
-            delivery: [ 
-                { id:'doordash', name:'DoorDash', s:'DD', c:'#FF3008', price:2.99, time:22 }, 
+            delivery: [
+                { id:'doordash', name:'DoorDash', s:'DD', c:'#FF3008', price:2.99, time:22 },
                 { id:'ubereats', name:'Uber Eats', s:'UE', c:'#06C167', price:3.49, time:18 }
             ],
             grocery: [
-                { id:'amazon_fresh', name:'Amazon Fresh / Prime', s:'Az', c:'#FF9900', price:0.00, time:30 },
-                { id:'walmart_plus', name:'Walmart+ Grocery Delivery', s:'Wm', c:'#0071DC', price:0.00, time:45 },
-                { id:'instacart', name:'Instacart Delivery', s:'IC', c:'#00AD31', price:4.99, time:40 }
+                { id:'amazon_fresh', name:'Amazon Fresh', s:'Az', c:'#FF9900', price:0.00, time:30 },
+                { id:'walmart_plus', name:'Walmart+', s:'Wm', c:'#0071DC', price:0.00, time:45 },
+                { id:'instacart', name:'Instacart', s:'IC', c:'#00AD31', price:4.99, time:40 }
             ]
-        }; 
+        };
 
         function toggleVegasMode() {
             isVegasMode = !isVegasMode;
-            var headline = document.getElementById('main-headline');
-            
-            if(isVegasMode) {
-                headline.innerHTML = "Vegas Ride. Vegas Delivery. <em>One Search.</em>";
-            } else {
-                headline.innerHTML = "Every Ride. Every Delivery. <em>One Search.</em>";
-                if(currentCat === 'loop' || currentCat === 'robotaxi') {
-                    currentCat = 'ride';
-                }
-            }
+            document.getElementById('main-headline').textContent = isVegasMode ? "Vegas Search." : "One Search.";
+            if(!isVegasMode && (currentCat === 'loop' || currentCat === 'robotaxi')) currentCat = 'ride';
             renderCategories();
         }
 
@@ -527,74 +457,73 @@
             var container = document.getElementById('categories-container');
             var html = '';
             
-            if(!isVegasMode) {
-                html += `<div class="cat ${currentCat === 'ride' ? 'on' : ''}" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>`;
-                html += `<div class="cat ${currentCat === 'delivery' ? 'on' : ''}" onclick="pickCat(this, 'delivery')"><div class="cat-label">Food Delivery</div></div>`;
-                html += `<div class="cat ${currentCat === 'grocery' ? 'on' : ''}" onclick="pickCat(this, 'grocery')"><div class="cat-label">Groceries</div></div>`;
-                html += `<div class="cat vegas-toggle-tile ${currentCat === 'loop' || currentCat === 'robotaxi' ? 'vegas-active' : ''}" onclick="toggleVegasMode()"><div class="cat-label">Vegas Mode</div></div>`;
-            } else {
-                html += `<div class="cat ${currentCat === 'ride' ? 'on' : ''}" onclick="pickCat(this, 'ride')"><div class="cat-label">Rideshare</div></div>`;
-                html += `<div class="cat ${currentCat === 'loop' ? 'on' : ''}" onclick="pickCat(this, 'loop')"><div class="cat-label">Vegas Loop</div></div>`;
-                html += `<div class="cat ${currentCat === 'robotaxi' ? 'on' : ''}" onclick="pickCat(this, 'robotaxi')"><div class="cat-label">Robotaxis</div></div>`;
-                html += `<div class="cat ${currentCat === 'delivery' ? 'on' : ''}" onclick="pickCat(this, 'delivery')"><div class="cat-label">Food Delivery</div></div>`;
-                html += `<div class="cat ${currentCat === 'grocery' ? 'on' : ''}" onclick="pickCat(this, 'grocery')"><div class="cat-label">Groceries</div></div>`;
-                html += `<div class="cat vegas-toggle-tile vegas-active" onclick="toggleVegasMode()"><div class="cat-label">Exit Vegas</div></div>`;
+            var cats = [
+                { id: 'ride', label: 'Rideshare' },
+                { id: 'delivery', label: 'Food Delivery' },
+                { id: 'grocery', label: 'Groceries' }
+            ];
+
+            if(isVegasMode) {
+                cats.splice(1, 0, { id: 'loop', label: 'Vegas Loop' }, { id: 'robotaxi', label: 'Robotaxis' });
             }
-            
+
+            cats.forEach(c => {
+                var active = currentCat === c.id ? 'active' : '';
+                html += `<div class="cat-btn ${active}" onclick="pickCat('${c.id}')"><span>${c.label}</span><span>→</span></div>`;
+            });
+
+            var vegasActive = isVegasMode ? 'active' : '';
+            var vegasLabel = isVegasMode ? 'Exit Vegas Mode' : 'Vegas Mode';
+            html += `<div class="cat-btn vegas-tile ${vegasActive}" onclick="toggleVegasMode()"><span>${vegasLabel}</span><span>⚡</span></div>`;
+
             container.innerHTML = html;
         }
 
-        function goTo(n) { 
-            document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active', i === n)); 
-            if (n === 2) renderProviders(); 
-            window.scrollTo(0,0); 
-        } 
+        function goTo(n) {
+            document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active', i === n));
+            if (n === 2) renderProviders();
+            window.scrollTo(0,0);
+        }
 
-        function pickCat(el, cat) { 
-            document.querySelectorAll('.cat').forEach(c => c.classList.remove('on')); 
-            el.classList.add('on'); 
-            currentCat = cat; 
-            selectedId = null; 
-        } 
+        function pickCat(cat) {
+            currentCat = cat;
+            selectedId = null;
+            renderCategories();
+        }
 
-        function setSort(type) { 
-            currentSort = type; 
-            document.querySelectorAll('.sort-btn').forEach(b => b.classList.toggle('active', b.id === 'sort-'+type)); 
-            renderProviders(); 
-        } 
+        function setSort(type) {
+            currentSort = type;
+            document.querySelectorAll('.sort-btn').forEach(b => b.classList.toggle('active', b.id === 'sort-'+type));
+            renderProviders();
+        }
 
-        function renderProviders() { 
-            var list = [...PROVIDERS[currentCat]].sort((a,b) => a[currentSort] - b[currentSort]); 
-            if (list.length > 0 && !selectedId) selectProvider(list[0].id); 
-            
-            var html = ''; 
-            list.forEach(p => { 
-                var activeClass = p.id === selectedId ? 'sel' : '';
-                var displayPrice = p.price === 0 ? "FREE" : `$${p.price.toFixed(2)}`;
-                
+        function renderProviders() {
+            var list = [...PROVIDERS[currentCat]].sort((a,b) => a[currentSort] - b[currentSort]);
+            if (list.length > 0 && !selectedId) selectProvider(list[0].id);
+
+            var html = '';
+            list.forEach(p => {
+                var sel = p.id === selectedId ? 'selected' : '';
+                var priceStr = p.price === 0 ? "FREE" : `$${p.price.toFixed(2)}`;
                 html += `
-                    <div class="pcard ${activeClass}" onclick="selectProvider('${p.id}')">
-                        <div class="pcard-logo" style="background:${p.c}">${p.s}</div>
-                        <div style="flex:1; text-align: left;">
-                            <div style="font-family: var(--serif); font-weight:900; color:var(--cab0-blue-dark); font-size:clamp(22px, 4.5vw, 28px);">${p.name}</div>
-                            <div style="font-size:clamp(15px, 3.5vw, 18px); color:#5577bb; margin-top:6px; font-weight:700;">${p.time} min response time</div>
+                    <div class="pcard ${sel}" onclick="selectProvider('${p.id}')">
+                        <div class="pcard-badge" style="background:${p.c}">${p.s}</div>
+                        <div>
+                            <div class="pcard-title">${p.name}</div>
+                            <div class="pcard-sub">${p.time} min ETA</div>
                         </div>
-                        <div style="font-family: var(--serif); font-weight:900; color:var(--cab0-blue); font-size:clamp(24px, 5vw, 32px);">${displayPrice}</div>
+                        <div class="pcard-price">${priceStr}</div>
                     </div>
-                `; 
-            }); 
-            document.getElementById('p3-grid').innerHTML = html; 
-        } 
+                `;
+            });
+            document.getElementById('p3-grid').innerHTML = html;
+        }
 
-        function selectProvider(id) { 
-            selectedId = id; 
-            var p = Object.values(PROVIDERS).flat().find(x => x.id === id); 
-            if(p) { 
-                document.getElementById('sel-name').textContent = p.name; 
-                document.getElementById('final-link').href = LINKS[id] || '#'; 
-                renderProviders(); 
-            } 
-        } 
+        function selectProvider(id) {
+            selectedId = id;
+            document.getElementById('final-link').href = LINKS[id] || '#';
+            renderProviders();
+        }
 
         renderCategories();
     </script>
