@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #070913;
-            --card-bg: rgba(18, 24, 43, 0.85);
-            --card-border: rgba(0, 240, 255, 0.3);
+            --bg-dark: #050711;
+            --card-bg: rgba(14, 20, 36, 0.85);
+            --card-border: rgba(0, 240, 255, 0.35);
             --primary-cyan: #00f0ff;
-            --primary-glow: rgba(0, 240, 255, 0.4);
+            --primary-glow: rgba(0, 240, 255, 0.45);
             --accent-purple: #7000ff;
             --text-main: #f0f4f8;
             --text-muted: #8a99ad;
@@ -28,22 +28,33 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        /* FIXED BACKGROUND CANVAS */
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
         body {
             background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 15% 15%, rgba(112, 0, 255, 0.2) 0%, transparent 45%),
-                radial-gradient(circle at 85% 85%, rgba(0, 240, 255, 0.15) 0%, transparent 45%);
             color: var(--text-main);
             font-family: var(--font-body);
             min-height: 100vh;
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         .container {
+            position: relative;
+            z-index: 1;
             width: 100%;
-            max-width: 800px; /* Perfect desktop width */
+            max-width: 800px;
             margin: 0 auto;
             padding: 16px;
             flex: 1;
@@ -83,7 +94,7 @@
             text-align: center;
             margin: 16px 0;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
         }
 
         .quote-card::before {
@@ -147,7 +158,7 @@
             border: 1px solid var(--card-border);
             border-radius: 16px;
             padding: 20px 24px;
-            min-height: 64px; /* Mobile touch optimization */
+            min-height: 64px;
             color: #fff;
             font-family: var(--font-head);
             font-size: clamp(17px, 4.8vw, 20px);
@@ -372,22 +383,17 @@
             display: inline-block;
         }
 
-        /* DESKTOP ENHANCEMENTS */
         @media (min-width: 768px) {
-            .container {
-                padding: 32px 20px;
-            }
-            .quote-card {
-                padding: 24px;
-                margin: 24px 0;
-            }
-            .cat-stack {
-                gap: 14px;
-            }
+            .container { padding: 32px 20px; }
+            .quote-card { padding: 24px; margin: 24px 0; }
+            .cat-stack { gap: 14px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- ANIMATED CANVAS BACKGROUND -->
+    <canvas id="starfield"></canvas>
 
     <div class="container">
         <!-- PAGE 0: DASHBOARD -->
@@ -451,6 +457,102 @@
     </div>
 
     <script>
+        /* 5-POINT STARFIELD CANVAS ENGINE */
+        (function initStarfield() {
+            var canvas = document.getElementById('starfield');
+            var ctx = canvas.getContext('2d');
+            var stars = [];
+            var numStars = 65;
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            // Function to draw a standard 5-point star
+            function draw5PointStar(ctx, cx, cy, outerRadius, innerRadius, alpha, rotation) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.translate(cx, cy);
+                ctx.rotate(rotation);
+                
+                var points = 5;
+                var step = Math.PI / points;
+
+                for (var i = 0; i < 2 * points; i++) {
+                    var r = (i % 2 === 0) ? outerRadius : innerRadius;
+                    var x = r * Math.sin(i * step);
+                    var y = -r * Math.cos(i * step);
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+
+                ctx.closePath();
+                ctx.fillStyle = "rgba(255, 255, 255, " + alpha + ")";
+                ctx.shadowBlur = outerRadius * 2.5;
+                ctx.shadowColor = "rgba(0, 240, 255, " + (alpha * 0.9) + ")";
+                ctx.fill();
+                ctx.restore();
+            }
+
+            // Create larger, shining star objects
+            for (var i = 0; i < numStars; i++) {
+                var size = Math.random() * 8 + 6; // Outer radius between 6px and 14px
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    outerRadius: size,
+                    innerRadius: size * 0.4,
+                    speed: Math.random() * 0.25 + 0.05,
+                    opacity: Math.random() * 0.6 + 0.4,
+                    pulseSpeed: Math.random() * 0.015 + 0.005,
+                    rotation: Math.random() * Math.PI,
+                    rotSpeed: (Math.random() - 0.5) * 0.005
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Deep space gradient backdrop
+                var bgGrad = ctx.createRadialGradient(
+                    canvas.width / 2, canvas.height / 2, 50,
+                    canvas.width / 2, canvas.height / 2, Math.max(canvas.width, canvas.height)
+                );
+                bgGrad.addColorStop(0, '#0a0d21');
+                bgGrad.addColorStop(1, '#04050b');
+                ctx.fillStyle = bgGrad;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Draw and animate each 5-point star
+                for (var i = 0; i < stars.length; i++) {
+                    var s = stars[i];
+                    s.y += s.speed;
+                    s.opacity += s.pulseSpeed;
+                    s.rotation += s.rotSpeed;
+
+                    if (s.opacity > 0.95 || s.opacity < 0.25) {
+                        s.pulseSpeed = -s.pulseSpeed;
+                    }
+
+                    if (s.y > canvas.height + 20) {
+                        s.y = -20;
+                        s.x = Math.random() * canvas.width;
+                    }
+
+                    draw5PointStar(ctx, s.x, s.y, s.outerRadius, s.innerRadius, Math.abs(s.opacity), s.rotation);
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        })();
+
+        /* CAB0 APPLICATION LOGIC */
         var isVegasMode = false;
         var currentCat = 'ride', currentSort = 'price', selectedId = null;
 
