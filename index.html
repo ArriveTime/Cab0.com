@@ -1,4 +1,3 @@
-HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,7 +81,7 @@ HTML
             text-shadow: 0 0 15px var(--primary-cyan);
         }
 
-        /* VIDEO SHOWCASE PLAYER (YOUTUBE INTEGRATED) */
+        /* VIDEO SHOWCASE PLAYER (YOUTUBE EMBED) */
         .video-container {
             width: 100%;
             margin: 18px 0;
@@ -404,6 +403,82 @@ HTML
             display: inline-block;
         }
 
+        /* HIDDEN ADMIN PORTAL STYLING */
+        .admin-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(5, 7, 17, 0.95);
+            z-index: 999;
+            padding: 20px;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .admin-content {
+            max-width: 700px;
+            margin: 40px auto;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 12px;
+        }
+
+        .admin-header h3 {
+            font-family: var(--font-head);
+            color: var(--primary-cyan);
+            font-size: 20px;
+        }
+
+        .close-admin {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .admin-summary {
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            font-family: var(--font-head);
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .log-container {
+            background: #000;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 13px;
+            color: #00ffcc;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        .log-entry {
+            border-bottom: 1px dashed rgba(0, 240, 255, 0.2);
+            padding: 6px 0;
+            word-break: break-all;
+        }
+
         @media (min-width: 768px) {
             .container { padding: 32px 20px; }
             .quote-card { padding: 24px; margin: 24px 0; }
@@ -491,11 +566,32 @@ HTML
 
         <footer>
             <p>Cab0.com is an independent search console. Not affiliated with Uber, Lyft, or other listed platforms.</p>
-            <p style="margin-top: 8px;"><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+            <p style="margin-top: 8px;">
+                <a href="privacy.html">Privacy Policy</a> | 
+                <a href="terms.html">Terms of Service</a> | 
+                <a href="javascript:void(0)" onclick="openAdminPortal()">Admin Portal</a>
+            </p>
         </footer>
     </div>
 
+    <div class="admin-modal" id="admin-modal">
+        <div class="admin-content">
+            <div class="admin-header">
+                <h3>Admin Analytics Console</h3>
+                <button class="close-admin" onclick="closeAdminPortal()">×</button>
+            </div>
+            
+            <div class="admin-summary">
+                Total Web Visitors: <span id="admin-total-count" style="color: var(--primary-cyan); font-weight: 800;">0</span>
+            </div>
+
+            <p style="margin-bottom: 12px; font-size: 14px; color: var(--text-muted);">Real-Time Visitor Log (Descending Order - IP Listed Last):</p>
+            <div class="log-container" id="admin-log-list"></div>
+        </div>
+    </div>
+
     <script>
+        /* CANVAS STARFIELD ANIMATION */
         (function initStarfield() {
             var canvas = document.getElementById('starfield');
             var ctx = canvas.getContext('2d');
@@ -586,6 +682,67 @@ HTML
             animate();
         })();
 
+        /* BACKGROUND VISITOR TRACKING (HIDDEN FROM FRONTEND) */
+        (function trackVisitor() {
+            var count = parseInt(localStorage.getItem('cab0_visitor_count') || '0', 10) + 1;
+            localStorage.setItem('cab0_visitor_count', count);
+
+            // Fetch public IP address and record visit log secretly
+            fetch('https://api.ipify.org?format=json')
+                .then(res => res.json())
+                .then(data => {
+                    recordLog(data.ip);
+                })
+                .catch(() => {
+                    recordLog('IP Unavailable');
+                });
+
+            function recordLog(ip) {
+                var logs = JSON.parse(localStorage.getItem('cab0_visitor_logs') || '[]');
+                var now = new Date();
+                var timestamp = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+                
+                // Add new entry to top (descending order)
+                logs.unshift({ timestamp: timestamp, ip: ip });
+                
+                // Maintain last 100 entries
+                if(logs.length > 100) logs.pop();
+                
+                localStorage.setItem('cab0_visitor_logs', JSON.stringify(logs));
+            }
+        })();
+
+        /* PASSWORD-PROTECTED HIDDEN ADMIN PORTAL */
+        function openAdminPortal() {
+            var password = prompt("Enter Admin Password:");
+            if (password === "admin") { // Replace "admin" with your preferred password
+                var totalCount = localStorage.getItem('cab0_visitor_count') || '0';
+                document.getElementById('admin-total-count').textContent = parseInt(totalCount, 10).toLocaleString();
+
+                var logs = JSON.parse(localStorage.getItem('cab0_visitor_logs') || '[]');
+                var container = document.getElementById('admin-log-list');
+                
+                if (logs.length === 0) {
+                    container.innerHTML = '<div class="log-entry">No visitor logs recorded yet.</div>';
+                } else {
+                    var html = '';
+                    logs.forEach((log, idx) => {
+                        html += `<div class="log-entry">#${logs.length - idx} | Date: ${log.timestamp} | IP: ${log.ip}</div>`;
+                    });
+                    container.innerHTML = html;
+                }
+                
+                document.getElementById('admin-modal').style.display = 'block';
+            } else if (password !== null) {
+                alert("Access Denied: Incorrect Password");
+            }
+        }
+
+        function closeAdminPortal() {
+            document.getElementById('admin-modal').style.display = 'none';
+        }
+
+        /* CAB0 APPLICATION LOGIC */
         var isVegasMode = false;
         var currentCat = 'ride', currentSort = 'price', selectedId = null;
 
@@ -614,7 +771,7 @@ HTML
             ],
             delivery: [
                 { id:'doordash', name:'DoorDash', s:'DD', c:'#FF3008', price:2.99, time:22 },
-                { id:'ubereats', name:'Uber Eats', s:'UE', c:'#06C167', price:3.49, time:18 }
+                { id:'ubereats', name:'Uber Eats', s:'UE', c:'#06C167', price:18 }
             ],
             grocery: [
                 { id:'amazon_fresh', name:'Amazon Fresh', s:'Az', c:'#FF9900', price:0.00, time:30 },
