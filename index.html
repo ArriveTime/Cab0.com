@@ -1,3 +1,4 @@
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +29,6 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* FIXED BACKGROUND CANVAS */
         #starfield {
             position: fixed;
             top: 0;
@@ -62,7 +62,6 @@
             flex-direction: column;
         }
 
-        /* HEADER & LOGO */
         header {
             text-align: center;
             padding: 12px 0;
@@ -81,6 +80,28 @@
             color: var(--primary-cyan);
             display: inline-block;
             text-shadow: 0 0 15px var(--primary-cyan);
+        }
+
+        /* VIDEO SHOWCASE PLAYER (YOUTUBE INTEGRATED) */
+        .video-container {
+            width: 100%;
+            margin: 18px 0;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.25);
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            position: relative;
+        }
+
+        .video-container iframe,
+        .video-container video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            display: block;
+            border: none;
         }
 
         /* WOZNIAK QUOTE CARD */
@@ -127,7 +148,6 @@
             margin-top: 4px;
         }
 
-        /* HEADLINE */
         .headline {
             text-align: center;
             font-family: var(--font-head);
@@ -144,7 +164,6 @@
             border-bottom: 2px solid var(--primary-cyan);
         }
 
-        /* CATEGORIES & UI BUTTONS — DOUBLED SIZE FOR CELL PHONES */
         .cat-stack {
             display: flex;
             flex-direction: column;
@@ -157,11 +176,11 @@
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 20px;
-            padding: 38px 28px; /* Doubled padding on mobile */
-            min-height: 130px;   /* Doubled height on mobile */
+            padding: 38px 28px;
+            min-height: 130px;
             color: #fff;
             font-family: var(--font-head);
-            font-size: clamp(24px, 7vw, 30px); /* Doubled font size on mobile */
+            font-size: clamp(24px, 7vw, 30px);
             font-weight: 800;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -228,7 +247,6 @@
             transform: scale(0.99);
         }
 
-        /* INPUT FIELDS */
         .input-group {
             margin-bottom: 22px;
             width: 100%;
@@ -262,7 +280,6 @@
             box-shadow: 0 0 15px var(--primary-glow);
         }
 
-        /* SORTING & CARDS */
         .sort-bar {
             display: flex;
             gap: 12px;
@@ -387,10 +404,10 @@
             display: inline-block;
         }
 
-        /* LAPTOP & DESKTOP STYLES (EXACT ORIGINAL SIZING PRESERVED) */
         @media (min-width: 768px) {
             .container { padding: 32px 20px; }
             .quote-card { padding: 24px; margin: 24px 0; }
+            .video-container { margin: 24px 0; }
             .cat-stack { gap: 14px; }
             
             .cat-btn {
@@ -408,15 +425,23 @@
 </head>
 <body>
 
-    <!-- ANIMATED CANVAS BACKGROUND -->
     <canvas id="starfield"></canvas>
 
     <div class="container">
-        <!-- PAGE 0: DASHBOARD -->
         <div class="page active" id="pg0">
             <header>
                 <div class="logo">Cab<span class="zero">0</span>.com</div>
             </header>
+
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed/K09aZR0Vyo4?autoplay=1&mute=1&loop=1&playlist=K09aZR0Vyo4" 
+                    title="Cab0.com Powered by ArriveTime.com" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
 
             <div class="quote-card">
                 <p class="quote-text">"Best of luck to you on this worthy venture, it's your turn"</p>
@@ -432,7 +457,6 @@
             <button class="main-btn" onclick="goTo(1)">Find Best Rate →</button>
         </div>
 
-        <!-- PAGE 1: LOCATIONS -->
         <div class="page" id="pg1">
             <button class="back-btn" onclick="goTo(0)">← Main Menu</button>
             <h2 style="font-family: var(--font-head); margin-bottom: 22px; font-size: clamp(22px, 5.5vw, 26px);">Search Details</h2>
@@ -450,7 +474,6 @@
             <button class="main-btn" onclick="goTo(2)">Compare Rates →</button>
         </div>
 
-        <!-- PAGE 2: MARKETPLACE CONSOLE -->
         <div class="page" id="pg2">
             <button class="back-btn" onclick="goTo(0)">← Main Menu</button>
 
@@ -473,7 +496,6 @@
     </div>
 
     <script>
-        /* 5-POINT STARFIELD CANVAS ENGINE */
         (function initStarfield() {
             var canvas = document.getElementById('starfield');
             var ctx = canvas.getContext('2d');
@@ -488,7 +510,6 @@
             window.addEventListener('resize', resizeCanvas);
             resizeCanvas();
 
-            // Function to draw a standard 5-point star
             function draw5PointStar(ctx, cx, cy, outerRadius, innerRadius, alpha, rotation) {
                 ctx.save();
                 ctx.beginPath();
@@ -514,9 +535,8 @@
                 ctx.restore();
             }
 
-            // Create larger, shining star objects
             for (var i = 0; i < numStars; i++) {
-                var size = Math.random() * 8 + 6; // Outer radius between 6px and 14px
+                var size = Math.random() * 8 + 6;
                 stars.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
@@ -533,7 +553,6 @@
             function animate() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                // Deep space gradient backdrop
                 var bgGrad = ctx.createRadialGradient(
                     canvas.width / 2, canvas.height / 2, 50,
                     canvas.width / 2, canvas.height / 2, Math.max(canvas.width, canvas.height)
@@ -543,7 +562,6 @@
                 ctx.fillStyle = bgGrad;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                // Draw and animate each 5-point star
                 for (var i = 0; i < stars.length; i++) {
                     var s = stars[i];
                     s.y += s.speed;
@@ -568,7 +586,6 @@
             animate();
         })();
 
-        /* CAB0 APPLICATION LOGIC */
         var isVegasMode = false;
         var currentCat = 'ride', currentSort = 'price', selectedId = null;
 
