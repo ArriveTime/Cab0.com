@@ -587,7 +587,7 @@
                 Total Global Visitors: <span id="admin-total-count" style="color: var(--primary-cyan); font-weight: 800;">Loading...</span>
             </div>
 
-            <p style="margin-bottom: 12px; font-size: 14px; color: var(--text-muted);">Recent Session Visits (Descending Order - IP Listed Last):</p>
+            <p style="margin-bottom: 12px; font-size: 14px; color: var(--text-muted);">Recent Session Visits (Timestamp, Location & IP at End):</p>
             <div class="log-container" id="admin-log-list"></div>
         </div>
     </div>
@@ -684,9 +684,9 @@
             animate();
         })();
 
-        /* GLOBAL COUNTER & SESSION TRACKING */
+        /* GLOBAL COUNTER & GEOLOCATION SESSION TRACKING */
         (function trackVisitor() {
-            // Hit global server API to count all site visitors cross-device
+            // Increments numerical count for cross-device metrics
             fetch('https://api.countapi.xyz/hit/cab0.com/visits')
                 .then(res => res.json())
                 .then(data => {
@@ -695,27 +695,27 @@
                     }
                 })
                 .catch(() => {
-                    // Fallback to local storage count if API is offline
                     var localVal = parseInt(localStorage.getItem('cab0_global_count') || '1', 10) + 1;
                     localStorage.setItem('cab0_global_count', localVal);
                 });
 
-            // Capture IP details for recent local sessions
-            fetch('https://api.ipify.org?format=json')
+            // Captures IP along with City, State, and Country
+            fetch('https://ipapi.co/json/')
                 .then(res => res.json())
                 .then(data => {
-                    recordLog(data.ip);
+                    var locationStr = `${data.city || 'Unknown City'}, ${data.region || 'Unknown State'}, ${data.country_code || 'US'}`;
+                    recordLog(locationStr, data.ip || 'Unknown IP');
                 })
                 .catch(() => {
-                    recordLog('IP Unavailable');
+                    recordLog('Location Unavailable', 'IP Unavailable');
                 });
 
-            function recordLog(ip) {
+            function recordLog(location, ip) {
                 var logs = JSON.parse(localStorage.getItem('cab0_visitor_logs') || '[]');
                 var now = new Date();
                 var timestamp = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
                 
-                logs.unshift({ timestamp: timestamp, ip: ip });
+                logs.unshift({ timestamp: timestamp, location: location, ip: ip });
                 if(logs.length > 100) logs.pop();
                 
                 localStorage.setItem('cab0_visitor_logs', JSON.stringify(logs));
@@ -737,7 +737,8 @@
                 } else {
                     var html = '';
                     logs.forEach((log, idx) => {
-                        html += `<div class="log-entry">#${logs.length - idx} | Date: ${log.timestamp} | IP: ${log.ip}</div>`;
+                        // Formatted so Timestamp and Location are first, IP is at the end
+                        html += `<div class="log-entry">#${logs.length - idx} | Date: ${log.timestamp} | Location: ${log.location} | IP: ${log.ip}</div>`;
                     });
                     container.innerHTML = html;
                 }
