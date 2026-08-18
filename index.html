@@ -81,7 +81,6 @@
             text-shadow: 0 0 15px var(--primary-cyan);
         }
 
-        /* VIDEO SHOWCASE PLAYER (YOUTUBE EMBED) */
         .video-container {
             width: 100%;
             margin: 18px 0;
@@ -103,7 +102,6 @@
             border: none;
         }
 
-        /* WOZNIAK QUOTE CARD */
         .quote-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -503,6 +501,7 @@
     <canvas id="starfield"></canvas>
 
     <div class="container">
+        <!-- PAGE 0: DASHBOARD -->
         <div class="page active" id="pg0">
             <header>
                 <div class="logo">Cab<span class="zero">0</span>.com</div>
@@ -532,6 +531,7 @@
             <button class="main-btn" onclick="goTo(1)">Find Best Rate →</button>
         </div>
 
+        <!-- PAGE 1: LOCATIONS -->
         <div class="page" id="pg1">
             <button class="back-btn" onclick="goTo(0)">← Main Menu</button>
             <h2 style="font-family: var(--font-head); margin-bottom: 22px; font-size: clamp(22px, 5.5vw, 26px);">Search Details</h2>
@@ -549,6 +549,7 @@
             <button class="main-btn" onclick="goTo(2)">Compare Rates →</button>
         </div>
 
+        <!-- PAGE 2: MARKETPLACE CONSOLE -->
         <div class="page" id="pg2">
             <button class="back-btn" onclick="goTo(0)">← Main Menu</button>
 
@@ -574,6 +575,7 @@
         </footer>
     </div>
 
+    <!-- HIDDEN ADMIN MODAL PORTAL -->
     <div class="admin-modal" id="admin-modal">
         <div class="admin-content">
             <div class="admin-header">
@@ -582,10 +584,10 @@
             </div>
             
             <div class="admin-summary">
-                Total Web Visitors: <span id="admin-total-count" style="color: var(--primary-cyan); font-weight: 800;">0</span>
+                Total Global Visitors: <span id="admin-total-count" style="color: var(--primary-cyan); font-weight: 800;">Loading...</span>
             </div>
 
-            <p style="margin-bottom: 12px; font-size: 14px; color: var(--text-muted);">Real-Time Visitor Log (Descending Order - IP Listed Last):</p>
+            <p style="margin-bottom: 12px; font-size: 14px; color: var(--text-muted);">Recent Session Visits (Descending Order - IP Listed Last):</p>
             <div class="log-container" id="admin-log-list"></div>
         </div>
     </div>
@@ -682,12 +684,23 @@
             animate();
         })();
 
-        /* BACKGROUND VISITOR TRACKING (HIDDEN FROM FRONTEND) */
+        /* GLOBAL COUNTER & SESSION TRACKING */
         (function trackVisitor() {
-            var count = parseInt(localStorage.getItem('cab0_visitor_count') || '0', 10) + 1;
-            localStorage.setItem('cab0_visitor_count', count);
+            // Hit global server API to count all site visitors cross-device
+            fetch('https://api.countapi.xyz/hit/cab0.com/visits')
+                .then(res => res.json())
+                .then(data => {
+                    if (data && data.value) {
+                        localStorage.setItem('cab0_global_count', data.value);
+                    }
+                })
+                .catch(() => {
+                    // Fallback to local storage count if API is offline
+                    var localVal = parseInt(localStorage.getItem('cab0_global_count') || '1', 10) + 1;
+                    localStorage.setItem('cab0_global_count', localVal);
+                });
 
-            // Fetch public IP address and record visit log secretly
+            // Capture IP details for recent local sessions
             fetch('https://api.ipify.org?format=json')
                 .then(res => res.json())
                 .then(data => {
@@ -702,10 +715,7 @@
                 var now = new Date();
                 var timestamp = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
                 
-                // Add new entry to top (descending order)
                 logs.unshift({ timestamp: timestamp, ip: ip });
-                
-                // Maintain last 100 entries
                 if(logs.length > 100) logs.pop();
                 
                 localStorage.setItem('cab0_visitor_logs', JSON.stringify(logs));
@@ -715,9 +725,9 @@
         /* PASSWORD-PROTECTED HIDDEN ADMIN PORTAL */
         function openAdminPortal() {
             var password = prompt("Enter Admin Password:");
-            if (password === "admin") { // Replace "admin" with your preferred password
-                var totalCount = localStorage.getItem('cab0_visitor_count') || '0';
-                document.getElementById('admin-total-count').textContent = parseInt(totalCount, 10).toLocaleString();
+            if (password === "admin") {
+                var globalCount = localStorage.getItem('cab0_global_count') || '1';
+                document.getElementById('admin-total-count').textContent = parseInt(globalCount, 10).toLocaleString();
 
                 var logs = JSON.parse(localStorage.getItem('cab0_visitor_logs') || '[]');
                 var container = document.getElementById('admin-log-list');
@@ -771,7 +781,7 @@
             ],
             delivery: [
                 { id:'doordash', name:'DoorDash', s:'DD', c:'#FF3008', price:2.99, time:22 },
-                { id:'ubereats', name:'Uber Eats', s:'UE', c:'#06C167', price:18 }
+                { id:'ubereats', name:'Uber Eats', s:'UE', c:'#06C167', price:3.49, time:18 }
             ],
             grocery: [
                 { id:'amazon_fresh', name:'Amazon Fresh', s:'Az', c:'#FF9900', price:0.00, time:30 },
